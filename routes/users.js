@@ -4,7 +4,7 @@ const router = express.Router();
 
 const UserController = require('../controllers/UserController');
 const auth = require('../middlewares/authentication');
-const permit = require('../middlewares/persmission');
+const permit = require('../middlewares/permission');
 
 router.post('/login', UserController.login);
 

@@ -8,13 +8,14 @@ module.exports = (function database() {
     mongoose.connect(DB, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
+      useFindAndModify: false
     })
       .then(() => {
         logger.info('Connected to database...');
       }).catch((error) => {
         logger.error('Error connecting to database...', error.message);
-        logger.info('Reconnecting to database...')
+        logger.info('Reconnecting to database...');
         startdb();
       });
   };
