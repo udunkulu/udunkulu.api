@@ -1,11 +1,9 @@
-const { logger } = require('./logging');
-
 require('dotenv').config();
 
 // The conditions below may not be necessary
 // but may be handy. If not replace everything with:
 /**
- module.exports = {
+module.exports = {
   SECRET: process.env.APP_SECRET,
   DB: process.env.APP_DB,
   PORT: process.env.APP_PORT,
