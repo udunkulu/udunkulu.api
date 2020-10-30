@@ -1,3 +1,5 @@
+const { logger } = require('./logging');
+
 require('dotenv').config();
 
 // The conditions below may not be necessary
@@ -19,7 +21,7 @@ if (runTimeEnv === 'production') {
   env = {
     SECRET: process.env.APP_SECRET,
     DB: process.env.APP_DB,
-    PORT: process.env.APP_PORT,
+    PORT: process.env.APP_PORT || 3000,
     NODE_ENV: runTimeEnv
   };
 } else if (runTimeEnv === 'development') {
@@ -34,7 +36,7 @@ if (runTimeEnv === 'production') {
   env = {
     SECRET: process.env.APP_SECRET,
     DB: process.env.TEST_DB, // test db
-    PORT: process.env.APP_PORT,
+    PORT: process.env.TEST_PORT || 3001,
     NODE_ENV: runTimeEnv
   };
 }
