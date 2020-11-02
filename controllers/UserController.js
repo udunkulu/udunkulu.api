@@ -17,7 +17,6 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const users = await User.find();
-  
   if (!users) return res.status(404).send({ status: 'error', message: 'User not found' });
 
   res.status(200).send({ status: 'success', data: users });
