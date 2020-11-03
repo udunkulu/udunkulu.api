@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config ./config/jest.config.js  --detectOpenHandles",
+    "test": "jest --config ./config/jest.config.js",
     "test:watch": "npm run test -- --watch",
     "start": "node index.js",
     "dev": "nodemon index.js",

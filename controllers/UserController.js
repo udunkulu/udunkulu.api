@@ -38,7 +38,7 @@ exports.create = async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
 
   await user.save();
-
+  // log the user in
   const token = user.generateAuthToken();
 
   return res.header('token', token).status(201).send({
