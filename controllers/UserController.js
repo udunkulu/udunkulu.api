@@ -17,7 +17,6 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const users = await User.find();
-  
   if (!users) return res.status(404).send({ status: 'error', message: 'User not found' });
 
   res.status(200).send({ status: 'success', data: users });
@@ -39,7 +38,7 @@ exports.create = async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
 
   await user.save();
-
+  // log the user in
   const token = user.generateAuthToken();
 
   return res.header('token', token).status(201).send({
