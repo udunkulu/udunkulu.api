@@ -19,14 +19,14 @@ if (runTimeEnv === 'production') {
   env = {
     SECRET: process.env.APP_SECRET,
     DB: process.env.APP_DB,
-    PORT: process.env.APP_PORT || 3000,
+    PORT: process.env.PORT || 3000,
     NODE_ENV: runTimeEnv
   };
 } else if (runTimeEnv === 'development') {
   env = {
     SECRET: process.env.APP_SECRET,
     DB: process.env.APP_DB,
-    PORT: process.env.APP_PORT,
+    PORT: process.env.PORT,
     NODE_ENV: runTimeEnv
   };
 } else {
