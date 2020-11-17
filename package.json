@@ -8,11 +8,10 @@
     "test:watch": "npm run test -- --watch",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "swagger-autogen": "node ./docs/swagger.js",
     "setup:env": "cp .env.example .env && echo created .env file"
   },
   "keywords": [],
-  "author": "",
+  "author": "https://github.com/ezehlivinus",
   "license": "ISC",
   "dependencies": {
     "accesscontrol": "^2.2.1",
