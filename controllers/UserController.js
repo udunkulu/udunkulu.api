@@ -2,6 +2,8 @@
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { User, validateUser, validateUpdate } = require('../models/User');
+const { mailGenerator, transporter } = require('../config/mail');
+const { EMAIL } = require('../config/env');
 
 /**
  * Retrieve a user
@@ -17,7 +19,7 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const users = await User.find();
-  if (!users) return res.status(404).send({ status: 'error', message: 'User not found' });
+  if (_.isEmpty(users)) return res.status(404).send({ status: 'error', message: 'No user found' });
 
   res.status(200).send({ status: 'success', data: users });
 };
@@ -40,6 +42,25 @@ exports.create = async (req, res) => {
   await user.save();
 
   const token = user.generateAuthToken();
+
+  // send mail
+  const response = {
+    body: {
+      name: `${user.firstName} ${user.lastName}`,
+      intro: 'Welcome to Nodemailer'
+    }
+  };
+
+  const mail = mailGenerator.generate(response);
+
+  const message = {
+    from: EMAIL,
+    to: user.email,
+    subject: 'Registration successful',
+    html: mail
+  };
+
+  await transporter.sendMail(message);
 
   return res.header('token', token).status(201).send({
     status: 'success',
