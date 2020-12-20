@@ -7,7 +7,7 @@ const { exceptRejectionLogger } = require('../config/logging');
 const routes = require('./routes');
 
 exceptRejectionLogger();
-require('../config/db')();
+require('../config/database')();
 
 module.exports = (app) => {
   app.use(morgan('dev'));
