@@ -6,3 +6,4 @@ To be implemented
 - email verification
 - reset, forget password/username
 - admin dashboard
+- using a view engine show form where user can enter their new password
