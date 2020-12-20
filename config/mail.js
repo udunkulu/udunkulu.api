@@ -2,7 +2,7 @@ const nodemialer = require('nodemailer');
 
 const Mailgen = require('mailgen');
 
-const { EMAIL, PASSWORD, MAIN_URL } = require('./env');
+const { EMAIL, PASSWORD, APP_URL } = require('./env');
 
 const transporter = nodemialer.createTransport({
   service: 'Yahoo',
@@ -17,7 +17,7 @@ const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
     name: 'Express-template',
-    link: MAIN_URL
+    link: APP_URL
   }
 });
 

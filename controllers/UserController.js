@@ -2,8 +2,7 @@
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { User, validateUser, validateUpdate } = require('../models/User');
-const { mailGenerator, transporter } = require('../config/mail');
-const { EMAIL } = require('../config/env');
+const UserService = require('../services/UserService');
 
 /**
  * Retrieve a user
@@ -43,24 +42,8 @@ exports.create = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  // send mail
-  const response = {
-    body: {
-      name: `${user.firstName} ${user.lastName}`,
-      intro: 'Welcome to Nodemailer'
-    }
-  };
-
-  const mail = mailGenerator.generate(response);
-
-  const message = {
-    from: EMAIL,
-    to: user.email,
-    subject: 'Registration successful',
-    html: mail
-  };
-
-  await transporter.sendMail(message);
+  // In local? You need to connect to internet for this to work
+  await UserService.sendVerificationMail(user, token);
 
   return res.header('token', token).status(201).send({
     status: 'success',
