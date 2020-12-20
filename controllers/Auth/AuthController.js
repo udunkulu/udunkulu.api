@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 const { SECRET } = require('../../config/env');
 const { User } = require('../../models/User');
 
@@ -13,10 +14,11 @@ exports.verifyEmail = async (req, res) => {
 
   const user = await User.findById(decoded._id);
   if (!user) return res.status(404).send({ status: false, message: 'user found' });
-
   if (user.verifiedAt) return res.status(200).send({ status: false, message: 'user already verified' });
 
   user.verifiedAt = new Date();
+
+  await user.save();
 
   return res.header('token', token).send({
     status: true, message: 'email verified', data: user
