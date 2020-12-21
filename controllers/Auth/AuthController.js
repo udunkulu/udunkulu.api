@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { validatePassword } = require('../../services/AuthService');
 const { SECRET } = require('../../config/env');
 const { User } = require('../../models/User');
-const { validateEmail, sendResetPasswordMail } = require('../../services/UserService');
+const { validateEmail, sendPasswordResetMail } = require('../../services/UserService');
 
 /**
  * Verifies if email is correct, through verifying a token
@@ -42,7 +44,7 @@ exports.forgotPassword = async (req, res) => {
   }
 
   // send reset password mail
-  await sendResetPasswordMail(user);
+  await sendPasswordResetMail(user);
 
   return res.status(200).send({
     status: true,
@@ -51,20 +53,38 @@ exports.forgotPassword = async (req, res) => {
 };
 
 /**
- * exports.passwordResetForm = async (req, res) => {
-  render('reset-password') or redirect to front-end form that does;
-};
- * Not implemented yet: This should render a form for user
- * to enter their new password. This form submits to resetPassword() handler via json
+ * Handles reset password, change the password and save.
  */
-
 exports.resetPassword = async (req, res) => {
-  const { token } = req.query;
+  const validData = await validatePassword(req.body);
 
-  const decoded = jwt.verify(token, SECRET);
+  const decoded = jwt.verify(validData.token, SECRET);
 
   const user = await User.findById(decoded._id);
   if (!user) return res.status(404).send({ status: false, message: 'user not found' });
 
-  return res.status(200).send({ status: true, message: 'user can reset password' })
+  // set password
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(validData.password, salt);
+
+  await user.save();
+
+  // The view unto which this response is returned to
+  // can choose to redirect to a new view or handle the response its own way
+  return res.status(200).send({ status: true, message: 'success', data: user });
+};
+
+/**
+ * Show the form/view for resetting a password
+ * @param {*} req - express Request object
+ * @param {*} res - express Response object
+ * @returns {*} view
+ */
+exports.passwordReset = async (req, res) => {
+  const { token } = req.query;
+
+  res.render('auth/password-reset', {
+    title: 'Expressjs template',
+    token
+  });
 };

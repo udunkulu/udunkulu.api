@@ -53,7 +53,7 @@ exports.validateEmail = async (email) => {
 /**
  * send a password reset mail to a user
  */
-exports.sendResetPasswordMail = async (user) => {
+exports.sendPasswordResetMail = async (user) => {
   const token = user.generateAuthToken();
   // send mail
   const response = {
@@ -64,7 +64,7 @@ exports.sendResetPasswordMail = async (user) => {
         instructions: 'To reset your password, click on the link below:',
         button: {
           text: 'Reset password',
-          link: `${APP_URL}/${BASE_PATH}/users/reset-password?token=${token}`
+          link: `${APP_URL}/${BASE_PATH}/users/password-reset?token=${token}`
         }
       },
       outro: 'Do not shared this link with anyone. Except if the person is helping to reset your password'
