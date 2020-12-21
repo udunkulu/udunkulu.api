@@ -1,8 +1,13 @@
 To be implemented
 
 - setup test
-- setup mail
 - file/pix upload
-- email verification
-- reset, forget password/username
+- change password
 - admin dashboard
+- prepare a token that expires fast for password recovery and related
+- implement refreshed token
+- move mailers to their own service
+- rename folders and files
+
+Long term task
+- setup a revocable token
