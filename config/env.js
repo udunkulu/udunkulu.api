@@ -1,41 +1,38 @@
 require('dotenv').config();
 
-// The conditions below may not be necessary
-// but may be handy. If not replace everything with:
-/**
-module.exports = {
-  SECRET: process.env.APP_SECRET,
-  DB: process.env.APP_DB,
-  PORT: process.env.APP_PORT,
-  NODE_ENV: process.env.NODE_ENV,
-  NEW_KEY: new_value_FROM_SOME_WHERE
-}
- */
-
 let env;
-const runTimeEnv = process.env.NODE_ENV;
 
-if (runTimeEnv === 'production') {
+const {
+  NODE_ENV, EMAIL, PASSWORD, APP_URL, PORT, APP_SECRET, APP_DB
+} = process.env;
+
+// we want to use the same env configuration for both
+// production and development env to avoid bugs when we moved our code to production
+// so in essence, if it is working in development, it should work in production
+// to perform some env specific operation we can check the env at that point in time, then perform
+// the required operation under the check block.
+const inProductionOrDevelopment = NODE_ENV === 'production' || NODE_ENV === 'development';
+
+if (inProductionOrDevelopment) {
+  // In the future this might be separated into two or moved into file:
+  // (production and development)
   env = {
-    SECRET: process.env.APP_SECRET,
-    DB: process.env.APP_DB,
-    PORT: process.env.PORT || 3000,
-    NODE_ENV: runTimeEnv
-  };
-} else if (runTimeEnv === 'development') {
-  env = {
-    SECRET: process.env.APP_SECRET,
-    DB: process.env.APP_DB,
-    PORT: process.env.PORT,
-    NODE_ENV: runTimeEnv
+    SECRET: APP_SECRET,
+    DB: APP_DB,
+    PORT: PORT || 3000,
+    NODE_ENV,
+    EMAIL,
+    PASSWORD,
+    APP_URL,
+    BASE_PATH: 'api/v1'
   };
 } else {
-  // it is test
+  // else it is in test env
   env = {
-    SECRET: process.env.APP_SECRET,
+    SECRET: APP_SECRET,
     DB: process.env.TEST_DB, // test db
     PORT: process.env.TEST_PORT || 3001,
-    NODE_ENV: runTimeEnv
+    NODE_ENV
   };
 }
 

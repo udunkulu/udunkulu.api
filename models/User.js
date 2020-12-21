@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin', 'superuser'],
     default: 'user',
     required: true
+  },
+
+  verifiedAt: {
+    type: Date
   }
 
 }, { timestamps: new Date() });

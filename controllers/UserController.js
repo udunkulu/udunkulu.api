@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { User, validateUser, validateUpdate } = require('../models/User');
+const UserService = require('../services/UserService');
 
 /**
  * Retrieve a user
@@ -17,7 +18,7 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const users = await User.find();
-  if (!users) return res.status(404).send({ status: 'error', message: 'User not found' });
+  if (_.isEmpty(users)) return res.status(404).send({ status: 'error', message: 'No user found' });
 
   res.status(200).send({ status: 'success', data: users });
 };
@@ -40,6 +41,9 @@ exports.create = async (req, res) => {
   await user.save();
   // log the user in
   const token = user.generateAuthToken();
+
+  // In local? You need to connect to internet for this to work
+  await UserService.sendVerificationMail(user, token);
 
   return res.header('token', token).status(201).send({
     status: 'success',
