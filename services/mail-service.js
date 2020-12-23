@@ -1,5 +1,5 @@
 const { mailGenerator, transporter } = require('../config/mail');
-const { EMAIL, APP_URL, BASE_PATH } = require('../config/env');
+const { APP_URL, BASE_PATH } = require('../config/env');
 
 /**
  * Send a verification mail to this user on signup
