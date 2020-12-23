@@ -1,10 +1,31 @@
 /* eslint-disable no-underscore-dangle */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { validatePassword } = require('../../services/AuthService');
+const { validatePassword, validatePasswordWithToken } = require('../../services/AuthService');
 const { SECRET } = require('../../config/env');
 const { User } = require('../../models/User');
-const { validateEmail, sendPasswordResetMail } = require('../../services/UserService');
+const { validateEmail } = require('../../services/UserService');
+const { sendPasswordResetMail } = require('../../services/mail-service');
+
+/**
+ * Login a user
+ */
+exports.login = async (req, res) => {
+  // check if user exist
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send({ status: 'error', message: 'Invalid email  or password' });
+
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword) return res.status(400).send({ status: 'error', message: 'Invalid password or email' });
+
+  const token = user.generateAuthToken();
+
+  res.header('token', token).status(200).send({
+    status: true,
+    message: 'success',
+    data: user
+  });
+};
 
 /**
  * Verifies if email is correct, through verifying a token
@@ -56,7 +77,7 @@ exports.forgotPassword = async (req, res) => {
  * Handles reset password, change the password and save.
  */
 exports.resetPassword = async (req, res) => {
-  const validData = await validatePassword(req.body);
+  const validData = await validatePasswordWithToken(req.body);
 
   const decoded = jwt.verify(validData.token, SECRET);
 
@@ -87,4 +108,24 @@ exports.passwordReset = async (req, res) => {
     title: 'Expressjs template',
     token
   });
+};
+
+/**
+ * This changes a user password
+ * @param {*} req - express Request object
+ * @param {*} res - express Request object
+ * @returns {*} { } - object contain  request response
+ */
+exports.changePassword = async (req, res) => {
+  const { password } = await validatePassword(req.body.password);
+
+  const user = await User.findOne({ email: req.user.email });
+  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(password, salt);
+
+  await user.save();
+
+  return res.status(200).send({ status: true, message: 'success', date: user });
 };

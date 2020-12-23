@@ -5,11 +5,9 @@ const router = express.Router();
 const UserController = require('../controllers/UserController');
 const auth = require('../middlewares/authentication');
 const permit = require('../middlewares/permission');
-const auths = require('./auths');
+const authRoutes = require('./auths');
 
-router.use(auths);
-
-router.post('/login', UserController.login);
+router.use(authRoutes);
 
 router.route('/')
   .get([auth], UserController.list)
