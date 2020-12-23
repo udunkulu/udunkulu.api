@@ -109,3 +109,23 @@ exports.passwordReset = async (req, res) => {
     token
   });
 };
+
+/**
+ * This changes a user password
+ * @param {*} req - express Request object
+ * @param {*} res - express Request object
+ * @returns {*} { } - object contain  request response
+ */
+exports.changePassword = async (req, res) => {
+  const { password } = await validatePassword(req.body.password);
+
+  const user = await User.findOne({ email: req.user.email });
+  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(password, salt);
+
+  await user.save();
+
+  return res.status(200).send({ status: true, message: 'success', date: user });
+};

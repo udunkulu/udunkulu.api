@@ -6,9 +6,10 @@ const { logger } = require('../config/logging');
 module.exports = (error, req, res, next) => {
   const data = {
     status: false,
-    message: `Something failed... \n${error.message}`
+    message: `Something failed:... ${error.message}`
   };
-  logger.error('From async error middleware');
+
+  logger.error('From async error middleware', error);
   next(error);
   return res.status(500).send(data);
 };

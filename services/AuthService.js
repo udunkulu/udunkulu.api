@@ -8,12 +8,12 @@ const Joi = require('joi');
  *
  * @returns {*} { password } - that has been validated
  */
-exports.validatePassword = async (data = {}) => {
+exports.validatePassword = async (password = '') => {
   const schema = Joi.object({
     password: Joi.string().min(6).max(60).required()
   });
 
-  const value = await schema.validateAsync(data);
+  const value = await schema.validateAsync({ password });
 
   return value;
 };
@@ -28,7 +28,7 @@ exports.validateToken = async (token = '') => {
     token: Joi.string().min(10).trim().required()
   });
 
-  const value = await schema.validateAsync(token);
+  const value = await schema.validateAsync({ token });
 
   return value;
 };
@@ -39,8 +39,8 @@ exports.validateToken = async (token = '') => {
  * @returns {*} - { password, token }
  */
 exports.validatePasswordWithToken = async (data = {}) => {
-  const { password } = await this.validatePassword({ password: data.password });
-  const { token } = await this.validateToken({ token: data.token });
+  const { password } = await this.validatePassword(data.password);
+  const { token } = await this.validateToken(data.token);
 
   return { password, token };
 };
