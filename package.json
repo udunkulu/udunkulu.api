@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "swagger-autogen": "node ./docs/swagger.js"
+    "setup:env": "cp .env.example .env && echo created .env file"
   },
   "keywords": [],
   "author": "",
