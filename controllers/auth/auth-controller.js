@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { validatePassword, validatePasswordWithToken } = require('../../services/AuthService');
+const { validatePassword, validatePasswordWithToken } = require('../../services/auth-service');
 const { SECRET } = require('../../config/env');
-const { User } = require('../../models/User');
-const { validateEmail } = require('../../services/UserService');
+const { User } = require('../../models/user');
+const { validateEmail } = require('../../services/user-service');
 const { sendPasswordResetMail } = require('../../services/mail-service');
 
 /**

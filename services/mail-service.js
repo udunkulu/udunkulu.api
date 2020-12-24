@@ -1,5 +1,7 @@
 const { mailGenerator, transporter } = require('../config/mail');
-const { EMAIL, APP_URL, BASE_PATH } = require('../config/env');
+const { APP_URL, BASE_PATH } = require('../config/env');
+
+const base = `${APP_URL}${BASE_PATH}`;
 
 /**
  * Send a verification mail to this user on signup
@@ -15,7 +17,7 @@ exports.sendVerificationMail = async (user, token) => {
         instructions: 'To continue, please click here:',
         button: {
           text: 'Verify your account',
-          link: `${APP_URL}/${BASE_PATH}/users/verify-email?token=${token}`
+          link: `${base}/users/verify-email?token=${token}`
         }
       },
       outro: 'Thanks for signing up.'
@@ -50,7 +52,7 @@ exports.sendPasswordResetMail = async (user) => {
         instructions: 'To reset your password, click on the link below:',
         button: {
           text: 'Reset password',
-          link: `${APP_URL}/${BASE_PATH}/users/password-reset?token=${token}`
+          link: `${base}/users/password-reset?token=${token}`
         }
       },
       outro: 'Do not shared this link with anyone. Except if the person is helping to reset your password'
