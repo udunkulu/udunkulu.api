@@ -1,15 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
-const { User, validateUser, validateUpdate } = require('../models/User');
+const { User, validateUser, validateUpdate } = require('../models/user');
 const mailService = require('../services/mail-service');
+const { NODE_ENV } = require('../config/env');
 
 /**
  * Retrieve a user
  */
 exports.detail = async (req, res) => {
   const user = await User.findById(req.params.id);
-  if (!user) return res.status(404).send({ status: 'error', message: 'No user found' });
+  if (!user) return res.status(404).send({ status: false, message: 'No user found' });
   res.status(200).send({ status: true, message: 'success', data: user });
 };
 
@@ -18,7 +19,7 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const users = await User.find();
-  if (_.isEmpty(users)) return res.status(404).send({ status: 'error', message: 'No user found' });
+  if (_.isEmpty(users)) return res.status(404).send({ status: false, message: 'No user found' });
 
   res.status(200).send({ status: true, message: 'success', data: users });
 };
@@ -31,7 +32,7 @@ exports.create = async (req, res) => {
   const validData = await validateUser(req.body);
 
   let user = await User.findOne({ email: validData.email });
-  if (user) return res.status(404).send({ status: 'error', message: 'User already exist' });
+  if (user) return res.status(404).send({ status: false, message: 'user already exist' });
 
   user = new User({ ...validData });
 
@@ -42,8 +43,10 @@ exports.create = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  // In local? You need to connect to internet for this to work
-  await mailService.sendVerificationMail(user, token);
+  // In local? You need to connect to internet for this to work and set NODE_ENV=production
+  if (NODE_ENV === 'production') {
+    await mailService.sendVerificationMail(user, token);
+  }
 
   return res.header('token', token).status(201).send({
     status: true, message: 'success', data: user
