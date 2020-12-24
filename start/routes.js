@@ -1,9 +1,7 @@
-// require your routes here
-// example: const users = require('../routes/users')
+// require/import your routes here
+const { BASE_PATH } = require('../config/env');
 
 const users = require('../routes/users');
-
-const basePath = '/api/v1';
 
 /**
  * Routes list
@@ -11,5 +9,5 @@ const basePath = '/api/v1';
 module.exports = (app) => {
 // routes goes here
 // example: app.use('api/v1/users', users);
-  app.use(`${basePath}/users`, users);
+  app.use(`${BASE_PATH}/users`, users);
 };

@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
-const { User, validateUser, validateUpdate } = require('../models/User');
+const { User, validateUser, validateUpdate } = require('../models/user');
 const mailService = require('../services/mail-service');
+const { NODE_ENV } = require('../config/env');
 
 /**
  * Retrieve a user
@@ -43,7 +44,10 @@ exports.create = async (req, res) => {
   const token = user.generateAuthToken();
 
   // In local? You need to connect to internet for this to work
-  await mailService.sendVerificationMail(user, token);
+  // if you still want to send mail in local/dev env then NODE_ENV=production at .env file
+  if (NODE_ENV !== 'production') {
+    await mailService.sendVerificationMail(user, token);
+  }
 
   return res.header('token', token).status(201).send({
     status: true, message: 'success', data: user
