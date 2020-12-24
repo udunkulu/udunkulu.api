@@ -26,7 +26,7 @@ if (inProductionOrDevelopment) {
     EMAIL,
     PASSWORD,
     APP_URL,
-    BASE_PATH: '/api/v1'
+    BASE_PATH: 'api/v1'
   };
 } else {
   // else it is in test env
@@ -34,9 +34,7 @@ if (inProductionOrDevelopment) {
     SECRET: APP_SECRET,
     DB: process.env.TEST_DB, // test db
     PORT: process.env.TEST_PORT || 3001,
-    NODE_ENV,
-    APP_URL,
-    BASE_PATH: '/api/v1'
+    NODE_ENV
   };
 }
 

@@ -8,7 +8,7 @@ const exceptRejectionLogger = () => {
   winston.exceptions.handle(
     // new winston.transports.Console(),
     new winston.transports.File({
-      filename: 'logs/uncaught-exceptions.log'
+      filename: 'logs/uncaughtExceptions.log'
     })
   );
 
@@ -17,8 +17,8 @@ const exceptRejectionLogger = () => {
     throw ex;
   });
   // write promise rejection to file
-  winston.add(new winston.transports.File({ filename: 'logs/unhandled-rejections.log' }));
-  // uncomment below line if you want to add log to database
+  winston.add(new winston.transports.File({ filename: 'logs/unhandledRejections.log' }));
+  // add log to database
   // winston.add(new winston.transports.MongoDB({ db: DB }));
 };
 
