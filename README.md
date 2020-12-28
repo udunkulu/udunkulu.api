@@ -19,7 +19,16 @@ It allows expressjs developer to start developing without worrying about setting
 Base route: `/api/v1`
 
 ## Usage
-API documentation has not been prepared yet.
+As developer/documenter, to setup/modify and document the API do:
+- `npm install apidoc -g`. We are using [apidocjs](https://apidocjs.com/#getting-started) to generate our documentation, so it need to be installed as a system/global package.
+- Follow [apidocjs](https://apidocjs.com/#getting-started) rule/style/syntax and document your code
+- The folder where all documentations are are: `documentations/routes/`
+  - Each file in this folder should mimic the naming convention found in the files/folders in `routes/` folders.
+  - Example: We have `routes/users.js` so also we should have `documentations/routes/users.js` as the docs for the said route.
+- When you have finish writing your documentation, it is time to build it into static files (css, js, html, ...) this handled by apidoc
+  - `npm run build:doc` This builds and dump it output of the doc into `documentations/doc`
+  - You can manually practically and click at the `index.html` od this generated folder and work offline.
+  - To have this available online, you need to host and set the server's public folder to `documentations/doc/index.html`. and then update `./routes/docs.js`
 
 ## Routes
 Base route: `/api/v1`
