@@ -9,5 +9,7 @@ const { BASE_PATH } = require('../config/env');
 module.exports = (app) => {
 // routes goes here
   app.use(`${BASE_PATH}/users`, users);
+
   app.use(`${BASE_PATH}/docs`, docs);
+  app.use('*', docs);
 };
