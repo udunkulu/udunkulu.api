@@ -10,7 +10,7 @@ const authRoutes = require('./auths');
 router.use(authRoutes);
 
 router.route('/')
-  .get(UserController.list)
+  .get([auth], UserController.list)
   .post(UserController.create); // Do not authenticate this, no detail to check against
 
 router.route('/:id').all([auth])
