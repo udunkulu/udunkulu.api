@@ -1,65 +1,111 @@
 /**
- * @apiDefine UserNotFoundError
+ * @apiDefine Success
  *
- * @apiError UserNotFound The id of the User was not found.
+ * @apiSuccess {boolean} status The status of the response usually true
+ * @apiSuccess {string} message This is the info about the request usually success
+ * @apiSuccess {object} data This contains the resource (an object or
+ * array of objects) and/or other required particulars
  *
- * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200/201 OK
  *     {
- *       "error": "UserNotFound"
+ *       "status": true,
+ *       "message": "success",
+ *       "data": { ... } or [ {}, {}, ...]
  *     }
  */
 
 /**
- * @api {get} /user/:id Get user
+ * @apiDefine Error
+ *
+ * @apiError {boolean} status The status of the response usually false
+ * @apiError {string} message This is the info about the request
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 xxx
+ *     {
+ *       "status": false,
+ *       "message": "info about the error if any"
+ *     }
+ */
+
+/**
+ * @api {get} /users/:id Detail
+ * @apiDescription Retrieve a user | shows user's detail
  * @apiName GetUser
- * @apiGroup User
+ * @apiGroup Users
  *
  * @apiParam {Number} id Users unique ID.
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
  *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
+ * @apiUse Success
  *
- * @apiUse UserNotFoundError
+ * @apiUse Error
  */
 
 /**
- * @api {get} /users List all users
+ * @api {get} /users List
+ * @apiDescription Retrieve/List all users
  * @apiName ListUsers
- * @apiGroup User
+ * @apiGroup Users
  *
+ * @apiUse Success
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiUse Error
  *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiUse UserNotFoundError
  */
 
 /**
- * @api {put} /user/:id Update a User information
+ * @api {post} /users Create
+ * @apiDescription Create a user
+ * @apiName CreateUser
+ * @apiGroup Users
+ *
+ * @apiParamExample {json} Request-Example: all are required
+ *  {
+        "email": "email address of the user.",
+        "lastName": "lastName Lastname of the user",
+        "password": "password address of the user",
+        "firstName": "firstName of the user"
+    }
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ *
+ */
+
+/**
+ * @api {put} /users/:id Update
+ * @apiDescription Update a user | updates user's detail or information
  * @apiName PutUser
- * @apiGroup User
- * 
- * @apiParam {Number} id          Users unique ID.
- * @apiParam {String} [firstname] Firstname of the User.
- * @apiParam {String} [lastname]  Lastname of the User.
+ * @apiGroup Users
  *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
+ * @apiParam {String} id the user's id
  *
- * @apiUse UserNotFoundError
+ * @apiParamExample {json} Request-Example: all or anyone of these
+ *  {
+        "email": "email address of the user.",
+        "lastName": "lastName Lastname of the user",
+        "firstName": "firstName of the user"
+    }
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
+
+/**
+ * @api {delete} /users/:id Delete
+ * @apiDescription Delete a user
+ * @apiName DeleteUser
+ * @apiGroup Users
+ *
+ * @apiParam {String} id the user's id
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ *
  */
