@@ -12,7 +12,9 @@
   },
   "apidoc": {
     "title": "Expressjs-template API documentation",
-    "url": "https://localhost:3000/api/v1"
+    "description": "This documentation describes this API endpoints, its params, request and response",
+    "url": "https://localhost:3000/api/v1",
+    "sampleUrl": "https://localhost:3000/api/v1"
   },
   "keywords": [],
   "author": "",
