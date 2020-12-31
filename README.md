@@ -34,8 +34,9 @@ As a backend or fullstack developer, to setup/modify and document your API do:
 
   - For this particular hosting, treated it like a static website and that is why we are to point the server towards `documentations/doc/` which contains the `index.html` that would be served by the hosting server, not expressjs.
 
-  - The doc to this API, is currently hosted at netlify, the repo is what was hosted and not the single folder `documentations/`. This way all changes to the doc is being picked by netlify.
-- You can also point your browser to `<host>/api/v1/docs` to access the docs; if you have hosted and updated `./routes/docs.js` except your are testing this template.
+  - The doc to this API, is currently hosted at netlify, it is the repo was was hosted and not the single folder `documentations/`. This way all changes to the doc is being picked by netlify for the code base when changes are made on on the repo/branch.
+
+- You can also point your browser to `<host>/api/v1/docs` to access the docs; if you have hosted and updated `./routes/docs.js` except your are testing this template. It is also available [online here](https://expressjs-template.netlify.app/).
 
 ## Routes
 Base route: `/api/v1`

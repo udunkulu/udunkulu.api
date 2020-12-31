@@ -19,4 +19,4 @@ const server = app.listen(PORT, () => {
   logger.info(`Listening on port ${PORT}`);
 });
 
-module.exports = server;
+module.exports.server = server;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --reporter spec",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build:doc": "apidoc -i documentations/routes -o documentations/doc",
@@ -37,10 +37,13 @@
     "winston-mongodb": "^5.0.5"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
     "grunt-apidoc": "^0.11.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.4"
   }
 }

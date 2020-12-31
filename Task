@@ -4,6 +4,7 @@ To be implemented
 - file/pix upload
 - admin dashboard
 - implement refreshed token
+- search
 
 Long term task
 - setup a revocable token

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { DB } = require('./env');
+const { DB, NODE_ENV } = require('./env');
 const { logger } = require('./logging');
 
 module.exports = (function database() {
@@ -12,7 +12,7 @@ module.exports = (function database() {
       useFindAndModify: false
     })
       .then(() => {
-        logger.info('Connected to database...');
+        if (NODE_ENV !== 'test') logger.info('Connected to database...');
       }).catch((error) => {
         logger.error('Error connecting to database...', error.message);
         logger.info('Reconnecting to database...');
