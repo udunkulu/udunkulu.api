@@ -71,3 +71,26 @@ These has being define on the doc but not all. New resource will be written ther
 
 ## Test
 To run test use `npm test`. Mocha chai are the testing library adopted for this projects.
+
+## App Structure
+This describes the project structure of this template
+- `expressjs-template/`: The project/app/root folder/directory
+  - `config/`: This contain configuration files, not really package configs which are on the root folder.
+    - `env.js`: This access in group and exposes the key/value pairs defined in `.env` files
+  - `controller/`: This is where the route handlers are kept
+  - `documentation/`: Keeps information/files about how to use or consume the API
+  - `logs/`: Holds logs files
+  - `middlewares/`: holds codes that must execute before, or after a request is handled
+  - `routes/`: contains our route files according to resource design
+  - `services/`: contain helper and other secretarial errands needed by controller or by other application parts
+  - `start/`: contain the files that control the app
+  - `test/`: hold test for files, this the place where `mochajs` finds it test files.
+  - `views/`: holds the template/view/html files for presentation where necessary
+  - `.env`: contains environmental variables  created from `.evn.example` as described in the previous sections. **This file must and should not be committed to version control, thus must be ignore**.
+  - `.env.example`: This is a blueprint of what `.env` should look like. .env keys must be in sync with .env.example.
+  - `index.js`: is the server entry point
+  - `eslintrc.js, mocharc.json, and prettierrc.json` contains configurations for eslint, mocha and prettier
+  - `5.0.0-alpha.8`: This app is using the alpha 8 (suppose to be version 5 ) of the expressjs
+  - `Procfile`: defines the app entry point
+  - `package.json`: contains the app configuration
+
