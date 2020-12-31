@@ -68,3 +68,6 @@ These has being define on the doc but not all. New resource will be written ther
  * }
  */
 ```
+
+## Test
+To run test use `npm test`. Mocha chai are the testing library adopted for this projects.
