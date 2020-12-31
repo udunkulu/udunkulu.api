@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config ./config/jest.config.js",
-    "test:watch": "npm run test -- --watch",
+    "test": "mocha --reporter spec",
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "build:doc": "apidoc -i documentations/routes -o documentations/doc",
     "setup:env": "cp .env.example .env && echo created .env file"
+  },
+  "apidoc": {
+    "title": "Expressjs-template API documentation",
+    "description": "This documentation describes this API endpoints, its params, request and response",
+    "url": "https://localhost:3000/api/v1"
   },
   "keywords": [],
   "author": "https://github.com/ezehlivinus",
@@ -32,13 +37,13 @@
     "winston-mongodb": "^5.0.5"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.15",
-    "@types/supertest": "^2.0.10",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "jest": "^26.6.1",
-    "nodemon": "^2.0.4",
-    "supertest": "^6.0.0"
+    "grunt-apidoc": "^0.11.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.4"
   }
 }

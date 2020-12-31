@@ -107,7 +107,7 @@ exports.passwordReset = async (req, res) => {
   res.render('auth/password-reset', {
     title: 'Expressjs template',
     token
-  });
+  }); 
 };
 
 /**
