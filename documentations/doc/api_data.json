@@ -1,11 +1,11 @@
 [
   {
     "type": "get",
-    "url": "/users/userId/posts/:id",
+    "url": "/users/userId/music/:id",
     "title": "Detail",
-    "description": "<p>Retrieve a post : entity <code>Post</code> does not exist on this app. This is for demonstration of how apidocjs works as seen in the navigation bar</p>",
-    "name": "GetPost",
-    "group": "Posts",
+    "description": "<p>Retrieve a music</p>",
+    "name": "GetMusic",
+    "group": "Music",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -14,7 +14,7 @@
             "type": "string",
             "optional": false,
             "field": "id",
-            "description": "<p>posts unique ID.</p>"
+            "description": "<p>music unique ID.</p>"
           },
           {
             "group": "Parameter",
@@ -28,7 +28,7 @@
     },
     "version": "0.0.0",
     "filename": "documentations/routes/posts.js",
-    "groupTitle": "Posts",
+    "groupTitle": "Music",
     "success": {
       "fields": {
         "Success 200": [

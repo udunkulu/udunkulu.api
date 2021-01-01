@@ -1,15 +1,15 @@
 define({
-  "title": "Expressjs-template API documentation",
-  "description": "This documentation describes this API endpoints, its params, request and response",
-  "url": "https://localhost:3000/api/v1",
-  "name": "expressjs-template",
+  "title": "údúnkúlú API documentation",
+  "description": "This documentation describes the endpoints, its params, request and response of this API",
+  "url": "https://udunkulu-api.herokuapp.com",
+  "name": "udunkulu",
   "version": "1.0.0",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-12-31T16:30:34.755Z",
+    "time": "2021-01-01T13:44:45.520Z",
     "url": "https://apidocjs.com",
     "version": "0.25.0"
   }
