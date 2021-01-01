@@ -1,15 +1,15 @@
 {
-  "title": "Expressjs-template API documentation",
-  "description": "This documentation describes this API endpoints, its params, request and response",
-  "url": "https://localhost:3000/api/v1",
-  "name": "expressjs-template",
+  "title": "údúnkúlú API documentation",
+  "description": "This documentation describes the API endpoints, its params, request and response",
+  "url": "https://expressjs-template.netlify.app",
+  "name": "udunkulu",
   "version": "1.0.0",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-12-31T16:30:34.755Z",
+    "time": "2021-01-01T12:44:32.963Z",
     "url": "https://apidocjs.com",
     "version": "0.25.0"
   }
