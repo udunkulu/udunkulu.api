@@ -2,7 +2,7 @@
 Music for Nigerian people by Nigerian artists!
 
 #### This is meant to be the backend API for the údúnkúlú service
-It prepares API that the frontend aprt of the app can consume.
+It prepares the API that the frontend part of the app can consume.
 
 ## Setup
 - Clone : before cloning it is assumed that you have mongodb installed and optional mongodb GUI browser like `Mongodb Compass`
@@ -117,5 +117,7 @@ We have adopted the npm package naming conveitions for our files and folder:
   - `user-controller.js` : not its camel or snake case counterparts
 
 ## Coding convention
-To be provided later
+To be provided later: But basically the following serve for now we depend
+- We uses `ESLint` and `AirBnG JavaScript style guide`
+- If you are using VSCode, You are encouraged to ESLint extension by `Dirk Baeumer` and make sure it is enabled
 
