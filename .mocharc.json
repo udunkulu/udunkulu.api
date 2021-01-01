@@ -1,8 +1,0 @@
-{
-  "diff": true,
-  "extension": ["js"],
-  "reporter": "spec",
-  "ui": "bdd",
-  "spec": ["./tests/**/*.js"],
-  "exit": true
-}
