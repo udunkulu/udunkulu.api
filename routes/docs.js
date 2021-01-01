@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // Host this app's doc and make sure on the server to point its public folder to
   // documentations/doc/
   // copy the link to the hosted and replace it with this one
-  res.redirect('https://expressjs-template.netlify.app/');
+  res.redirect('https://udunkulu.netlify.app/');
 });
 
 module.exports = router;

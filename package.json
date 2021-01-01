@@ -12,7 +12,7 @@
   },
   "apidoc": {
     "title": "údúnkúlú API documentation",
-    "description": "This documentation describes the API endpoints, its params, request and response",
+    "description": "This documentation describes the endpoints, its params, request and response of this API",
     "url": "https://udunkulu.netlify.app"
   },
   "keywords": [],

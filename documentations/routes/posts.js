@@ -1,5 +1,3 @@
-// This is just an example to demonstrate how apidocjs works
-// The entity post does not yet exist here on this app
 /**
  * @apiDefine Success
  *
@@ -33,13 +31,12 @@
  */
 
 /**
-  @api {get} /users/userId/posts/:id Detail
-  @apiDescription Retrieve a post : entity `Post` does not exist on this app.
-  This is for demonstration of how apidocjs works as seen in the navigation bar
-  @apiName GetPost
-  @apiGroup Posts
+  @api {get} /users/userId/music/:id Detail
+  @apiDescription Retrieve a music
+  @apiName GetMusic
+  @apiGroup Music
  
-  @apiParam {string} id posts unique ID.
+  @apiParam {string} id music unique ID.
   @apiParam {string} userId users unique ID.
  
   @apiUse Success

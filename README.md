@@ -21,7 +21,7 @@ It prepares API that the frontend aprt of the app can consume.
   - Then use the doc at `./documentations/doc/index.html` ( or `<your-host>/api/v1/docs` if it has been configure to do so) and access to know the endpoints to make calls to and their requirements.
   - Then start making calls to the provided host, mostly: localhost:port/api/v1
 - If you want to consume the API online:
-  - Then point your browser to: `<wherever-your-team-hosted-the-doc-online/api/v1/docs`, check the docs
+  - Then point your browser to: `https://udunkulu.netlify.app/api/v1/docs`, check the [docs](https://udunkulu.netlify.app)
   - Then make calls to to the endpoints provided on the doc above
 
 ## Usage
@@ -46,7 +46,7 @@ As a backend or fullstack developer, to setup/modify, and document your API, do:
 
   - The doc to this API is currently hosted at netlify, it is the repo that was hosted and not the single folder `documentations/`. This way, all changes to the doc is being picked by netlify from the code base when changes are made on the repo/branch, `main`.
 
-- You can also point your browser to `<yourhost>/api/v1/docs` to access the docs; if you have hosted and updated `./routes/docs.js` except your are testing this template. This is also available [online here](enter-the-address-where-this-exist).
+- You can also point your browser to `<yourhost>/api/v1/docs` to access the docs; if you have hosted and updated `./routes/docs.js` except your are testing this template. This is also available [online here](https://udunkulu.netlify.app).
 
 ## Routes
 Base route: `/api/v1`
