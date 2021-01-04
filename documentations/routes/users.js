@@ -99,6 +99,7 @@
 /**
  * @api {delete} /users/:id Delete
  * @apiDescription Delete a user
+ * @apiDescription Delete a user
  * @apiName DeleteUser
  * @apiGroup Users
  *
