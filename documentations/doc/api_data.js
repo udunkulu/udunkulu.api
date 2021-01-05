@@ -101,7 +101,7 @@ define({ "api": [
     "parameter": {
       "examples": [
         {
-          "title": "Request-Example: all are required",
+          "title": "Request-Example: all fields are required",
           "content": "{\n       \"email\": \"email address of the user.\",\n       \"lastName\": \"lastName Lastname of the user\",\n       \"password\": \"password address of the user\",\n       \"firstName\": \"firstName of the user\"\n   }",
           "type": "json"
         }
@@ -269,7 +269,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>Users unique ID.</p>"
@@ -435,7 +435,7 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Request-Example: all or anyone of these",
+          "title": "Request-Example: all or anyone of these fields",
           "content": "{\n       \"email\": \"email address of the user.\",\n       \"lastName\": \"lastName Lastname of the user\",\n       \"firstName\": \"firstName of the user\"\n   }",
           "type": "json"
         }

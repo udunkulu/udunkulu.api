@@ -22,7 +22,7 @@
  * @apiError {boolean} status The status of the response usually false
  * @apiError {string} message This is the info about the request
  *
- * @apiErrorExample Error-Response:
+ * @apiErrorExample {json} Error-Response:
  *     HTTP/1.1 xxx
  *     {
  *       "status": false,
@@ -36,7 +36,7 @@
  * @apiName GetUser
  * @apiGroup Users
  *
- * @apiParam {Number} id Users unique ID.
+ * @apiParam {String} id Users unique ID.
  *
  *
  * @apiUse Success
@@ -62,7 +62,7 @@
  * @apiName CreateUser
  * @apiGroup Users
  *
- * @apiParamExample {json} Request-Example: all are required
+ * @apiParamExample {json} Request-Example: all fields are required
  *  {
         "email": "email address of the user.",
         "lastName": "lastName Lastname of the user",
@@ -84,7 +84,7 @@
  *
  * @apiParam {String} id the user's id
  *
- * @apiParamExample {json} Request-Example: all or anyone of these
+ * @apiParamExample {json} Request-Example: all or anyone of these fields
  *  {
         "email": "email address of the user.",
         "lastName": "lastName Lastname of the user",
@@ -98,7 +98,6 @@
 
 /**
  * @api {delete} /users/:id Delete
- * @apiDescription Delete a user
  * @apiDescription Delete a user
  * @apiName DeleteUser
  * @apiGroup Users
