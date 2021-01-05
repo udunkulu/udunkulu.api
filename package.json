@@ -1,5 +1,5 @@
 {
-  "name": "udunkulu",
+  "name": "údúnkúlú",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "setup:env": "cp .env.example .env && echo created .env file"
   },
   "apidoc": {
-    "title": "",
+    "title": "údúnkúlú-API-documentation",
     "description": "This documentation describes the endpoints, its params, request and response of this API",
     "url": "https://udunkulu-api.herokuapp.com/api/v1"
   },
