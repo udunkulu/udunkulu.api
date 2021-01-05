@@ -282,7 +282,7 @@ define({ "api": [
     "groupTitle": "Users",
     "header": {
       "fields": {
-        "": [
+        "Header": [
           {
             "group": "Header",
             "type": "String",

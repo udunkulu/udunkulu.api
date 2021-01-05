@@ -31,9 +31,9 @@
  */
 
 /**
- * @apiDefine Header
+ * @apiDefine Header Header
  * @apiHeader {String} token Token value.
- * 
+ *
  */
 
 /**
