@@ -1,5 +1,6 @@
 define({
   "name": "údúnkúlú API documentation",
+  "title": "údúnkúlú doc",
   "description": "This documentation describes the endpoints, its params, request and response of this API",
   "url": "https://udunkulu-api.herokuapp.com/api/v1",
   "version": "1.0.0",
@@ -8,7 +9,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2021-01-05T14:07:44.022Z",
+    "time": "2021-01-05T14:34:39.527Z",
     "url": "https://apidocjs.com",
     "version": "0.25.0"
   }

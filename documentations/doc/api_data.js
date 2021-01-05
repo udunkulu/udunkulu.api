@@ -280,6 +280,19 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "documentations/routes/users.js",
     "groupTitle": "Users",
+    "header": {
+      "fields": {
+        "": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token value.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [

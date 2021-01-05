@@ -31,6 +31,12 @@
  */
 
 /**
+ * @apiDefine Header
+ * @apiHeader {String} token Token value.
+ * 
+ */
+
+/**
  * @api {get} /users/:id Detail
  * @apiDescription Retrieve a user | shows user's detail
  * @apiName GetUser
@@ -38,6 +44,7 @@
  *
  * @apiParam {String} id Users unique ID.
  *
+ * @apiUse Header
  *
  * @apiUse Success
  *
