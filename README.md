@@ -7,12 +7,17 @@ It prepares the API that the frontend part of the app can consume.
 ## Setup
 - Clone : before cloning it is assumed that you have mongodb installed and optional mongodb GUI browser like `Mongodb Compass`
 - Terminal/CLI command: `npm install` to install dependencies
-- Terminal/CLI command: `npm run setup:env` or `cp .env.example .env` to create .env file based on the .env.example file. Setup the created .env file
+- Terminal/CLI command: `npm run setup:env` or `cp .env.example .env` to create .`env` file based on the `.env.example` file.
+- Setup the created `.env` file
   - The `NODE_ENV`: This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`
+  - An environment is changed or switched when the server starts or ran:
+    - In production mode: `npm run start`. This is used when the app is running on a production server.
+    - In development mode: `npm run dev`. This is when you are testing and making changes in your `local` machine
+    - In test mode: `npm run test`. This is when you have written test or want to check if the existing tests are passing.
   - To switch to any env
     - Stop the server if currently running
     - Set the key `NODE_ENV` in the `.env` file to `production`, `development`, or `test`.
-    - setup your yahoo mail or gmail or any other mail service and get credentials for sending mail...use those credention to update .env
+    - setup your yahoo mail service and get credentials for sending mail...use those credentials to update .env for EMAIL and PASSWORD property
 - Start the app in dev mode: `npm run dev` or prod mode: `npm run start`. However, regardless of any of these commands, what ever is set in NODE_ENV is assume the current NODE Environment. Always make sure that it is set always be in the right environment
 
 ## Frontend developers guide

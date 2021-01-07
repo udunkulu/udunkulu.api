@@ -14,7 +14,7 @@ app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 start(app);
-
+console.log(process.env.NODE_ENV)
 const server = app.listen(PORT, () => {
   logger.info(`Listening on port ${PORT}`);
 });
