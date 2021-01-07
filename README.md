@@ -1,28 +1,27 @@
 # údúnkúlú
 Music for Nigerian people by Nigerian artists!
 
-#### This is meant to be the backend API for the údúnkúlú service
+#### This is the backend API for the údúnkúlú service
 It prepares the API that the frontend part of the app can consume.
 
 ## Setup
 - Clone : before cloning it is assumed that you have mongodb installed and optional mongodb GUI browser like `Mongodb Compass`
 - Terminal/CLI command: `npm install` to install dependencies
 - Terminal/CLI command: `npm run setup:env` or `cp .env.example .env` to create .`env` file based on the `.env.example` file.
+
 - Setup the created `.env` file
-  - The `NODE_ENV`: This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`
-  - An environment is changed or switched when the server starts or ran:
-    - In production mode: `npm run start`. This is used when the app is running on a production server.
-    - In development mode: `npm run dev`. This is when you are testing and making changes in your `local` machine
-    - In test mode: `npm run test`. This is when you have written test or want to check if the existing tests are passing.
-  - To switch to any env
-    - Stop the server if currently running
-    - Set the key `NODE_ENV` in the `.env` file to `production`, `development`, or `test`.
-    - setup your yahoo mail service and get credentials for sending mail...use those credentials to update .env for EMAIL and PASSWORD property
-- Start the app in dev mode: `npm run dev` or prod mode: `npm run start`. However, regardless of any of these commands, what ever is set in NODE_ENV is assume the current NODE Environment. Always make sure that it is set always be in the right environment
+  - The `NODE_ENV`: This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`.
+  - An environment is changed or switched when the server starts or ran in any of this mode. Check starting the app in different env for more info.
+  - setup your yahoo mail service and get credentials for sending mail...use those credentials to update .env for EMAIL and PASSWORD property. < this will be changed to gmail later on >
+
+- Starting the app in different envs:
+    - Production env: `npm run start`. This is used when the app is running on a production server.
+    - Development env: `npm run dev`. This is when you are testing and making changes in your `local` machine
+    - Test env: `npm run test`. This is when you have written test or want to check if the existing tests are passing.
 
 ## Frontend developers guide
 - If you want to consume the app locally, then follow the setup process above
-  - If you encounter any defficulty, beckon on the backend developers in your team for help, trust me they will surelly know what to do.
+  - If you encounter any difficulty, beckon on the backend developers in your team for help, trust me they will surely know what to do.
   - Then use the doc at `./documentations/doc/index.html` ( or `<your-host>/api/v1/docs` if it has been configure to do so) and access to know the endpoints to make calls to and their requirements.
   - Then start making calls to the provided host, mostly: localhost:port/api/v1
 - If you want to consume the API online:
@@ -124,5 +123,5 @@ We have adopted the npm package naming conveitions for our files and folder:
 ## Coding convention
 To be provided later: But basically the following serve for now we depend
 - We uses `ESLint` and `AirBnG JavaScript style guide`
-- If you are using VSCode, You are encouraged to ESLint extension by `Dirk Baeumer` and make sure it is enabled
+- If you are using VSCode, You are encouraged to install `ESLint` extension by `Dirk Baeumer` and make sure it is enabled
 
