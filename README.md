@@ -10,7 +10,7 @@ It prepares the API that the frontend part of the app can consume.
 - Terminal/CLI command: `npm run setup:env` or `cp .env.example .env` to create .`env` file based on the `.env.example` file.
 
 - Setup the created `.env` file
-  - The `NODE_ENV`: This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`.
+  - The `NODE_ENV`: cd This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`.
   - An environment is changed or switched when the server starts or ran in any of this mode. Check starting the app in different env for more info.
   - setup your yahoo mail service and get credentials for sending mail...use those credentials to update .env for EMAIL and PASSWORD property. < this will be changed to gmail later on >
 
