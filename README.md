@@ -7,7 +7,7 @@ It prepares the API that the frontend part of the app can consume.
 ## Setup
 - Clone : before cloning it is assumed that you have mongodb installed and optional mongodb GUI browser like `Mongodb Compass`
 - Terminal/CLI command: `npm install` to install dependencies
-- Terminal/CLI command: `npm run setup:env` or `cp .env.example .env` to create .`env` file based on the `.env.example` file.
+- Terminal/CLI command: `npm run setup:env` to create `.env` file based on the `.env.example` file. This command creates the file along with error message in Windows, Linux or MacOS printed command prompt, bash or terminal. This is fine it is due to the command used, one tries for Windows if fails it try for Linux/Mac.
 
 - Setup the created `.env` file
   - The `NODE_ENV`: cd This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`.

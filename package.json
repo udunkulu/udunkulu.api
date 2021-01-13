@@ -8,7 +8,7 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "build:doc": "apidoc -i documentations/routes -o documentations/doc",
-    "setup:env": "cp .env.example .env && echo created .env file"
+    "setup:env": "@type .env.example > .env || cp .env.example .env"
   },
   "apidoc": {
     "name": "údúnkúlú API documentation",
