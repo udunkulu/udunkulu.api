@@ -11,8 +11,8 @@ It prepares the API that the frontend part of the app can consume.
 
 - Setup the created `.env` file
   - The `NODE_ENV`: This app maintains one of the three environments (env(s)) at a time, `production`, `development`, or `test`.
-  - An environment is changed or switched when the server starts or ran in any of this mode. Check starting the app in different env for more info.
-  - setup your yahoo mail service and get credentials for sending mail...use those credentials to update .env for EMAIL and PASSWORD property. < this will be changed to gmail later on >
+  - An environment is changed or switched when the server is started or ran in any of this mode. Check starting the app in a different env for more info.
+  - Setup your yahoo mail service and get credentials for sending mail...use those credentials to update `.env` for EMAIL and PASSWORD property. < __this will be changed to gmail later on__ >
 
 - Starting the app in different envs:
     - Production env: `npm run start`. This is used when the app is running on a production server.
@@ -30,13 +30,13 @@ It prepares the API that the frontend part of the app can consume.
 
 ## Usage
 #### This is how the API documentation should be hosted/treated
-As a backend or fullstack developer, to setup/modify, and document your API, do:
+As a backend or fullstack developer, to setup/modify and document your API, do:
 - `npm install apidoc -g`. We are using [apidocjs](https://apidocjs.com/#getting-started) to generate our documentation, so it need to be installed as a system/global package.
 - Follow [apidocjs's](https://apidocjs.com/#param-api-param) rule/style/syntax/params and document your code as required.
 - All written documentations are kept and is to be done in the: [documentations/routes/](https://github.com/ezehlivinus/udunkulu/tree/main/documentations/routes)
   - Each file in this folder should mimic the naming convention found in the files and folders in `./routes/` folders.
   - Example: We have `./routes/users.js` so also we should have `documentations/routes/users.js` as the docs for the said route: `./routes/users.js`.
-- When you have finish writing your documentation, it is time to build it into static files (css, js, html, ...) this is handled by apidoc.
+- When you have finished writing your documentation, it is time to build it into static files (css, js, html, ...) this is handled by apidoc.
   - `npm run build:doc` This builds and dump it output of the doc into `documentations/doc`. You must run this command each time you a change to the docs at `documentations/routes/`
   - Whenever you run the command fresh sets of files (i.e the docs or statics) are being generated
 
