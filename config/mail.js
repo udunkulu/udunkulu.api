@@ -16,7 +16,7 @@ const transporter = nodemialer.createTransport({
 const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
-    name: 'Express-template',
+    name: 'údúnkúlú',
     link: APP_URL
   }
 });
