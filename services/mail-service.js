@@ -12,7 +12,7 @@ exports.sendVerificationMail = async (user, token) => {
   const response = {
     body: {
       name: `${user.firstName} ${user.lastName}`,
-      intro: 'Welcome to Expressjs template',
+      intro: 'Welcome to `Udúnkúlú',
       action: {
         instructions: 'To continue, please click here:',
         button: {
@@ -27,7 +27,7 @@ exports.sendVerificationMail = async (user, token) => {
   const mail = mailGenerator.generate(response);
 
   const message = {
-    from: 'Expressjs Template <ezehlivinus@yahoo.com>',
+    from: '`Udúnkúlú <ezehlivinus@yahoo.com>',
     to: user.email,
     subject: 'Registration successful',
     html: mail
@@ -62,7 +62,7 @@ exports.sendPasswordResetMail = async (user) => {
   const mail = mailGenerator.generate(response);
 
   const message = {
-    from: 'Expressjs Template <ezehlivinus@yahoo.com>',
+    from: '`Udúnkúlú <ezehlivinus@yahoo.com>',
     to: user.email,
     subject: 'Reset your password',
     html: mail
