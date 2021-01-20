@@ -6,6 +6,10 @@ const { SECRET } = require('../config/env');
 // Define user schema
 const userSchema = new mongoose.Schema({
 
+  firstName: {
+    type: String, required: true, minlength: 3, maxlength: 100
+  },
+
   lastName: {
     type: String, required: true, minlength: 3, maxlength: 100
   },

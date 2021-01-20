@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
-// Define user schema
+// Define song schema
 const songSchema = new mongoose.Schema({
 
   title: {
@@ -30,11 +30,11 @@ const songSchema = new mongoose.Schema({
 
 }, { timestamps: new Date() });
 
-// Tells which user properties that are included when converting MongoDB records to
+// Tells which song properties that are included when converting MongoDB records to
 // JSON objects which are returned in API responses
 songSchema.set('toJSON', {});
 
-// Define User model based on user schema
+// Define Song model based on song schema
 const Song = mongoose.model('Song', songSchema);
 
 // validation
