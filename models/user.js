@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const { SECRET } = require('../config/env');
+const { ac } = require('../config/roles');
 
 // Define user schema
 const userSchema = new mongoose.Schema({
@@ -62,6 +63,21 @@ userSchema.set('toJSON', {
 
 // Define User model based on user schema
 const User = mongoose.model('User', userSchema);
+
+// authorisations
+const authorisation = () => {
+  ac.grant('listener')
+    .readAny('userAccount')
+    .updateOwn('userAccount');
+
+  ac.grant('artist').extend('listener');
+
+  ac.grant('admin').extend('artist')
+    .createAny('userAccount')
+    .updateAny('userAccount')
+    .deleteAny('userAccount');
+};
+authorisation();
 
 // validation
 const validateUser = async (user = {}) => {

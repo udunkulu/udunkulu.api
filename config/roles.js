@@ -2,17 +2,10 @@ const AccessControl = require('accesscontrol');
 
 const ac = new AccessControl();
 
-exports.roles = (function r() {
-  ac.grant('user')
-    .readOwn('userAccount')
-    .updateOwn('userAccount');
-
-  ac.grant('admin').extend('user')
-    .createAny('userAccount');
-
-  ac.grant('superadmin').extend('admin')
-    .updateAny('userAccount')
-    .deleteAny('userAccount');
-
+const roles = (function r() {
   return ac;
 }());
+
+module.exports = {
+  ac, roles
+};
