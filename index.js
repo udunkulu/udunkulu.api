@@ -1,7 +1,7 @@
 const express = require('express');
 require('express-async-errors');
 const path = require('path');
-
+require('./config/social-auth/google-auth')()
 const { PORT } = require('./config/env');
 const { logger } = require('./config/logging');
 
@@ -19,4 +19,5 @@ const server = app.listen(PORT, () => {
   logger.info(`Listening on port ${PORT}`);
 });
 
+module.exports.app = app;
 module.exports.server = server;
