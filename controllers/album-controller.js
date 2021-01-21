@@ -7,8 +7,8 @@ const { Album, validateAlbum, validateUpdate } = require('../models/album');
  */
 exports.detail = async (req, res) => {
   const album = await Album.findById(req.params.id);
-  if (!album) return res.success(404).send({ success: false, message: 'Album not found' });
-  res.success(200).send({ success: true, message: 'Success', data: album });
+  if (!album) return res.status(404).send({ success: false, message: 'Album not found' });
+  res.status(200).send({ success: true, message: 'Success', data: album });
 };
 
 /**
@@ -16,9 +16,9 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const albums = await Album.find();
-  if (_.isEmpty(albums)) return res.success(404).send({ success: false, message: 'albums not found' });
+  if (_.isEmpty(albums)) return res.status(404).send({ success: false, message: 'albums not found' });
 
-  res.success(200).send({ success: true, message: 'success', data: albums });
+  res.status(200).send({ success: true, message: 'success', data: albums });
 };
 
 /**
@@ -33,7 +33,7 @@ exports.create = async (req, res) => {
 
   await album.save();
 
-  res.success(201).send({ success: true, message: 'album created', data: album });
+  res.status(201).send({ success: true, message: 'album created', data: album });
 };
 
 /**
@@ -47,9 +47,9 @@ exports.update = async (req, res) => {
     ...requestBody
   }, options, async (error, album) => {
     if (error) throw error;
-    if (!album) return res.success(404).send({ success: false, message: 'album not found' });
+    if (!album) return res.status(404).send({ success: false, message: 'album not found' });
 
-    res.success(200).send({ success: true, message: 'success', data: album });
+    res.status(200).send({ success: true, message: 'success', data: album });
   });
 };
 /**
@@ -59,12 +59,12 @@ exports.delete = async (req, res) => {
   /**
      * validate,
      * only an artist can delete his or her album, admin can also delete.
-     * if (req.user._id !== req.params.id) return res.success(400).send('Bad request');
+     * if (req.user._id !== req.params.id) return res.status(400).send('Bad request');
      */
 
   const album = await Album.findByIdAndRemove(req.params.id);
 
-  if (!album) return res.success(404).send({ success: false, message: 'album not found ' });
+  if (!album) return res.status(404).send({ success: false, message: 'album not found ' });
 
-  res.success(200).send({ success: true, message: 'success', data: album });
+  res.status(200).send({ success: true, message: 'success', data: album });
 };
