@@ -55,6 +55,23 @@ songSchema.set('toJSON', {
 // Define Song model based on song schema | map song schema to database
 const Song = mongoose.model('Song', songSchema);
 
+// authorisations
+const authorisations = () => {
+  ac.grant('listener')
+    .readAny('song');
+
+  ac.grant('artist').extend('listener')
+    .createOwn('song')
+    .updateOwn('song')
+    .deleteOwn('song');
+
+  ac.grant('admin').extend('listener')
+    // .createAny('song') // in the future we may allow this
+    .updateAny('song')
+    .deleteAny('song');
+};
+authorisations();
+
 module.exports = {
   Song
 };
