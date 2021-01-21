@@ -88,3 +88,23 @@
  *
  @apiUse Error
  */
+
+/**
+ * @api {put} /albums/:id Update
+ * @apiDescription Update a album | updates Album's detail or information
+ * @apiName PutAlbum
+ * @apiGroup Albums
+ *
+ * @apiParam {String} id the album's id
+ *
+ * @apiParamExample {json} Request-Example: all or anyone of these fields
+ *  {
+        "email": "email address of the album.",
+        "lastName": "lastName Lastname of the album",
+        "firstName": "firstName of the album"
+    }
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
