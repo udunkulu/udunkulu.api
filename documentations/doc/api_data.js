@@ -1,5 +1,340 @@
 define({ "api": [
   {
+    "type": "post",
+    "url": "/album",
+    "title": "Create",
+    "description": "<p>Creates an album</p>",
+    "name": "CreateAlbum",
+    "group": "Albums",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example: only artist and title fields are required",
+          "content": "{\n    \"title\": \"album title\",\n    \"artist\": \"artists name\",\n    \"discription\": \"album discription\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "documentations/routes/albums.js",
+    "groupTitle": "Albums",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/album/:id",
+    "title": "Delete",
+    "description": "<p>Deletes an album</p>",
+    "name": "DeleteAlbum",
+    "group": "Albums",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>the album's id</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "documentations/routes/albums.js",
+    "groupTitle": "Albums",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/albums/:id",
+    "title": "Detail",
+    "description": "<p>Retrieves an album or rather shows the details of an album</p>",
+    "name": "GetAlbum",
+    "group": "Albums",
+    "parameter": {
+      "fields": {
+        "String": [
+          {
+            "group": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Album unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "documentations/routes/albums.js",
+    "groupTitle": "Albums",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token value.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/albums",
+    "title": "List",
+    "description": "<p>Retrieves all the albums or rather shows all the details of available albums</p>",
+    "name": "ListAlbum",
+    "group": "Albums",
+    "version": "0.0.0",
+    "filename": "documentations/routes/albums.js",
+    "groupTitle": "Albums",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/users/userId/music/:id",
     "title": "Detail",
@@ -36,8 +371,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually true</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
           },
           {
             "group": "Success 200",
@@ -58,7 +393,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"status\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
           "type": "json"
         }
       ]
@@ -70,8 +405,8 @@ define({ "api": [
             "group": "Error 4xx",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually false</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
           },
           {
             "group": "Error 4xx",
@@ -85,7 +420,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"status\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
           "type": "json"
         }
       ]
@@ -117,8 +452,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually true</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
           },
           {
             "group": "Success 200",
@@ -139,7 +474,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"status\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
           "type": "json"
         }
       ]
@@ -151,8 +486,8 @@ define({ "api": [
             "group": "Error 4xx",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually false</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
           },
           {
             "group": "Error 4xx",
@@ -166,7 +501,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"status\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
           "type": "json"
         }
       ]
@@ -202,8 +537,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually true</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
           },
           {
             "group": "Success 200",
@@ -224,7 +559,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"status\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
           "type": "json"
         }
       ]
@@ -236,8 +571,8 @@ define({ "api": [
             "group": "Error 4xx",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually false</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
           },
           {
             "group": "Error 4xx",
@@ -251,7 +586,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"status\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
           "type": "json"
         }
       ]
@@ -300,8 +635,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually true</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
           },
           {
             "group": "Success 200",
@@ -322,7 +657,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"status\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
           "type": "json"
         }
       ]
@@ -334,8 +669,8 @@ define({ "api": [
             "group": "Error 4xx",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually false</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
           },
           {
             "group": "Error 4xx",
@@ -349,7 +684,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"status\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
           "type": "json"
         }
       ]
@@ -372,8 +707,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually true</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
           },
           {
             "group": "Success 200",
@@ -394,7 +729,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"status\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
           "type": "json"
         }
       ]
@@ -406,8 +741,8 @@ define({ "api": [
             "group": "Error 4xx",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually false</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
           },
           {
             "group": "Error 4xx",
@@ -421,7 +756,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"status\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
           "type": "json"
         }
       ]
@@ -464,8 +799,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually true</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
           },
           {
             "group": "Success 200",
@@ -486,7 +821,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"status\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
           "type": "json"
         }
       ]
@@ -498,8 +833,8 @@ define({ "api": [
             "group": "Error 4xx",
             "type": "boolean",
             "optional": false,
-            "field": "status",
-            "description": "<p>The status of the response usually false</p>"
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
           },
           {
             "group": "Error 4xx",
@@ -513,7 +848,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"status\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
           "type": "json"
         }
       ]
