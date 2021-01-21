@@ -20,7 +20,7 @@ exports.sendVerificationMail = async (user, token) => {
           link: `${base}/users/verify-email?token=${token}`
         }
       },
-      outro: 'Thanks for signing up.'
+      outro: 'Thanks for signing up. Enjoy the gbedu..'
     }
   };
 
@@ -49,13 +49,13 @@ exports.sendPasswordResetMail = async (user) => {
       name: `${user.firstName} ${user.lastName}`,
       intro: 'Password Reset Link',
       action: {
-        instructions: 'To reset your password, click on the link below:',
+        instructions: 'If you did not request for this mail, Please Ignore it. To reset your password, click on the link below:',
         button: {
           text: 'Reset password',
           link: `${base}/users/password-reset?token=${token}`
         }
       },
-      outro: 'Do not shared this link with anyone. Except if the person is helping to reset your password'
+      outro: 'Do not share this link with anyone.'
     }
   };
 
