@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: new Date() });
 
 // Define static method to be used on User object
-userSchema.methods.generateAuthToken = function t() {
+userSchema.methods.generateAuthToken = function t() {      //t is short for token
   const token = jwt.sign({
     _id: this._id,
     email: this.email,
@@ -103,6 +103,9 @@ const validateUpdate = async (user = {}) => {
   return value;
 };
 
-exports.validateUser = validateUser;
-exports.User = User;
-exports.validateUpdate = validateUpdate;
+module.exports = {
+  validateUser,
+  User,
+  validateUpdate
+};
+
