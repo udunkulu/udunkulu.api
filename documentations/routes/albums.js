@@ -77,7 +77,7 @@
  */
 
 /**
- * @api {delete} /album/:id Delete
+ * @api {delete} /albums/:id Delete
  * @apiDescription Deletes an album
  * @apiName DeleteAlbum
  * @apiGroup Albums
