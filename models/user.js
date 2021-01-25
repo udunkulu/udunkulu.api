@@ -24,10 +24,9 @@ const userSchema = new mongoose.Schema({
   },
 
   phoneNumber: {
-    type: Number,
-    required: true,
+    type: String,
     unique: true,
-    maxlength: 11
+    maxlength: 15
   },
 
   password: {
@@ -98,7 +97,7 @@ const validateUser = async (user = {}) => {
     password: Joi.string().min(6).max(60).required(),
     email: Joi.string().email().trim().lowercase()
       .required(),
-    phoneNumber: Joi.number()
+    phoneNumber: Joi.string()
   });
 
   const value = await schema.validateAsync(user);
@@ -112,7 +111,8 @@ const validateUpdate = async (user = {}) => {
     firstName: Joi.string().min(3).max(100),
     lastName: Joi.string().min(3).max(100),
     password: Joi.string().min(6).max(60),
-    email: Joi.string().email().trim().lowercase()
+    email: Joi.string().email().trim().lowercase(),
+    phoneNumber: Joi.string()
   });
 
   const value = await schema.validateAsync(user);
