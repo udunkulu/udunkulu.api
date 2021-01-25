@@ -7,9 +7,9 @@ const { SECRET } = require('../config/env');
 module.exports = function auth(req, res, next) {
   const token = req.header('token');
 
-  if (!token) return res.status(401).send({ status: false, message: 'Access Denied: Token not provided' });
+  if (!token) return res.status(401).send({ success: false, message: 'Access Denied: Token not provided' });
 
-  if (token.length <= 10) return res.status(401).send({ status: false, message: 'Access Denied: Invalid' });
+  if (token.length <= 10) return res.status(401).send({ success: false, message: 'Access Denied: Invalid' });
 
   const decoded = jwt.verify(token, SECRET);
   req.user = decoded;

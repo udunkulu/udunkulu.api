@@ -92,6 +92,30 @@ const authorisations = () => {
 };
 authorisations();
 
-module.exports = {
-  Song
+// validation
+const validateSong = async (song = {}) => {
+  const schema = Joi.object({
+    title: Joi.string().min(3).max(100).required()
+
+  });
+
+  const value = await schema.validateAsync(song);
+
+  return value;
 };
+
+// validation
+const validateUpdate = async (song = {}) => {
+  const schema = Joi.object({
+    title: Joi.string().min(3).max(100)
+  });
+
+  const value = await schema.validateAsync(song);
+
+  return value;
+};
+
+module.exports = {
+  Song, validateSong, validateUpdate
+};
+
