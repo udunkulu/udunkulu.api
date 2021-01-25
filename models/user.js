@@ -22,12 +22,13 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+
   phoneNumber: {
     type: Number,
     required: true,
     unique: true,
-    maxlength: 11,
-  }
+    maxlength: 11
+  },
 
   password: {
     type: String,
@@ -51,7 +52,7 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Define static method to be used on User object
-userSchema.methods.generateAuthToken = function t() {      //t is short for token
+userSchema.methods.generateAuthToken = function t() { // t is short for token
   const token = jwt.sign({
     _id: this._id,
     email: this.email,
@@ -96,8 +97,8 @@ const validateUser = async (user = {}) => {
     lastName: Joi.string().min(3).max(100).required(),
     password: Joi.string().min(6).max(60).required(),
     email: Joi.string().email().trim().lowercase()
-      .required()
-    phoneNumber: Joi.number(),
+      .required(),
+    phoneNumber: Joi.number()
   });
 
   const value = await schema.validateAsync(user);
@@ -124,4 +125,3 @@ module.exports = {
   User,
   validateUpdate
 };
-
