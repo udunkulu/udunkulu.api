@@ -1,5 +1,5 @@
-const cloudinary = require('../config/cloudinary');
 const path = require('path');
+const cloudinary = require('../config/cloudinary');
 const { Song } = require('../models/song');
 
 // const dir = path.join(__dirname, 'uploads/songs');
@@ -13,24 +13,30 @@ const { Song } = require('../models/song');
 //   // res.send({name : req.file.originalname, path: req.file.path });
 
 exports.upload = async (req, res) => {
-  try {
-    const music = new Song({
-      title: req.file.originalname,
-      artist: 'Ezeh',
-      music: req.file
-    });
-    // return res.send(req.file.fieldname)
-    console.log(music);
-    const response = await cloudinary.uploads(req.file.path);
-    let newMusic = await music.save();
+  // upload to cloudinary
+  const response = await cloudinary.uploads(req.file.path);
 
-    res.status(200).json({ data: newMusic, response });
-  } catch (err) {
-    res.status(500).json({ error: err });
-  }
+  // get artist info
+
+  // get album info
+
+  const songData = {
+    title: req.file.originalname,
+    duration: response.duration,
+    url: response.secure_url,
+    cloudinary: response
+  };
+
+  const song = new Song(songData);
+
+  await song.save();
+
+  // return 
+
+  res.status(200).send(song);
 };
 
 exports.playSong = async (req, res) => {
   // res
   // return res.sendFile(path.join(__dirname, '../uploads/1611483241090-53331333601 Rites of Passage.mp3'))
-}
+};

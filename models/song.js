@@ -11,26 +11,37 @@ let songSchema = new mongoose.Schema({
     trim: true
   },
 
-  address: {
-    type: String,
-    trim: true
-  },
+  // artist: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Artist'
+  // },
 
-  artist: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Artist'
-  },
-
-  album: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Album'
-  },
+  // album: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Album'
+  // },
 
   // path to the song's image
   coverArt: {
     type: String,
     trim: true,
     minlength: 2
+  },
+
+  // The length a song can play until it stops (seconds)
+  duration: {
+    type: Number
+  },
+
+  url: {
+    type: String
+  },
+
+  // keeps details about this files' info on where it was stored
+  // in the cloud...This is not going to be sent in the API response
+  cloudinary: {
+    type: Object,
+    required: true
   },
 
   // must not be filled during creation
@@ -47,29 +58,32 @@ let songSchema = new mongoose.Schema({
 
 }, { timestamps: new Date() });
 
-songSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  music: {
-    type: Object,
-    required: true
-  },
-  artist: {
-    type: String,
-    required: true
-  },
-  created: {
-    type: Date,
-    default: Date.now()
-  }
-});
+// songSchema = new mongoose.Schema({
+//   title: {
+//     type: String,
+//     required: true
+//   },
+//   music: {
+//     type: Object,
+//     required: true
+//   },
+//   artist: {
+//     type: String,
+//     required: true
+//   },
+//   created: {
+//     type: Date,
+//     default: Date.now()
+//   }
+// });
 
 // Determine which properties are returned in API responses
 songSchema.set('toJSON', {
-  versionKey: false
-  // transform(doc, ret) {}
+  versionKey: false,
+  transform(doc, ret) {
+    // eslint-disable-next-line no-param-reassign
+    delete ret.cloudinary;
+  }
 });
 
 // Define Song model based on song schema | map song schema to database
@@ -118,4 +132,3 @@ const validateUpdate = async (song = {}) => {
 module.exports = {
   Song, validateSong, validateUpdate
 };
-

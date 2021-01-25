@@ -41,8 +41,8 @@ const validateUpdate = async (artist = {}) => {
   return value;
 };
 
-module.exports {
-    validateArtist,
-    validateUpdate,
-    Artist
+module.exports = {
+  validateArtist,
+  validateUpdate,
+  Artist
 };
