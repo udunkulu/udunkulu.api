@@ -97,7 +97,8 @@ const validateUser = async (user = {}) => {
     password: Joi.string().min(6).max(60).required(),
     email: Joi.string().email().trim().lowercase()
       .required(),
-    phoneNumber: Joi.string()
+    phoneNumber: Joi.string(),
+    role: Joi.string()
   });
 
   const value = await schema.validateAsync(user);
