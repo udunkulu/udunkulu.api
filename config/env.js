@@ -3,7 +3,8 @@ require('dotenv').config();
 let env;
 
 const {
-  NODE_ENV, EMAIL, PASSWORD, APP_URL, PORT, APP_SECRET, APP_DB
+  NODE_ENV, EMAIL, PASSWORD, APP_URL, PORT, APP_SECRET, APP_DB,
+  CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
 } = process.env;
 
 const BASE_PATH = '/api/v1';
@@ -26,7 +27,10 @@ if (inProductionOrDevelopment) {
     EMAIL,
     PASSWORD,
     APP_URL,
-    BASE_PATH
+    BASE_PATH,
+    CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_SECRET,
+    CLOUDINARY_API_KEY
   };
 } else {
   // else it is in test env

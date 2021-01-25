@@ -1,41 +1,96 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { ac } = require('../config/roles');
 
 // Define song schema
-const songSchema = new mongoose.Schema({
-
+let songSchema = new mongoose.Schema({
   title: {
-    type: String, required: true, minlength: 3, maxlength: 100
+    type: String,
+    required: true,
+    minlength: 2,
+    trim: true
+  },
+
+  address: {
+    type: String,
+    trim: true
+  },
+
+  artist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Artist'
   },
 
   album: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Album'
+  },
+
+  // path to the song's image
+  coverArt: {
     type: String,
-    required: false,
-    minlength: 3,
-    maxlength: 60
+    trim: true,
+    minlength: 2
   },
 
-  duration: {
+  // must not be filled during creation
+  // keeps number of times a was played
+  streams: {
     type: Number,
-    required: true
-  },
-  musidId: {
-    type: Number,
-    required: true
-  },
-
-  releaseDate: {
-    type: Date
+    required: true,
+    default: 0
   }
+
+  // genre: {  }
+
+  // mood: {  }
 
 }, { timestamps: new Date() });
 
-// Tells which song properties that are included when converting MongoDB records to
-// JSON objects which are returned in API responses
-songSchema.set('toJSON', {});
+songSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  music: {
+    type: Object,
+    required: true
+  },
+  artist: {
+    type: String,
+    required: true
+  },
+  created: {
+    type: Date,
+    default: Date.now()
+  }
+});
 
-// Define Song model based on song schema
+// Determine which properties are returned in API responses
+songSchema.set('toJSON', {
+  versionKey: false
+  // transform(doc, ret) {}
+});
+
+// Define Song model based on song schema | map song schema to database
 const Song = mongoose.model('Song', songSchema);
+
+// authorisations
+const authorisations = () => {
+  ac.grant('listener')
+    .readAny('song');
+
+  ac.grant('artist').extend('listener')
+    .createOwn('song')
+    .updateOwn('song')
+    .deleteOwn('song');
+
+  ac.grant('admin').extend('listener')
+    // .createAny('song') // in the future we may allow this
+    .updateAny('song')
+    .deleteAny('song');
+};
+authorisations();
 
 // validation
 const validateSong = async (song = {}) => {
@@ -60,6 +115,7 @@ const validateUpdate = async (song = {}) => {
   return value;
 };
 
-exports.validateSong = validateSong;
-exports.Song = Song;
-exports.validateUpdate = validateUpdate;
+module.exports = {
+  Song, validateSong, validateUpdate
+};
+
