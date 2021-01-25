@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { ac } = require('accesscontrol');
+const { ac } = require('../config/roles');
 
 // Define song schema
-const songSchema = new mongoose.Schema({
+let songSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -46,6 +46,25 @@ const songSchema = new mongoose.Schema({
   // mood: {  }
 
 }, { timestamps: new Date() });
+
+songSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  music: {
+    type: Object,
+    required: true
+  },
+  artist: {
+    type: String,
+    required: true
+  },
+  created: {
+    type: Date,
+    default: Date.now()
+  }
+});
 
 // Determine which properties are returned in API responses
 songSchema.set('toJSON', {
