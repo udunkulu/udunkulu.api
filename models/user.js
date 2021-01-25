@@ -97,7 +97,8 @@ const validateUser = async (user = {}) => {
     password: Joi.string().min(6).max(60).required(),
     email: Joi.string().email().trim().lowercase()
       .required(),
-    phoneNumber: Joi.string()
+    phoneNumber: Joi.string(),
+    role: Joi.string()
   });
 
   const value = await schema.validateAsync(user);
@@ -112,7 +113,8 @@ const validateUpdate = async (user = {}) => {
     lastName: Joi.string().min(3).max(100),
     password: Joi.string().min(6).max(60),
     email: Joi.string().email().trim().lowercase(),
-    phoneNumber: Joi.string()
+    phoneNumber: Joi.string(),
+    role: Joi.string()
   });
 
   const value = await schema.validateAsync(user);
