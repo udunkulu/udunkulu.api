@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
     type: Date
   }
 
-}, { timestamps: new Date() });
+}, { timestamps: true });
 
 // Define static method to be used on User object
 userSchema.methods.generateAuthToken = function t() {      //t is short for token
