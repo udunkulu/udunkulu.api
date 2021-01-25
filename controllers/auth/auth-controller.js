@@ -13,10 +13,10 @@ const { sendPasswordResetMail } = require('../../services/mail-service');
 exports.login = async (req, res) => {
   // check if user exist
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send({ status: 'error', message: 'Invalid email  or password' });
+  if (!user) return res.status(400).send({ status: false, message: 'Invalid email  or password' });
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send({ status: 'error', message: 'Invalid password or email' });
+  if (!validPassword) return res.status(400).send({ status: false, message: 'Invalid password or email' });
 
   const token = user.generateAuthToken();
 
