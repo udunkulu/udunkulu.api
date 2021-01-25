@@ -13,15 +13,15 @@ const { sendPasswordResetMail } = require('../../services/mail-service');
 exports.login = async (req, res) => {
   // check if user exist
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send({ status: false, message: 'Invalid email  or password' });
+  if (!user) return res.status(400).send({ success: false, message: 'Invalid email  or password' });
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send({ status: false, message: 'Invalid password or email' });
+  if (!validPassword) return res.status(400).send({ success: false, message: 'Invalid password or email' });
 
   const token = user.generateAuthToken();
 
   res.header('token', token).status(200).send({
-    status: true,
+    success: true,
     message: 'success',
     data: user
   });
@@ -38,15 +38,15 @@ exports.verifyEmail = async (req, res) => {
   const decoded = jwt.verify(token, SECRET);
 
   const user = await User.findById(decoded._id);
-  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
-  if (user.verifiedAt) return res.status(200).send({ status: false, message: 'user already verified' });
+  if (!user) return res.status(404).send({ success: false, message: 'user not found' });
+  if (user.verifiedAt) return res.status(200).send({ success: false, message: 'user already verified' });
 
   user.verifiedAt = new Date();
 
   await user.save();
 
   return res.header('token', token).send({
-    status: true, message: 'email verified', data: user
+    success: true, message: 'email verified', data: user
   });
 };
 
@@ -60,7 +60,7 @@ exports.forgotPassword = async (req, res) => {
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(404).send({
-      status: false, message: 'user with this email does not exist'
+      success: false, message: 'user with this email does not exist'
     });
   }
 
@@ -68,7 +68,7 @@ exports.forgotPassword = async (req, res) => {
   await sendPasswordResetMail(user);
 
   return res.status(200).send({
-    status: true,
+    success: true,
     message: 'The link to reset your password has been sent to the provided mail'
   });
 };
@@ -82,7 +82,7 @@ exports.resetPassword = async (req, res) => {
   const decoded = jwt.verify(validData.token, SECRET);
 
   const user = await User.findById(decoded._id);
-  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
+  if (!user) return res.status(404).send({ success: false, message: 'user not found' });
 
   // set password
   const salt = await bcrypt.genSalt(10);
@@ -92,7 +92,7 @@ exports.resetPassword = async (req, res) => {
 
   // The view unto which this response is returned to
   // can choose to redirect to a new view or handle the response its own way
-  return res.status(200).send({ status: true, message: 'success', data: user });
+  return res.status(200).send({ success: true, message: 'success', data: user });
 };
 
 /**
@@ -120,12 +120,12 @@ exports.changePassword = async (req, res) => {
   const { password } = await validatePassword(req.body.password);
 
   const user = await User.findOne({ email: req.user.email });
-  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
+  if (!user) return res.status(404).send({ success: false, message: 'user not found' });
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(password, salt);
 
   await user.save();
 
-  return res.status(200).send({ status: true, message: 'success', date: user });
+  return res.status(200).send({ success: true, message: 'success', date: user });
 };
