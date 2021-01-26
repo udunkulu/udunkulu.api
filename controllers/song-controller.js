@@ -2,6 +2,7 @@ const path = require('path');
 const { dataUriParser } = require('../config/multer');
 const cloudinary = require('../config/cloudinary');
 const { Song } = require('../models/song');
+const { deleteFile } = require('../services/song-service');
 
 // const dir = path.join(__dirname, 'uploads/songs');
 // console.log(dir);
@@ -22,7 +23,7 @@ exports.upload = async (req, res) => {
   // // get artist info
 
   // // get album info
- 
+ console.log(req.file)
   const songData = {
     title: req.file.originalname,
     duration: response.duration,
@@ -33,6 +34,9 @@ exports.upload = async (req, res) => {
   const song = new Song(songData);
 
   await song.save();
+
+  await deleteFile(req.file);
+  // return 
 
   res.status(200).send({
     success: true,
