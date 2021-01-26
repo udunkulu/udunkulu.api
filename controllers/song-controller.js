@@ -16,10 +16,10 @@ exports.upload = async (req, res) => {
   // upload to cloudinary
   const response = await cloudinary.uploads(req.file.path);
 
-  // get artist info
+  // // get artist info
 
-  // get album info
-
+  // // get album info
+ 
   const songData = {
     title: req.file.originalname,
     duration: response.duration,
@@ -33,7 +33,11 @@ exports.upload = async (req, res) => {
 
   // return 
 
-  res.status(200).send(song);
+  res.status(200).send({
+    success: true,
+    message: 'file uploaded',
+    data: song
+  });
 };
 
 exports.playSong = async (req, res) => {
