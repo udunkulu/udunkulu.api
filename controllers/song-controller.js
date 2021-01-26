@@ -1,4 +1,5 @@
 const path = require('path');
+const { dataUriParser } = require('../config/multer');
 const cloudinary = require('../config/cloudinary');
 const { Song } = require('../models/song');
 
@@ -13,9 +14,11 @@ const { Song } = require('../models/song');
 //   // res.send({name : req.file.originalname, path: req.file.path });
 
 exports.upload = async (req, res) => {
-  // upload to cloudinary
-  const response = await cloudinary.uploads(req.file.path);
+  // parse the file buffer and return its content
+  const file = await (await dataUriParser(req)).content;
 
+  const response = await cloudinary.uploads(file);
+ 
   // // get artist info
 
   // // get album info
@@ -30,8 +33,6 @@ exports.upload = async (req, res) => {
   const song = new Song(songData);
 
   await song.save();
-
-  // return 
 
   res.status(200).send({
     success: true,

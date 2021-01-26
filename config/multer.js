@@ -1,17 +1,6 @@
+const DatauriParser = require('datauri/parser');
 const multer = require('multer');
 const path = require('path');
-// const cloudinary = require('./cloudinary').uploads;
-
-const storage = multer.diskStorage({
-  destination: async (req, file, cb) => {
-    cb(null, 'uploads');
-  },
-  filename: (req, file, cb) => {
-    // console.log(path.extname(file.originalname));
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
-    cb(null, uniqueSuffix + file.originalname);
-  }
-});
 
 const fileFilter = (req, file, cb) => {
   // console.log(file.mimetype);
@@ -27,6 +16,23 @@ const fileFilter = (req, file, cb) => {
     cb(new Error('wrong file type'));
     cb(null, false);
   }
+};
+
+const storage = multer.memoryStorage();
+
+const parser = new DatauriParser();
+
+/**
+ * @description parse a file buffer (req.file.buffer) as package by multerjs
+ * @param {Object} req Express Request object
+ * @returns {Object} result containing file content and other properties defined by dataUri
+ */
+exports.dataUriParser = async (req) => {
+  const result = await parser.format(
+    path.extname(req.file.originalname).toString(),
+    req.file.buffer
+  );
+  return result;
 };
 
 exports.upload = multer({
