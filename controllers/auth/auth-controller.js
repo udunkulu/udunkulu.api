@@ -18,6 +18,12 @@ exports.login = async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send({ success: false, message: 'Invalid password or email' });
 
+  if (!user.isVerified) {
+    return res.status(401).send({
+      success: false, message: 'user not verified'
+    });
+  }
+
   const token = user.generateAuthToken();
 
   res.header('token', token).status(200).send({
