@@ -6,6 +6,7 @@ const { SECRET } = require('../../config/env');
 const { User } = require('../../models/user');
 const { validateEmail } = require('../../services/user-service');
 const { sendPasswordResetMail } = require('../../services/mail-service');
+const { Artist } = require('../../models/artist');
 
 /**
  * Login a user
@@ -50,6 +51,24 @@ exports.verifyEmail = async (req, res) => {
   user.verifiedAt = new Date();
 
   await user.save();
+
+  // we want to associate the a user (for now artist) with its Artist model
+  if (user.role === 'artist') {
+    req.header('token', token);
+
+    const artist = new Artist({
+      ...req.body,
+      user: user._id
+    });
+
+    await artist.save();
+
+    const data = { user, artist };
+
+    return res.header('token', token).status(200).send({
+      success: true, message: 'registered success', data
+    });
+  }
 
   return res.header('token', token).send({
     success: true, message: 'email verified', data: user
@@ -113,7 +132,7 @@ exports.passwordReset = async (req, res) => {
   res.render('auth/password-reset', {
     title: 'Expressjs template',
     token
-  }); 
+  });
 };
 
 /**

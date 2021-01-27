@@ -4,6 +4,7 @@ const _ = require('lodash');
 const { User, validateUser, validateUpdate } = require('../models/user');
 const mailService = require('../services/mail-service');
 const { NODE_ENV } = require('../config/env');
+const { verifyEmail } = require('./auth/auth-controller');
 
 /**
  * Retrieve a user
@@ -29,17 +30,18 @@ exports.list = async (req, res) => {
  */
 exports.create = async (req, res) => {
   // validate req.body
-  const validData = await validateUser(req.body);
+  let validData = await validateUser(req.body);
 
   let user = await User.findOne({ email: validData.email });
   if (user) return res.status(409).send({ status: false, message: 'user already exist' });
+
+  validData = _.omit(validData, ['admin']);
 
   user = new User({ ...validData });
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 
-  await user.save();
   // log the user in
   const token = user.generateAuthToken();
 
@@ -47,6 +49,15 @@ exports.create = async (req, res) => {
   if (NODE_ENV === 'production') {
     await mailService.sendVerificationMail(user, token);
   }
+
+  if (NODE_ENV === 'development') {
+    await user.save();
+
+    req.query.token = token;
+    return verifyEmail(req, res);
+  }
+
+  await user.save();
 
   return res.header('token', token).status(201).send({
     status: true, message: 'success', data: user
