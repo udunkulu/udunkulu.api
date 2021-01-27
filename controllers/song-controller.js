@@ -6,21 +6,20 @@ const { deleteFile } = require('../services/song-service');
 // const dir = path.join(__dirname, 'uploads/songs');
 // console.log(dir);
 
-// exports.upload = async (req, res) =>
-//   // const { file } = req;
-//   // return res.send('file uploads...');
-//   // res.send(dir)
-//   res.sendFile('C:\\code\\node\\project\\udunkulu\\uploads\\songs\\7d1ad87e0c08481251f235a51e44c7bd.mp3');
-//   // res.send({name : req.file.originalname, path: req.file.path });
-
 exports.upload = async (req, res) => {
   // upload to cloudinary
+  if (!req.file.hasOwnProperty('path')) {
+    return res.status(404).send({
+      success: false,
+      message: 'no file found, please attached a file'
+    });
+  }
   const response = await cloudinary.uploads(req.file.path);
 
-  // // get artist info
+  // get artist info
 
-  // // get album info
- console.log(req.file)
+  // get album info
+
   const songData = {
     title: req.file.originalname,
     duration: response.duration,
@@ -33,7 +32,7 @@ exports.upload = async (req, res) => {
   await song.save();
 
   await deleteFile(req.file);
-  // return 
+  // return
 
   res.status(200).send({
     success: true,

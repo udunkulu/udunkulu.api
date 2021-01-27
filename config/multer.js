@@ -1,6 +1,5 @@
 const multer = require('multer');
 const path = require('path');
-// const cloudinary = require('./cloudinary').uploads;
 
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
@@ -8,8 +7,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     // console.log(path.extname(file.originalname));
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
-    cb(null, uniqueSuffix + file.originalname);
+    const uniquePrefix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
+    cb(null, `${uniquePrefix}-${file.originalname}`);
   }
 });
 
@@ -21,10 +20,14 @@ const fileFilter = (req, file, cb) => {
     || file.mimetype === 'audio/wave'
     || file.mimetype === 'audio/wav'
      || file.mimetype === 'audio/mp3'
+     || file.mimetype === 'audio/x-ms-wma'
+     || file.mimetype === 'audio/x-wav'
+     || file.mimetype === 'audio/vnd.rn-realaudio'
+     || file.mimetype === 'audio/aac'
   ) {
     cb(null, true);
   } else {
-    cb(new Error('wrong file type'));
+    cb(new Error(`wrong file type ${file.mimetype}`));
     cb(null, false);
   }
 };
