@@ -1,5 +1,3 @@
-const path = require('path');
-const { dataUriParser } = require('../config/multer');
 const cloudinary = require('../config/cloudinary');
 const { Song } = require('../models/song');
 const { deleteFile } = require('../services/song-service');
@@ -7,23 +5,23 @@ const { deleteFile } = require('../services/song-service');
 // const dir = path.join(__dirname, 'uploads/songs');
 // console.log(dir);
 
-// exports.upload = async (req, res) =>
-//   // const { file } = req;
-//   // return res.send('file uploads...');
-//   // res.send(dir)
-//   res.sendFile('C:\\code\\node\\project\\udunkulu\\uploads\\songs\\7d1ad87e0c08481251f235a51e44c7bd.mp3');
-//   // res.send({name : req.file.originalname, path: req.file.path });
-
 exports.upload = async (req, res) => {
-  // parse the file buffer and return its content
-  const file = await (await dataUriParser(req)).content;
+  // check if a file was parsed by multer
+  // if req has property 'file' || files, then it definitely has files.path || file.path
+  if (!('file' in req) || !('files' in req)) {
+    return res.status(404).send({
+      success: false,
+      message: 'no file found, please attached a file'
+    });
+  }
 
-  const response = await cloudinary.uploads(file);
- 
-  // // get artist info
+  // upload to cloudinary
+  const response = await cloudinary.uploads(req.file.path);
 
-  // // get album info
- console.log(req.file)
+  // get artist info
+
+  // get album info
+
   const songData = {
     title: req.file.originalname,
     duration: response.duration,
@@ -36,7 +34,7 @@ exports.upload = async (req, res) => {
   await song.save();
 
   await deleteFile(req.file);
-  // return 
+  // return
 
   res.status(200).send({
     success: true,
