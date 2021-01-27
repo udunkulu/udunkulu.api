@@ -7,8 +7,8 @@ const { deleteFile } = require('../services/song-service');
 
 exports.upload = async (req, res) => {
   // check if a file was parsed by multer
-  // if req has property 'file' || files, then it definitely has files.path || file.path
-  if (!('file' in req) || !('files' in req)) {
+  // if req has property 'file' then it definitely has files.path || file.path
+  if (!('file' in req)) {
     return res.status(404).send({
       success: false,
       message: 'no file found, please attached a file'
