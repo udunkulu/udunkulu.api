@@ -7,13 +7,16 @@ const { deleteFile } = require('../services/song-service');
 // console.log(dir);
 
 exports.upload = async (req, res) => {
-  // upload to cloudinary
-  if (!req.file.hasOwnProperty('path')) {
+  // check if a file was parsed by multer
+  // if req has property 'file' || files, then it definitely has path
+  if (!('file' in req) || !('files' in req)) {
     return res.status(404).send({
       success: false,
       message: 'no file found, please attached a file'
     });
   }
+
+  // upload to cloudinary
   const response = await cloudinary.uploads(req.file.path);
 
   // get artist info
