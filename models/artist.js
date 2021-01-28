@@ -4,7 +4,10 @@ const Joi = require('joi');
 // Define artist schema
 const artistSchema = new mongoose.Schema({
   stageName: {
-    type: String
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 50
   },
 
   user: {
@@ -21,7 +24,7 @@ const Artist = mongoose.model('Artist', artistSchema);
 // validation for creating artist
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string.min(2).max(50),
+    stageName: Joi.string.min(2).max(50).required(),
     user: Joi.string.min(10)
   });
 
