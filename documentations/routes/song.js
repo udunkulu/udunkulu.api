@@ -29,17 +29,47 @@
  *       "message": "info about the error if any"
  *     }
  */
+/**
+ * @apiDefine Header Header
+ * @apiHeader {String} token Token value.
+ *
+ */
 
 /**
-  @api {get} /users/userId/music/:id Detail
-  @apiDescription Retrieve a music
-  @apiName GetMusic
-  @apiGroup Music
- 
-  @apiParam {string} id music unique ID.
-  @apiParam {string} userId users unique ID.
- 
-  @apiUse Success
- 
-  @apiUse Error
+ * @api {post} /songs Upload
+ * @apiDescription Upload a song 
+ * 
+ * The form should be sent as multipart/form-data
+ * The particular input field that file should be attached to should be in this form
+ * 
+ * < input name="_song" type="file"  / >
+ *
+ * @apiName UploadSong
+ * @apiGroup Songs
+ *
+ * @apiParamExample {json} Request-Example: all the fields are required for now
+ * {
+ *    "title": "song title",
+ *    "artist": "artists name",
+ *    "album": "album name",
+ *    "mood": "possible moods"
+ * }
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ *
+ */
+
+/**
+ * @api {get} /songs/:id Play
+ * @apiDescription Play a song
+ * @apiName PlaySong
+ * @apiGroup Songs
+ *
+ * @apiParam {String} id the song's id
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
  */

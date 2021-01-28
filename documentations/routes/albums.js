@@ -59,7 +59,7 @@
  */
 
 /**
- * @api {post} /album Create
+ * @api {post} /albums Create
  * @apiDescription Creates an album
  * @apiName CreateAlbum
  * @apiGroup Albums
@@ -77,7 +77,7 @@
  */
 
 /**
- * @api {delete} /albums/:id Delete
+ * @api {delete} /albums/id Delete
  * @apiDescription Deletes an album
  * @apiName DeleteAlbum
  * @apiGroup Albums
@@ -90,7 +90,7 @@
  */
 
 /**
- * @api {put} /albums/:id Update
+ * @api {put} /albums/id Update
  * @apiDescription Update a album | updates Album's detail or information
  * @apiName PutAlbum
  * @apiGroup Albums
