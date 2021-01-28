@@ -24,7 +24,7 @@ exports.upload = async (req, res) => {
 
   const songData = {
     title: req.file.originalname,
-    duration: response.duration,
+    duration: response.duration / 60,
     url: response.secure_url,
     cloudinary: response
   };

@@ -24,8 +24,8 @@ const Artist = mongoose.model('Artist', artistSchema);
 // validation for creating artist
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string.min(2).max(50).required(),
-    user: Joi.string.min(10)
+    stageName: Joi.string.min(2).max(50).required()
+    // user: Joi.string.min(10)
   });
 
   const value = await schema.validateAsync(artist);
@@ -36,8 +36,8 @@ const validateArtist = async (artist = {}) => {
 // Validation for updating artist
 const validateUpdate = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string.min(2).max(50),
-    user: Joi.string.min(10)
+    stageName: Joi.string.min(2).max(50)
+    // user: Joi.string.min(10)
   });
 
   const value = await schema.validateAsync(artist);
