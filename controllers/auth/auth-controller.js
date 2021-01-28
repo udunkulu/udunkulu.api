@@ -52,24 +52,6 @@ exports.verifyEmail = async (req, res) => {
 
   await user.save();
 
-  // we want to associate the a user (for now artist) with its Artist model
-  if (user.role === 'artist') {
-    req.header('token', token);
-
-    const artist = new Artist({
-      ...req.body,
-      user: user._id
-    });
-
-    await artist.save();
-
-    const data = { user, artist };
-
-    return res.header('token', token).status(200).send({
-      success: true, message: 'registered success', data
-    });
-  }
-
   return res.header('token', token).send({
     success: true, message: 'email verified', data: user
   });

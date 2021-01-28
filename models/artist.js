@@ -21,10 +21,15 @@ const artistSchema = new mongoose.Schema({
 // define artist model based on artist schema
 const Artist = mongoose.model('Artist', artistSchema);
 
+artistSchema.set('toJSON', {
+  versionKey: false
+  // transform(doc, ret) {}
+});
+
 // validation for creating artist
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string.min(2).max(50).required()
+    stageName: Joi.string().min(2).max(50).required()
     // user: Joi.string.min(10)
   });
 
@@ -36,7 +41,7 @@ const validateArtist = async (artist = {}) => {
 // Validation for updating artist
 const validateUpdate = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string.min(2).max(50)
+    stageName: Joi.string().min(2).max(50)
     // user: Joi.string.min(10)
   });
 

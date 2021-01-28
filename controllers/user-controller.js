@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const ArtistController = require('./artist-controller');
 const { User, validateUser, validateUpdate } = require('../models/user');
 const mailService = require('../services/mail-service');
 const { NODE_ENV } = require('../config/env');
-const { verifyEmail } = require('./auth/auth-controller');
 
 /**
  * Retrieve a user
@@ -29,6 +29,11 @@ exports.list = async (req, res) => {
  * Create a user
  */
 exports.create = async (req, res) => {
+  // if it is an artist, go here
+  if (req.body.role === 'artist') {
+    return ArtistController.create(req, res);
+  }
+
   // validate req.body
   let validData = await validateUser(req.body);
 
@@ -51,10 +56,7 @@ exports.create = async (req, res) => {
   }
 
   if (NODE_ENV === 'development') {
-    await user.save();
-
-    req.query.token = token;
-    return verifyEmail(req, res);
+    user.verifiedAt = new Date();
   }
 
   await user.save();
