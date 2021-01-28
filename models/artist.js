@@ -21,6 +21,7 @@ const artistSchema = new mongoose.Schema({
 // define artist model based on artist schema
 const Artist = mongoose.model('Artist', artistSchema);
 
+// Define what is return in API response
 artistSchema.set('toJSON', {
   versionKey: false
   // transform(doc, ret) {}
