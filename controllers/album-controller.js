@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const _ = require('lodash');
 const { Album, validateAlbum, validateUpdate } = require('../models/album');
+const { Artist } = require('../models/artist');
 
 /**
  * Retrive an album
@@ -25,15 +26,23 @@ exports.list = async (req, res) => {
  * Create an album
  */
 exports.create = async (req, res) => {
-  // validate req.body
-  // return res.send(req.body);
-  const validData = await validateAlbum(req.body);
-  // return res.send(validData);
-  const album = new Album({ ...validData });
+  const validDate = await validateAlbum(req.body);
+
+  const artist = await Artist.findById(req.params.artistId);
+  if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
+
+  const album = new Album({
+    ...validDate,
+    artist: artist._id
+  });
 
   await album.save();
 
-  res.status(201).send({ success: true, message: 'album created', data: album });
+  res.status(201).send({
+    success: true,
+    message: 'album created',
+    data: album
+  });
 };
 
 /**
