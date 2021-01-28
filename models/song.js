@@ -3,7 +3,7 @@ const Joi = require('joi');
 const { ac } = require('../config/roles');
 
 // Define song schema
-let songSchema = new mongoose.Schema({
+const songSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -30,7 +30,7 @@ let songSchema = new mongoose.Schema({
 
   // The length a song can play until it stops (seconds)
   duration: {
-    type: Number
+    type: String
   },
 
   url: {
