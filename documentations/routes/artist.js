@@ -31,7 +31,7 @@
  */
 
 /**
- * @api {get} /artists/:id Detail
+ * @api {get} /artists/id Detail
  * @apiDescription Retrieves an artist and shows infomation about the artist
  * @apiName GetArtist
  * @apiGroup Artists
@@ -46,7 +46,7 @@
  */
 
 /**
- * @api {get} /artist list
+ * @api {get} /artists list
  * @apiDescription Retrieves all available artist in the data base and shows their details
  * @apiName ListArtist
  * @apiGroup Artists
@@ -58,7 +58,7 @@
  */
 
 /**
- * @api {post} /artist Create
+ * @api {post} /artists Create
  * @apiDescription Creates an artist
  * @apiName CreateArtist
  * @apiGroup Artists
@@ -66,7 +66,7 @@
  * @apiParamExample {json} Request-Example: only userId and stage
  * {
  *    "userId": "userId",
- *    "stage": "artist stage name"
+ *    "stageName": "artist stage name"
  * }
  *
  * @apiUse Success
@@ -75,7 +75,7 @@
  */
 
 /**
- * @api {put} /artists/:id Update
+ * @api {put} /artists/id Update
  * @apiDescription Update a artist | updates Artist's detail or information
  * @apiName PutArtist
  * @apiGroup Artists
@@ -94,7 +94,7 @@
  */
 
 /**
- * @api {delete} /artists/:id Delete
+ * @api {delete} /artists/id Delete
  * @apiDescription Deletes an artist
  * @apiName DeleteArtist
  * @apiGroup Artists
