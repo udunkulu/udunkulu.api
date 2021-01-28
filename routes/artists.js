@@ -2,23 +2,32 @@ const express = require('express');
 
 const router = express.Router();
 
-const ArtistController = require('../controllers/artist-controller');
-// I am not sure that you will use this so I commented it out
-
-// const auth = require('../middlewares/authentication');
+const auth = require('../middlewares/authentication');
 // const permit = require('../middlewares/permission');
-const authRoutes = require('./auths');
 
-router.use(authRoutes);
+const ArtistController = require('../controllers/artist-controller');
+const AlbumController = require('../controllers/album-controller');
+
+const albums = require('./albums');
 
 router.route('/')
   .get(ArtistController.list)
   .post(ArtistController.create); // Do not authenticate this, no detail to check against
 
-router.route('/:id').all// ([auth])
+router.route('/:id')// .all([auth])
   .get(ArtistController.detail)
-  .put(ArtistController.update)
-  .patch(ArtistController.update)
-  .delete(ArtistController.delete);
+  .put(ArtistController.update);
+//   .delete(ArtistController.delete);
+
+// allow album to make use of artists resource
+// /:artistsId/albums
+router.route('/:artistId/albums')
+  .get(AlbumController.list)
+  .post(AlbumController.create);
+
+router.route('/:artistId/albums/:id')
+  .get(AlbumController.detail)
+  .put(AlbumController.update)
+  .delete(AlbumController.delete);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const { SECRET } = require('../../config/env');
 const { User } = require('../../models/user');
 const { validateEmail } = require('../../services/user-service');
 const { sendPasswordResetMail } = require('../../services/mail-service');
+const { Artist } = require('../../models/artist');
 
 /**
  * Login a user
@@ -17,6 +18,12 @@ exports.login = async (req, res) => {
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send({ success: false, message: 'Invalid password or email' });
+
+  if (!user.isVerified) {
+    return res.status(401).send({
+      success: false, message: 'user not verified'
+    });
+  }
 
   const token = user.generateAuthToken();
 
@@ -107,7 +114,7 @@ exports.passwordReset = async (req, res) => {
   res.render('auth/password-reset', {
     title: 'Expressjs template',
     token
-  }); 
+  });
 };
 
 /**
