@@ -8,6 +8,8 @@ const ArtistController = require('../controllers/artist-controller');
 const auth = require('../middlewares/authentication');
 // const permit = require('../middlewares/permission');
 
+const albums = require('./albums');
+
 router.route('/')
   .get(ArtistController.list)
   .post(ArtistController.create); // Do not authenticate this, no detail to check against
