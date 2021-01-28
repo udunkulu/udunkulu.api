@@ -1,6 +1,6 @@
 const cloudinary = require('../config/cloudinary');
 const { Song } = require('../models/song');
-const { deleteFile } = require('../services/song-service');
+const { deleteFile, secondsToMinute } = require('../services/song-service');
 
 // const dir = path.join(__dirname, 'uploads/songs');
 // console.log(dir);
@@ -22,9 +22,11 @@ exports.upload = async (req, res) => {
 
   // get album info
 
+  const songDuration = await secondsToMinute(response.duration);
+
   const songData = {
     title: req.file.originalname,
-    duration: response.duration,
+    duration: songDuration,
     url: response.secure_url,
     cloudinary: response
   };
