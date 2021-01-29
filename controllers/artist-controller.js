@@ -39,18 +39,18 @@ exports.create = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const artists = await Artist.find();
-  if (_.isEmpty(artists)) return res.status(404).send({ status: false, message: 'artists not found' });
+  if (_.isEmpty(artists)) return res.status(404).send({ success: false, message: 'artists not found' });
 
-  res.status(200).send({ status: true, message: 'success: list of artists', data: artists });
+  res.status(200).send({ success: true, message: 'success: list of artists', data: artists });
 };
 
 /**
- * Retrieve a artist
+ * Retrieve an artist
  */
 exports.detail = async (req, res) => {
   const artist = await Artist.findById(req.params.id).populate('user');
-  if (!artist) return res.status(404).send({ status: false, message: 'artist not found' });
-  res.status(200).send({ status: true, message: 'success', data: artist });
+  if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
+  res.status(200).send({ success: true, message: 'success', data: artist });
 };
 
 exports.update = async (req, res) => {
