@@ -37,11 +37,11 @@
 
 /**
  * @api {post} /songs Upload
- * @apiDescription Upload a song 
- * 
+ * @apiDescription Upload a song
+ *
  * The form should be sent as multipart/form-data
  * The particular input field that file should be attached to should be in this form
- * 
+ *
  * < input name="_song" type="file"  / >
  *
  * @apiName UploadSong
@@ -62,7 +62,7 @@
  */
 
 /**
- * @api {get} /songs/:id Play
+ * @api {get} /songs/id Play
  * @apiDescription Play a song
  * @apiName PlaySong
  * @apiGroup Songs

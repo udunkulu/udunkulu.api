@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "post",
-    "url": "/albums",
+    "url": "/artists/artistId/albums",
     "title": "Create",
     "description": "<p>Creates an album</p>",
     "name": "CreateAlbum",
@@ -9,180 +9,11 @@ define({ "api": [
     "parameter": {
       "examples": [
         {
-          "title": "Request-Example: only artist and title fields are required",
-          "content": "{\n    \"title\": \"album title\",\n    \"artist\": \"artists name\",\n    \"discription\": \"album discription\"\n  }",
+          "title": "Request-Example: only the title field is required",
+          "content": "{\n    \"title\": \"album title\",\n    \"description\": \"album description\"\n  }",
           "type": "json"
         }
       ]
-    },
-    "version": "0.0.0",
-    "filename": "documentations/routes/albums.js",
-    "groupTitle": "Albums",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>The success of the response usually true</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "object",
-            "optional": false,
-            "field": "data",
-            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>The success of the response usually false</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "string",
-            "optional": false,
-            "field": "message",
-            "description": "<p>This is the info about the request</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "delete",
-    "url": "/albums/id",
-    "title": "Delete",
-    "description": "<p>Deletes an album</p>",
-    "name": "DeleteAlbum",
-    "group": "Albums",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>the album's id</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "documentations/routes/albums.js",
-    "groupTitle": "Albums",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>The success of the response usually true</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "object",
-            "optional": false,
-            "field": "data",
-            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>The success of the response usually false</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "string",
-            "optional": false,
-            "field": "message",
-            "description": "<p>This is the info about the request</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "get",
-    "url": "/albums/:id",
-    "title": "Detail",
-    "description": "<p>Retrieves an album or rather shows the details of an album</p>",
-    "name": "GetAlbum",
-    "group": "Albums",
-    "parameter": {
-      "fields": {
-        "String": [
-          {
-            "group": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Album unique ID.</p>"
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "documentations/routes/albums.js",
@@ -263,12 +94,209 @@ define({ "api": [
     }
   },
   {
+    "type": "delete",
+    "url": "/artists/artistId/albums/id",
+    "title": "Delete",
+    "description": "<p>Deletes an album</p>",
+    "name": "DeleteAlbum",
+    "group": "Albums",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>the album's id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "artistId",
+            "description": "<p>the artist's id</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "documentations/routes/albums.js",
+    "groupTitle": "Albums",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
-    "url": "/albums",
+    "url": "/artists/artistId/albums/id",
+    "title": "Detail",
+    "description": "<p>Retrieves an album or rather shows the details of an album</p>",
+    "name": "GetAlbum",
+    "group": "Albums",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Album unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "artistId",
+            "description": "<p>artist unique ID</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "documentations/routes/albums.js",
+    "groupTitle": "Albums",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/artists/artistId/albums",
     "title": "List",
     "description": "<p>Retrieves all the albums or rather shows all the details of available albums</p>",
     "name": "ListAlbum",
     "group": "Albums",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "artistId",
+            "description": "<p>artist unique ID</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "documentations/routes/albums.js",
     "groupTitle": "Albums",
@@ -336,7 +364,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/albums/id",
+    "url": "/artists/artistId/albums/id",
     "title": "Update",
     "description": "<p>Update a album | updates Album's detail or information</p>",
     "name": "PutAlbum",
@@ -350,13 +378,20 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>the album's id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "artistId",
+            "description": "<p>the artists id</p>"
           }
         ]
       },
       "examples": [
         {
-          "title": "Request-Example: all or anyone of these fields",
-          "content": "{\n       \"email\": \"email address of the album.\",\n       \"lastName\": \"lastName Lastname of the album\",\n       \"firstName\": \"firstName of the album\"\n   }",
+          "title": "Request-Example: any of these files below are required",
+          "content": "{\n   \"title\": \"album title\",\n   \"description\": \"album description\"\n   }",
           "type": "json"
         }
       ]
@@ -364,6 +399,19 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "documentations/routes/albums.js",
     "groupTitle": "Albums",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token value.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -855,7 +903,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/songs/:id",
+    "url": "/songs/id",
     "title": "Play",
     "description": "<p>Play a song</p>",
     "name": "PlaySong",
