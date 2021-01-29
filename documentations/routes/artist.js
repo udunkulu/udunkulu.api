@@ -65,8 +65,12 @@
  *
  * @apiParamExample {json} Request-Example: only userId and stage
  * {
- *    "userId": "userId",
- *    "stageName": "artist stage name"
+        "email": "email address of the user.",
+        "lastName": "lastName Lastname of the user",
+        "password": "password address of the user",
+        "firstName": "firstName of the user",
+        "role": "users role",
+        "stageName": "artist stage name"
  * }
  *
  * @apiUse Success
@@ -105,4 +109,3 @@
  *
  @apiUse Error
  */
-
