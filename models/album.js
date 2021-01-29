@@ -14,7 +14,9 @@ const albumSchema = new mongoose.Schema({
     ref: 'Artist'
   },
   description: {
-    type: String
+    type: String,
+    minlength: 10,
+    maxlength: 250
   }
 
 }, { timestamps: new Date() });
@@ -22,11 +24,17 @@ const albumSchema = new mongoose.Schema({
 // Defines Album model based on album schema
 const Album = mongoose.model('Album', albumSchema);
 
+// Define what is return in API response
+albumSchema.set('toJSON', {
+  versionKey: false
+  // transform(doc, ret) {}
+});
+
 // validation
 const validateAlbum = async (album = {}) => {
   const schema = Joi.object({
     title: Joi.string().min(3).max(50).required(),
-    description: Joi.string().min(10).max(250).required()
+    description: Joi.string().min(10).max(250)
   });
 
   const value = await schema.validateAsync(album);
