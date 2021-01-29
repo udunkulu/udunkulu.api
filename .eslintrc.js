@@ -15,7 +15,8 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'no-underscore-dangle': [
-      'error', { allowAfterThis: true }
+      'error', { allowAfterThis: true },
+      { "allow": ['_id'] } 
     ]
   }
 };

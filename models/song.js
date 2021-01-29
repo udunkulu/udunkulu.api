@@ -11,15 +11,15 @@ const songSchema = new mongoose.Schema({
     trim: true
   },
 
-  // artist: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Artist'
-  // },
+  artist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Artist'
+  },
 
-  // album: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Album'
-  // },
+  album: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Album'
+  },
 
   // path to the song's image
   coverArt: {
@@ -58,24 +58,6 @@ const songSchema = new mongoose.Schema({
 
 }, { timestamps: new Date() });
 
-// songSchema = new mongoose.Schema({
-//   title: {
-//     type: String,
-//     required: true
-//   },
-//   music: {
-//     type: Object,
-//     required: true
-//   },
-//   artist: {
-//     type: String,
-//     required: true
-//   },
-//   created: {
-//     type: Date,
-//     default: Date.now()
-//   }
-// });
 
 // Determine which properties are returned in API responses
 songSchema.set('toJSON', {

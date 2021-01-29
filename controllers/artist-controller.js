@@ -49,7 +49,7 @@ exports.list = async (req, res) => {
  */
 exports.detail = async (req, res) => {
   const artist = await Artist.findById(req.params.id).populate('user');
-  if (!artist) return res.status(404).send({ status: false, message: 'artist not found' });
+  if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
   res.status(200).send({ status: true, message: 'success', data: artist });
 };
 
