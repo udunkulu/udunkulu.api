@@ -485,7 +485,7 @@
       "examples": [
         {
           "title": "Request-Example: only userId and stage",
-          "content": "{\n   \"userId\": \"userId\",\n   \"stageName\": \"artist stage name\"\n}",
+          "content": "{\n        \"email\": \"email address of the aritst.\",\n        \"lastName\": \"lastName Lastname of the artist\",\n        \"password\": \"password address of the artist\",\n        \"firstName\": \"firstName of the artist\",\n        \"role\": \"artist\",\n        \"stageName\": \"artist stage name\"\n}",
           "type": "json"
         }
       ]
@@ -903,7 +903,7 @@
   },
   {
     "type": "delete",
-    "url": "/artists/artistId/songs/id",
+    "url": "/artists/artistId/albums/albumId/songs/id",
     "title": "Delete",
     "description": "<p>Deletes a song</p>",
     "name": "DeleteSong",
@@ -916,14 +916,21 @@
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>the song's id</p>"
+            "description": "<p>the song unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "albumId",
+            "description": "<p>album unique ID</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "artistId",
-            "description": "<p>the artist's id</p>"
+            "description": "<p>artist unique ID</p>"
           }
         ]
       }
@@ -1008,7 +1015,7 @@
   },
   {
     "type": "get",
-    "url": "/artists/artistId/songs/id",
+    "url": "/artists/artistId/albums/albumId/songs/id",
     "title": "Detail",
     "description": "<p>Retrieves a particular song</p>",
     "name": "GetSong",
@@ -1022,6 +1029,13 @@
             "optional": false,
             "field": "id",
             "description": "<p>the song unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "albumId",
+            "description": "<p>album unique ID</p>"
           },
           {
             "group": "Parameter",
@@ -1100,14 +1114,21 @@
   },
   {
     "type": "get",
-    "url": "/artists/artistId/songs",
+    "url": "/artists/artistId/albums/albumId/songs",
     "title": "List",
-    "description": "<p>Play a song</p>",
+    "description": "<p>Lists all songs</p>",
     "name": "ListSong",
     "group": "Songs",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "albumId",
+            "description": "<p>the album's unique ID</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -1185,7 +1206,7 @@
   },
   {
     "type": "put",
-    "url": "/artists/artistId/songs/id",
+    "url": "/artists/artistId/albums/albumId/songs/id",
     "title": "update",
     "description": "<p>Udate a song or its detail</p>",
     "name": "UpdateSong",
@@ -1199,6 +1220,13 @@
             "optional": false,
             "field": "id",
             "description": "<p>the song's id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "albumId",
+            "description": "<p>the album's unique ID</p>"
           },
           {
             "group": "Parameter",
@@ -1290,7 +1318,7 @@
   },
   {
     "type": "post",
-    "url": "/artists/artistId/songs",
+    "url": "/artists/artistId/albums/albumId/songs",
     "title": "Upload",
     "description": "<p>Upload a song</p> <p>The form should be sent as multipart/form-data The particular input field that file should be attached to should be in this form</p> <p>&lt; input name=&quot;_song&quot; type=&quot;file&quot;  / &gt;</p>",
     "name": "UploadSong",
@@ -1302,6 +1330,13 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
+            "field": "albumId",
+            "description": "<p>the album's unique ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
             "field": "artistId",
             "description": "<p>the artist's unique ID</p>"
           }
@@ -1309,8 +1344,8 @@
       },
       "examples": [
         {
-          "title": "Request-Example: all the fields are required for now",
-          "content": "{\n   \"title\": \"song title\",\n   \"artist\": \"artists name\",\n   \"album\": \"album name\",\n   \"mood\": \"possible moods\"\n}",
+          "title": "Request-Example: title is required",
+          "content": "{\n   \"title\": \"song title\",\n   \"mood\": \"possible moods\"\n}",
           "type": "json"
         }
       ]
@@ -1404,7 +1439,7 @@
       "examples": [
         {
           "title": "Request-Example: all fields are required",
-          "content": "{\n       \"email\": \"email address of the user.\",\n       \"lastName\": \"lastName Lastname of the user\",\n       \"password\": \"password address of the user\",\n       \"firstName\": \"firstName of the user\"\n   }",
+          "content": "{\n       \"email\": \"email address of the user.\",\n       \"lastName\": \"lastName Lastname of the user\",\n       \"password\": \"password address of the user\",\n       \"firstName\": \"firstName of the user\",\n       \"role\": \"user's role\",\n       \"phoneNumber\": \"user phone number\",\n       \"stageName\": \"if userm is an artist\"\n   }",
           "type": "json"
         }
       ]
