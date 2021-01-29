@@ -36,7 +36,7 @@
  */
 
 /**
- * @api {post} /songs Upload
+ * @api {post} /artists/artistId/albums/albumId/songs Upload
  * @apiDescription Upload a song
  *
  * The form should be sent as multipart/form-data
@@ -47,14 +47,15 @@
  * @apiName UploadSong
  * @apiGroup Songs
  *
- * @apiParamExample {json} Request-Example: all the fields are required for now
+ * @apiParam {String} albumId the album's unique ID
+ * @apiParam {String} artistId the artist's unique ID
+ *
+ * @apiParamExample {json} Request-Example: title is required
  * {
  *    "title": "song title",
- *    "artist": "artists name",
- *    "album": "album name",
  *    "mood": "possible moods"
  * }
- *
+ * @apiUse Header
  * @apiUse Success
  *
  * @apiUse Error
@@ -62,14 +63,61 @@
  */
 
 /**
- * @api {get} /songs/id Play
- * @apiDescription Play a song
- * @apiName PlaySong
+ * @api {get} /artists/artistId/albums/albumId/songs List
+ * @apiDescription Lists all songs
+ * @apiName ListSong
+ * @apiGroup Songs
+ *
+ * @apiParam {String} albumId the album's unique ID
+ * @apiParam {String} artistId the artist's unique ID
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
+
+/**
+ * @api {put} /artists/artistId/albums/albumId/songs/id update
+ * @apiDescription Udate a song or its detail
+ * @apiName UpdateSong
  * @apiGroup Songs
  *
  * @apiParam {String} id the song's id
+ * @apiParam {String} albumId the album's unique ID
+ * @apiParam {String} artistId the artist's unique ID
+ * @apiUse Header
+ *  @apiUse Success
  *
+ * @apiUse Error
+ */
+
+/**
+ * @api {get} /artists/artistId/albums/albumId/songs/id Detail
+ * @apiDescription Retrieves a particular song
+ * @apiName GetSong
+ * @apiGroup Songs
+ *
+ * @apiParam {String} id the song unique ID.
+ * @apiParam {String} albumId album unique ID
+ * @apiParam {String} artistId artist unique ID
  * @apiUse Success
+ *
+ * @apiUse Error
+ *
+ */
+
+/**
+ * @api {delete} /artists/artistId/albums/albumId/songs/id Delete
+ * @apiDescription Deletes a song
+ * @apiName DeleteSong
+ * @apiGroup Songs
+ *
+ * @apiParam {String} id the song unique ID.
+ * @apiParam {String} albumId album unique ID
+ * @apiParam {String} artistId artist unique ID
+ *
+ * @apiUse Header
+ * @apiUSe Success
  *
  * @apiUse Error
  */
