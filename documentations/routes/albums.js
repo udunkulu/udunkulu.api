@@ -31,14 +31,13 @@
   */
 
 /**
- * @api {get} /albums/:id Detail
+ * @api {get} /artists/artistId/albums/id Detail
  * @apiDescription Retrieves an album or rather shows the details of an album
  * @apiName GetAlbum
  * @apiGroup Albums
  *
- * @apiParam (String) id Album unique ID.
- *
- * @apiUse Header
+ * @apiParam {String} id Album unique ID.
+ * @apiParam {String} artistId artist unique ID
  *
  * @apiUse Success
  *
@@ -47,11 +46,11 @@
  */
 
 /**
- * @api {get} /albums List
+ * @api {get} /artists/artistId/albums List
  * @apiDescription Retrieves all the albums or rather shows all the details of available albums
  * @apiName ListAlbum
  * @apiGroup Albums
- *
+ * @apiParam {String} artistId artist unique ID
  * @apiUse Success
  *
  * @apiUse Error
@@ -59,17 +58,18 @@
  */
 
 /**
- * @api {post} /albums Create
+ * @api {post} /artists/artistId/albums Create
  * @apiDescription Creates an album
  * @apiName CreateAlbum
  * @apiGroup Albums
  *
- * @apiParamExample {json} Request-Example: only artist and title fields are required
+ * @apiParamExample {json} Request-Example: only the title field is required
  *{
     "title": "album title",
-    "artist": "artists name",
-    "discription": "album discription"
+    "description": "album description"
   }
+ *
+ *@apiUse Header
  *
  *@apiUse Success
  *
@@ -77,31 +77,34 @@
  */
 
 /**
- * @api {delete} /albums/id Delete
+ * @api {delete} /artists/artistId/albums/id Delete
  * @apiDescription Deletes an album
  * @apiName DeleteAlbum
  * @apiGroup Albums
  *
  * @apiParam {String} id the album's id
+ * @apiParam {String} artistId the artist's id
  *
  * @apiUSe Success
  *
- @apiUse Error
+ * @apiUse Error
  */
 
 /**
- * @api {put} /albums/id Update
+ * @api {put} /artists/artistId/albums/id Update
  * @apiDescription Update a album | updates Album's detail or information
  * @apiName PutAlbum
  * @apiGroup Albums
  *
  * @apiParam {String} id the album's id
+ * @apiParam {String} artistId the artists id
  *
- * @apiParamExample {json} Request-Example: all or anyone of these fields
+ * @apiUse Header
+ *
+ * @apiParamExample {json} Request-Example: any of these files below are required
  *  {
-        "email": "email address of the album.",
-        "lastName": "lastName Lastname of the album",
-        "firstName": "firstName of the album"
+    "title": "album title",
+    "description": "album description"
     }
  *
  * @apiUse Success

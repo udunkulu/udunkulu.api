@@ -16,7 +16,7 @@ module.exports = (app) => {
   app.use(`${BASE_PATH}/albums`, albums);
   app.use(`${BASE_PATH}/artists`, artists);
   app.use(`${BASE_PATH}/songs`, songs);
-  // app.use(`${BASE_PATH}/artists/:artistId/albums`, albums);
+  // app.use(`${BASE_PATH}/artists/:artistId/songs`, albums);
 
   app.use(`${BASE_PATH}/docs`, docs);
   app.use('*', docs);
