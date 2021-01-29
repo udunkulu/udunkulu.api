@@ -74,7 +74,10 @@
         "email": "email address of the user.",
         "lastName": "lastName Lastname of the user",
         "password": "password address of the user",
-        "firstName": "firstName of the user"
+        "firstName": "firstName of the user",
+        "role": "user's role",
+        "phoneNumber": "user phone number",
+        "stageName": "if userm is an artist"
     }
  *
  * @apiUse Success
