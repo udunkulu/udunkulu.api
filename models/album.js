@@ -17,6 +17,13 @@ const albumSchema = new mongoose.Schema({
     type: String,
     minlength: 10,
     maxlength: 250
+  },
+  coverArt: {
+    type: String
+  },
+  cloudinary: {
+    type: Object,
+    required: true
   }
 
 }, { timestamps: new Date() });

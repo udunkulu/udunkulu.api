@@ -12,6 +12,8 @@ const SongController = require('../controllers/song-controller');
 const albums = require('./albums');
 const songs = require('./songs');
 
+const upload = require('../config/multer');
+
 router.route('/')
   .get(ArtistController.list)
   .post(ArtistController.create); // Do not authenticate this, no detail to check against
@@ -25,18 +27,17 @@ router.route('/:id')// .all([auth])
 // /:artistsId/albums
 router.route('/:artistId/albums')
   .get(AlbumController.list)
-  .post(AlbumController.create);
+  .post([upload.upload.single('albumCoverArt')], AlbumController.create);
 
 router.route('/:artistId/albums/:id')
   .get(AlbumController.detail)
-  .put(AlbumController.update)
+  .put([upload.upload.single('albumCoverArt')], AlbumController.update)
   .delete(AlbumController.delete);
 
 /**
  * Songs
  * /:artists/artistId/songs
  */
-const upload = require('../config/multer');
 
 router.route('/:artistId/albums/:albumId/songs')
   .post([upload.upload.single('_song')], SongController.upload)
