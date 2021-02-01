@@ -5,13 +5,9 @@ const AlbumController = require('../controllers/album-controller');
 const router = express.Router();
 
 router.route('/')
-  .get(AlbumController.list)
-  .post(AlbumController.create);
+  .get(AlbumController.list);
 
 router.route('/:id').all()
-  .get(AlbumController.detail)
-  .put(AlbumController.update)
-  .patch(AlbumController.update)
-  .delete(AlbumController.delete);
+  .get(AlbumController.detail);
 
 module.exports = router;

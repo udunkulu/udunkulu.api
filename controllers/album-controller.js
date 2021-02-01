@@ -18,7 +18,8 @@ exports.detail = async (req, res) => {
  * List/Fetch all album
  */
 exports.list = async (req, res) => {
-  const albums = await Album.find();
+  const albums = await Album.find()
+    .populate('artist');
   if (_.isEmpty(albums)) return res.status(404).send({ success: false, message: 'albums not found' });
 
   res.status(200).send({ success: true, message: 'success', data: albums });
@@ -77,6 +78,8 @@ exports.update = async (req, res) => {
   }, options, async (error, album) => {
     if (error) throw error;
     if (!album) return res.status(404).send({ success: false, message: 'album not found' });
+
+    await deleteFile(req.file);
 
     res.status(200).send({ success: true, message: 'success : ablum updated', data: album });
   });
