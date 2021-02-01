@@ -11,8 +11,8 @@ const { NODE_ENV } = require('../config/env');
  */
 exports.detail = async (req, res) => {
   const user = await User.findById(req.params.id);
-  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
-  res.status(200).send({ status: true, message: 'success', data: user });
+  if (!user) return res.status(404).send({ success: false, message: 'user not found' });
+  res.status(200).send({ success: true, message: 'success', data: user });
 };
 
 /**
@@ -20,9 +20,9 @@ exports.detail = async (req, res) => {
  */
 exports.list = async (req, res) => {
   const users = await User.find();
-  if (_.isEmpty(users)) return res.status(404).send({ status: false, message: 'users not found' });
+  if (_.isEmpty(users)) return res.status(404).send({ success: false, message: 'users not found' });
 
-  res.status(200).send({ status: true, message: 'success', data: users });
+  res.status(200).send({ success: true, message: 'success', data: users });
 };
 
 /**
@@ -38,7 +38,7 @@ exports.create = async (req, res) => {
   let validData = await validateUser(_.omit(req.body, ['stageName']));
 
   let user = await User.findOne({ email: validData.email });
-  if (user) return res.status(409).send({ status: false, message: 'user already exist' });
+  if (user) return res.status(409).send({ success: false, message: 'user already exist' });
 
   validData = _.omit(validData, ['admin']);
 
@@ -62,7 +62,7 @@ exports.create = async (req, res) => {
   await user.save();
 
   return res.header('token', token).status(201).send({
-    status: true, message: 'success', data: user
+    success: true, message: 'success', data: user
   });
 };
 
@@ -80,9 +80,9 @@ exports.update = async (req, res) => {
     ...requestBody
   }, options, async (error, user) => {
     if (error) throw error;
-    if (!user) return res.status(404).send({ status: false, message: 'user not found' });
+    if (!user) return res.status(404).send({ success: false, message: 'user not found' });
 
-    res.status(200).send({ status: true, message: 'success', data: user });
+    res.status(200).send({ success: true, message: 'success', data: user });
   });
 };
 
@@ -96,7 +96,7 @@ exports.delete = async (req, res) => {
 
   const user = await User.findByIdAndRemove(req.params.id);
 
-  if (!user) return res.status(404).send({ status: false, message: 'user not found' });
+  if (!user) return res.status(404).send({ success: false, message: 'user not found' });
 
-  res.status(200).send({ status: true, message: 'success', data: user });
+  res.status(200).send({ success: true, message: 'success', data: user });
 };

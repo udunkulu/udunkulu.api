@@ -3,7 +3,8 @@ const cloudinary = require('../config/cloudinary');
 const { Song } = require('../models/song');
 const { Artist } = require('../models/artist');
 const { Album } = require('../models/album');
-const { deleteFile, secondsToMinute } = require('../services/song-service');
+const { secondsToMinute } = require('../services/song-service');
+const { deleteFile } = require('../services/upload-service');
 
 // const dir = path.join(__dirname, 'uploads/songs');
 // console.log(dir);
@@ -27,7 +28,7 @@ exports.upload = async (req, res) => {
   if (!album) return res.status(404).send({ success: false, message: 'album not found' });
 
   // upload to cloudinary
-  const response = await cloudinary.uploads(req.file.path);
+  const response = await cloudinary.uploadSong(req.file.path);
   // song duration/length in minute string
   const songDuration = await secondsToMinute(response.duration);
 
@@ -61,7 +62,7 @@ exports.list = async (req, res) => {
   const songs = await Song.find()
     .populate('artist')
     .populate('album');
-  
+
   if (_.isEmpty(songs)) return res.status(404).send({ success: false, message: 'songs not found' });
 
   res.status(200).send({ status: true, message: 'success: song list', data: songs });
@@ -81,7 +82,6 @@ exports.detail = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-
   const filter = {
     _id: req.params.id,
     artist: req.params.artistId,
