@@ -8,8 +8,8 @@ const router = express.Router();
 const upload = require('../config/multer');
 
 const SongController = require('../controllers/song-controller');
-const auth = require('../middlewares/authentication');
-const permit = require('../middlewares/permission');
+// const auth = require('../middlewares/authentication');
+// const permit = require('../middlewares/permission');
 
 router.route('/').all()
   .get(SongController.list)

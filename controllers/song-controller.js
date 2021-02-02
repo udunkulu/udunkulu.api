@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const cloudinary = require('../config/cloudinary');
-const { Song } = require('../models/song');
+const { Song, validateSong } = require('../models/song');
 const { Artist } = require('../models/artist');
 const { Album } = require('../models/album');
 const { secondsToMinute } = require('../services/song-service');
@@ -18,6 +18,8 @@ exports.upload = async (req, res) => {
       message: 'no file found, please attached a file'
     });
   }
+
+  const validData = await validateSong(req.body);
 
   // get artist info
   const artist = await Artist.findById(req.params.artistId);
@@ -38,7 +40,9 @@ exports.upload = async (req, res) => {
     url: response.secure_url,
     cloudinary: response,
     artist: artist._id,
-    album: album._id
+    album: album._id,
+    ...validData
+
   };
 
   const song = new Song(songData);
