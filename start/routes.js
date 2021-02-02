@@ -4,6 +4,7 @@ const docs = require('../routes/docs');
 const songs = require('../routes/songs');
 const albums = require('../routes/albums');
 const artists = require('../routes/artists');
+const search = require('../routes/search');
 const { BASE_PATH } = require('../config/env');
 
 /**
@@ -15,7 +16,7 @@ module.exports = (app) => {
   app.use(`${BASE_PATH}/songs`, songs);
   app.use(`${BASE_PATH}/albums`, albums);
   app.use(`${BASE_PATH}/artists`, artists);
-  // app.use(`${BASE_PATH}/songs`, songs);
+  app.use(`${BASE_PATH}/search`, search);
   // app.use(`${BASE_PATH}/artists/:artistId/songs`, songs);
 
   app.use(`${BASE_PATH}/docs`, docs);

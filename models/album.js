@@ -17,24 +17,46 @@ const albumSchema = new mongoose.Schema({
     type: String,
     minlength: 10,
     maxlength: 250
+  },
+  coverArt: {
+    type: String
+  },
+  featuring: {
+    type: String
+  },
+  cloudinary: {
+    type: Object,
+    required: true
+  },
+  released: {
+    type: Date,
+    required: true,
+    default: new Date()
   }
 
 }, { timestamps: new Date() });
+
+albumSchema.index({ title: 'text' });
 
 // Defines Album model based on album schema
 const Album = mongoose.model('Album', albumSchema);
 
 // Define what is return in API response
 albumSchema.set('toJSON', {
-  versionKey: false
-  // transform(doc, ret) {}
+  versionKey: false,
+  transform(doc, ret) {
+    // eslint-disable-next-line no-param-reassign
+    delete ret.cloudinary;
+  }
 });
 
 // validation
 const validateAlbum = async (album = {}) => {
   const schema = Joi.object({
     title: Joi.string().min(3).max(50).required(),
-    description: Joi.string().min(10).max(250)
+    description: Joi.string().min(10).max(250),
+    featuring: Joi.string(),
+    released: Joi.date().required()
   });
 
   const value = await schema.validateAsync(album);
@@ -46,7 +68,9 @@ const validateAlbum = async (album = {}) => {
 const validateUpdate = async (album = {}) => {
   const schema = Joi.object({
     title: Joi.string().min(3).max(50).required(),
-    description: Joi.string().min(10).max(250)
+    description: Joi.string().min(10).max(250),
+    featuring: Joi.string(),
+    released: Joi.date().required()
   });
 
   const value = await schema.validateAsync(album);

@@ -71,6 +71,8 @@ userSchema.set('toJSON', {
   }
 });
 
+userSchema.index({ firstName: 'text', lastName: 'text' })
+
 // Define User model based on user schema
 const User = mongoose.model('User', userSchema);
 

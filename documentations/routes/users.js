@@ -74,7 +74,10 @@
         "email": "email address of the user.",
         "lastName": "lastName Lastname of the user",
         "password": "password address of the user",
-        "firstName": "firstName of the user"
+        "firstName": "firstName of the user",
+        "role": "user's role",
+        "phoneNumber": "user phone number",
+        "stageName": "if userm is an artist"
     }
  *
  * @apiUse Success
@@ -90,7 +93,6 @@
  * @apiGroup Users
  *
  * @apiParam {String} id the user's id
- *
  * @apiParamExample {json} Request-Example: all or anyone of these fields
  *  {
         "email": "email address of the user.",
@@ -110,6 +112,25 @@
  * @apiGroup Users
  *
  * @apiParam {String} id the user's id
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ *
+ */
+
+/**
+ * @api {post} /users/login Login
+ * @apiDescription Login a user
+ * @apiName loginUser
+ * @apiGroup Users
+ * @apiHeader {String} token Token value.(available on response header)
+ *
+ * @apiParamExample {json} Request-Example: all fields are required
+ *  {
+        "email": "user email",
+        "password": "user password"
+    }
  *
  * @apiUse Success
  *

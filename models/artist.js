@@ -16,6 +16,8 @@ const artistSchema = new mongoose.Schema({
   }
 }, { timestamps: new Date() });
 
+artistSchema.index({ stageName: 'text' });
+
 // No static method to be used on object
 
 // define artist model based on artist schema

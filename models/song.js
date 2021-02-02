@@ -50,14 +50,22 @@ const songSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+
+  mood: {
+    type: String,
+    lowercase: true,
+    enum: ['workout', 'feelgood', 'romance', 'focus', 'party'],
+    required: true
+  },
+  genre: {
+    type: String,
+    lowercase: true,
+    enum: ['pop', 'r&b', 'rap', 'jazz', 'blues', 'metal', 'country', 'rock', 'spiritual'],
+    required: true
   }
 
-  // genre: {  }
-
-  // mood: {  }
-
 }, { timestamps: new Date() });
-
 
 // Determine which properties are returned in API responses
 songSchema.set('toJSON', {
@@ -67,6 +75,8 @@ songSchema.set('toJSON', {
     delete ret.cloudinary;
   }
 });
+
+songSchema.index({title: 'text'});
 
 // Define Song model based on song schema | map song schema to database
 const Song = mongoose.model('Song', songSchema);
@@ -91,7 +101,9 @@ authorisations();
 // validation
 const validateSong = async (song = {}) => {
   const schema = Joi.object({
-    title: Joi.string().min(3).max(100).required()
+    // title: Joi.string().min(3).max(100).required(),
+    mood: Joi.string().required(),
+    genre: Joi.string().required()
 
   });
 
@@ -103,7 +115,9 @@ const validateSong = async (song = {}) => {
 // validation
 const validateUpdate = async (song = {}) => {
   const schema = Joi.object({
-    title: Joi.string().min(3).max(100)
+    // title: Joi.string().min(3).max(100).required(),
+    mood: Joi.string().required(),
+    genre: Joi.string().required()
   });
 
   const value = await schema.validateAsync(song);
