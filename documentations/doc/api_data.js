@@ -1344,8 +1344,8 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Request-Example: title is required",
-          "content": "{\n   \"title\": \"song title\",\n   \"mood\": \"possible moods\"\n}",
+          "title": "Request-Example: these fileds are required as well as _song required as a form data",
+          "content": "{\n   \"mood\": \"possible moods\",\n    \"genre\": \"possible genre\"\n}",
           "type": "json"
         }
       ]
