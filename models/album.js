@@ -36,6 +36,8 @@ const albumSchema = new mongoose.Schema({
 
 }, { timestamps: new Date() });
 
+albumSchema.index({ title: 'text' });
+
 // Defines Album model based on album schema
 const Album = mongoose.model('Album', albumSchema);
 

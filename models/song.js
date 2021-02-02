@@ -58,7 +58,6 @@ const songSchema = new mongoose.Schema({
 
 }, { timestamps: new Date() });
 
-
 // Determine which properties are returned in API responses
 songSchema.set('toJSON', {
   versionKey: false,
@@ -67,6 +66,8 @@ songSchema.set('toJSON', {
     delete ret.cloudinary;
   }
 });
+
+songSchema.index({title: 'text'});
 
 // Define Song model based on song schema | map song schema to database
 const Song = mongoose.model('Song', songSchema);

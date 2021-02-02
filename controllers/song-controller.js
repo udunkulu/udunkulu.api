@@ -94,7 +94,3 @@ exports.delete = async (req, res) => {
 
   res.status(200).send({ success: true, message: 'success: song deleted', data: song });
 };
-
-exports.testing = async (req, res) => {
-  res.send('Reached....');
-};
