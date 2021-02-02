@@ -2,15 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 
-const auth = require('../middlewares/authentication');
+// const auth = require('../middlewares/authentication');
 // const permit = require('../middlewares/permission');
 
 const ArtistController = require('../controllers/artist-controller');
 const AlbumController = require('../controllers/album-controller');
 const SongController = require('../controllers/song-controller');
 
-const albums = require('./albums');
-const songs = require('./songs');
+// const albums = require('./albums');
+// const songs = require('./songs');
 
 const upload = require('../config/multer');
 

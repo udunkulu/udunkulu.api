@@ -93,7 +93,6 @@
  * @apiGroup Users
  *
  * @apiParam {String} id the user's id
- *
  * @apiParamExample {json} Request-Example: all or anyone of these fields
  *  {
         "email": "email address of the user.",
@@ -113,6 +112,25 @@
  * @apiGroup Users
  *
  * @apiParam {String} id the user's id
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ *
+ */
+
+/**
+ * @api {post} /users/login Login
+ * @apiDescription Login a user
+ * @apiName loginUser
+ * @apiGroup Users
+ * @apiHeader {String} token Token value.(available on response header)
+ *
+ * @apiParamExample {json} Request-Example: all fields are required
+ *  {
+        "email": "user email",
+        "password": "user password"
+    }
  *
  * @apiUse Success
  *

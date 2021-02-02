@@ -50,11 +50,12 @@
  * @apiParam {String} albumId the album's unique ID
  * @apiParam {String} artistId the artist's unique ID
  *
- * @apiParamExample {json} Request-Example: title is required
+ * @apiParamExample {json} Request-Example: these fileds are required as well as _song required as a form data
  * {
- *    "title": "song title",
- *    "mood": "possible moods"
+ *    "mood": "possible moods",
+ *     "genre": "possible genre"
  * }
+ *
  * @apiUse Header
  * @apiUse Success
  *
