@@ -11,21 +11,29 @@ cloudinary.config({
 });
 
 exports.uploadSong = async (file) => {
-  const response = await cloudinary.uploader.upload(file, {
-    resource_type: 'video',
-    folder: 'udunkulu/songs'
-  });
+  try {
+    const response = await cloudinary.uploader.upload(file, {
+      resource_type: 'video',
+      folder: 'udunkulu/songs'
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    throw new Error(`From Cloudinary: ${error}`);
+  }
 };
 
 exports.uploadImage = async (file) => {
-  const response = await cloudinary.uploader.upload(file, {
-    resource_type: 'image',
-    folder: 'udunkulu/images'
-  });
+  try {
+    const response = await cloudinary.uploader.upload(file, {
+      resource_type: 'image',
+      folder: 'udunkulu/images'
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    throw new Error(`From Cloudinary: ${error}`);
+  }
 };
 
 // exports.cloudinary = cloudinary;
