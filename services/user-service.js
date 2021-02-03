@@ -39,13 +39,15 @@ exports.createUser = async (req, res) => {
   const token = user.generateAuthToken();
 
   // In local? You need to connect to internet for this to work and set NODE_ENV=production
-  if (NODE_ENV === 'production') {
-    await mailService.sendVerificationMail(user, token);
-  }
+  // if (NODE_ENV === 'production') {
+  //   await mailService.sendVerificationMail(user, token);
+  // }
 
-  if (NODE_ENV === 'development') {
-    user.verifiedAt = new Date();
-  }
+  // if (NODE_ENV === 'development') {
+  //   user.verifiedAt = new Date();
+  // }
+
+  user.verifiedAt = new Date();
 
   await user.save();
 
