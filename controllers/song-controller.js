@@ -105,9 +105,13 @@ exports.detail = async (req, res) => {
  Retrieve a song based on mood.
  */
 exports.listMood = async (req, res) => {
-  const song = await Song.find({ mood: req.body.mood });
-  if (!song) return res.status(404).send({ success: false, message: 'mood not found ' });
-  res.status(200).send({ success: true, message: 'success', data: song });
+  const filter = req.body.genre;
+  let songs = await Song.find({ $text: {$search: req.body.genre} });
+  // if (!song) return res.status(404).send({ success: false, message: 'mood not found ' });
+
+  if (_.isEmpty(songs)) return res.status(404).send({ success: false, message: 'songs not found' });
+
+  res.status(200).send({ success: true, message: 'success', data: songs });
 };
 
 /*

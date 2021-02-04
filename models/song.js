@@ -76,7 +76,7 @@ songSchema.set('toJSON', {
   }
 });
 
-songSchema.index({ title: 'text' });
+songSchema.index({ title: 'text', mood: 'text', genre: 'text' });
 
 // Define Song model based on song schema | map song schema to database
 const Song = mongoose.model('Song', songSchema);
