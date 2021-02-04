@@ -13,7 +13,10 @@ const SongController = require('../controllers/song-controller');
 
 router.route('/').all()
   .get(SongController.list)
-  .post([upload.upload.single('_song')], SongController.upload);
+  // .post([upload.upload.single('_song')], SongController.upload);
+
+router.post('/moods', SongController.listMood);
+router.post('/genres', SongController.listGenre);
 
 router.route('/:id').all()
   .get(SongController.detail);
