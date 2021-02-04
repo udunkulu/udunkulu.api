@@ -23,12 +23,10 @@ exports.validateEmail = async (email) => {
 
 exports.createUser = async (req, res) => {
   // validate req.body
-  let validData = await validateUser(_.omit(req.body, ['stageName']));
+  const validData = await validateUser(_.omit(req.body, ['stageName']));
 
   let user = await User.findOne({ email: validData.email });
   if (user) return res.status(409).send({ status: false, message: 'user already exist' });
-
-  validData = _.omit(validData, ['admin']);
 
   user = new User({ ...validData });
 

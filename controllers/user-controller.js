@@ -1,10 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const ArtistController = require('./artist-controller');
 const { User, validateUser, validateUpdate } = require('../models/user');
-const mailService = require('../services/mail-service');
-const { NODE_ENV } = require('../config/env');
+// const mailService = require('../services/mail-service');
+// const { NODE_ENV } = require('../config/env');
+const UserService = require('../services/user-service');
+
 
 /**
  * Retrieve a user
@@ -35,34 +37,14 @@ exports.create = async (req, res) => {
   }
 
   // validate req.body
-  let validData = await validateUser(_.omit(req.body, ['stageName']));
+  const validData = await validateUser(_.omit(req.body, ['stageName', 'role']));
 
   let user = await User.findOne({ email: validData.email });
   if (user) return res.status(409).send({ success: false, message: 'user already exist' });
 
-  validData = _.omit(validData, ['admin']);
+  user = await UserService.createUser(req, res);
 
-  user = new User({ ...validData });
-
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-
-  // log the user in
-  const token = user.generateAuthToken();
-
-  // In local? You need to connect to internet for this to work and set NODE_ENV=production
-  // if (NODE_ENV === 'production') {
-  //   await mailService.sendVerificationMail(user, token);
-  // }
-  // if (NODE_ENV === 'development') {
-  //   user.verifiedAt = new Date();
-  // }
-
-  user.verifiedAt = new Date();
-
-  await user.save();
-
-  return res.header('token', token).status(201).send({
+  return res.status(201).send({
     success: true, message: 'success', data: user
   });
 };
