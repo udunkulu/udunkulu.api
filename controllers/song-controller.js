@@ -85,6 +85,24 @@ exports.detail = async (req, res) => {
   res.status(200).send({ success: true, message: 'success', data: song });
 };
 
+/*
+ Retrieve a song based on mood.
+ */
+exports.listMood = async (req, res) => {
+  const song = await Song.find({ mood: req.body.mood });
+  if (!song) return res.status(404).send({ success: false, message: 'mood not found ' });
+  res.status(200).send({ success: true, message: 'success', data: song });
+};
+
+/*
+ Retrieve a song based on genre.
+ */
+exports.listGenre = async (req, res) => {
+  const song = await Song.find({ genre: req.body.genre });
+  if (!song) return res.status(404).send({ success: false, message: 'genre not found ' });
+  res.status(200).send({ success: true, message: 'success', data: song });
+};
+
 exports.delete = async (req, res) => {
   const filter = {
     _id: req.params.id,
