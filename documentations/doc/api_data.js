@@ -906,7 +906,7 @@ define({ "api": [
     "url": "/artists/artistId/albums/albumId/songs/id",
     "title": "Delete",
     "description": "<p>Deletes a song</p>",
-    "name": "DeleteSong",
+    "name": "DeleteSongs",
     "group": "Songs",
     "parameter": {
       "fields": {
@@ -1018,7 +1018,7 @@ define({ "api": [
     "url": "/artists/artistId/albums/albumId/songs/id",
     "title": "Detail",
     "description": "<p>Retrieves a particular song</p>",
-    "name": "GetSong",
+    "name": "GetSongs",
     "group": "Songs",
     "parameter": {
       "fields": {
@@ -1114,10 +1114,154 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/artists/artistId/albums/albumId/songs",
+    "url": "/songs/latests",
+    "title": "latestList",
+    "description": "<p>Lists all latest songs</p>",
+    "name": "LatestSongs",
+    "group": "Songs",
+    "version": "0.0.0",
+    "filename": "documentations/routes/song.js",
+    "groupTitle": "Songs",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/songs",
     "title": "List",
     "description": "<p>Lists all songs</p>",
-    "name": "ListSong",
+    "name": "ListAllSongs",
+    "group": "Songs",
+    "version": "0.0.0",
+    "filename": "documentations/routes/song.js",
+    "groupTitle": "Songs",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/artists/artistId/albums/albumId/songs",
+    "title": "ArtistList",
+    "description": "<p>Lists all songs by an artist</p>",
+    "name": "ListArtistsSongs",
     "group": "Songs",
     "parameter": {
       "fields": {
@@ -1205,11 +1349,83 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "/songs/randoms",
+    "title": "randomList",
+    "description": "<p>randomize songs</p>",
+    "name": "RandomSongs",
+    "group": "Songs",
+    "version": "0.0.0",
+    "filename": "documentations/routes/song.js",
+    "groupTitle": "Songs",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "put",
     "url": "/artists/artistId/albums/albumId/songs/id",
     "title": "update",
     "description": "<p>Udate a song or its detail</p>",
-    "name": "UpdateSong",
+    "name": "UpdateSongs",
     "group": "Songs",
     "parameter": {
       "fields": {
@@ -1321,7 +1537,7 @@ define({ "api": [
     "url": "/artists/artistId/albums/albumId/songs",
     "title": "Upload",
     "description": "<p>Upload a song</p> <p>The form should be sent as multipart/form-data The particular input field that file should be attached to should be in this form</p> <p>&lt; input name=&quot;_song&quot; type=&quot;file&quot;  / &gt;</p>",
-    "name": "UploadSong",
+    "name": "UploadSongs",
     "group": "Songs",
     "parameter": {
       "fields": {
@@ -1344,7 +1560,7 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Request-Example: these fileds are required as well as _song required as a form data",
+          "title": "Request-Example: these fields are required as well as _song required as a form data",
           "content": "{\n   \"mood\": \"possible moods\",\n    \"genre\": \"possible genre\"\n}",
           "type": "json"
         }
@@ -1366,6 +1582,87 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request usually success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>This contains the resource (an object or array of objects) and/or other required particulars</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200/201 OK\n{\n  \"success\": true,\n  \"message\": \"success\",\n  \"data\": { ... } or [ {}, {}, ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>The success of the response usually false</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>This is the info about the request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 xxx\n{\n  \"success\": false,\n  \"message\": \"info about the error if any\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/songs/filter",
+    "title": "filter",
+    "description": "<p>Lists all songs based on mood or genre</p>",
+    "name": "filterSongs",
+    "group": "Songs",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example: one of these field is required.",
+          "content": "   \"mood\": \"required mood\",\n    \"genre\": \"required genre\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "documentations/routes/song.js",
+    "groupTitle": "Songs",
     "success": {
       "fields": {
         "Success 200": [

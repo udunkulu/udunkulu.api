@@ -189,7 +189,7 @@ exports.update = async (req, res) => {
  * fetch latest songs
  */
 exports.latestList = async (req, res) => {
-  const latestSongs = await Song.find().sort({ _id: -1 }).limit(5)
+  const latestSongs = await Song.find().sort({ _id: -1 }).limit(10)
     .populate('artist')
     .populate('album');
 

@@ -44,13 +44,13 @@
  *
  * < input name="_song" type="file"  / >
  *
- * @apiName UploadSong
+ * @apiName UploadSongs
  * @apiGroup Songs
  *
  * @apiParam {String} albumId the album's unique ID
  * @apiParam {String} artistId the artist's unique ID
  *
- * @apiParamExample {json} Request-Example: these fileds are required as well as _song required as a form data
+ * @apiParamExample {json} Request-Example: these fields are required as well as _song required as a form data
  * {
  *    "mood": "possible moods",
  *     "genre": "possible genre"
@@ -64,9 +64,9 @@
  */
 
 /**
- * @api {get} /artists/artistId/albums/albumId/songs List
- * @apiDescription Lists all songs
- * @apiName ListSong
+ * @api {get} /artists/artistId/albums/albumId/songs ArtistList
+ * @apiDescription Lists all songs by an artist
+ * @apiName ListArtistsSongs
  * @apiGroup Songs
  *
  * @apiParam {String} albumId the album's unique ID
@@ -78,9 +78,60 @@
  */
 
 /**
+ * @api {get} /songs/latests latestList
+ * @apiDescription Lists all latest songs
+ * @apiName LatestSongs
+ * @apiGroup Songs
+ *
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
+
+/**
+ * @api {get} /songs/randoms randomList
+ * @apiDescription randomize songs
+ * @apiName RandomSongs
+ * @apiGroup Songs
+ *
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
+
+/**
+ * @api {get} /songs/filter filter
+ * @apiDescription Lists all songs based on mood or genre
+ * @apiName filterSongs
+ * @apiGroup Songs
+ * @apiParamExample {json} Request-Example: one of these field is required.
+ *    "mood": "required mood",
+ *     "genre": "required genre"
+ * }
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
+
+/**
+ * @api {get} /songs List
+ * @apiDescription Lists all songs
+ * @apiName ListAllSongs
+ * @apiGroup Songs
+ *
+ *
+ * @apiUse Success
+ *
+ * @apiUse Error
+ */
+
+/**
  * @api {put} /artists/artistId/albums/albumId/songs/id update
  * @apiDescription Udate a song or its detail
- * @apiName UpdateSong
+ * @apiName UpdateSongs
  * @apiGroup Songs
  *
  * @apiParam {String} id the song's id
@@ -95,7 +146,7 @@
 /**
  * @api {get} /artists/artistId/albums/albumId/songs/id Detail
  * @apiDescription Retrieves a particular song
- * @apiName GetSong
+ * @apiName GetSongs
  * @apiGroup Songs
  *
  * @apiParam {String} id the song unique ID.
@@ -110,7 +161,7 @@
 /**
  * @api {delete} /artists/artistId/albums/albumId/songs/id Delete
  * @apiDescription Deletes a song
- * @apiName DeleteSong
+ * @apiName DeleteSongs
  * @apiGroup Songs
  *
  * @apiParam {String} id the song unique ID.
