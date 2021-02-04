@@ -102,26 +102,30 @@ exports.detail = async (req, res) => {
 };
 
 /*
- Retrieve a song based on mood.
+ Retrieve a song based on mood or genre.
  */
-exports.listMood = async (req, res) => {
-  const filter = req.body.genre;
-  let songs = await Song.find({ $text: {$search: req.body.genre} });
-  // if (!song) return res.status(404).send({ success: false, message: 'mood not found ' });
+exports.listMoodGenre = async (req, res) => {
+  // in the future one can find send in mood and genre
+  // const songs = await Song.find({
+  //   $or: [
+  //     { mood: req.body.mood.trim() },
+  //     { genre: req.body.genre.trim() }
+  //   ]
+  // });
+
+  const filter = req.body.filter.toString().trim();
+  const songs = await Song.find({
+    $or: [
+      { mood: filter },
+      { genre: filter }
+    ]
+  });
 
   if (_.isEmpty(songs)) return res.status(404).send({ success: false, message: 'songs not found' });
 
   res.status(200).send({ success: true, message: 'success', data: songs });
 };
 
-/*
- Retrieve a song based on genre.
- */
-exports.listGenre = async (req, res) => {
-  const song = await Song.find({ genre: req.body.genre });
-  if (!song) return res.status(404).send({ success: false, message: 'genre not found ' });
-  res.status(200).send({ success: true, message: 'success', data: song });
-};
 
 exports.delete = async (req, res) => {
   const filter = {
