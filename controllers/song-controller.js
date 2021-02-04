@@ -73,6 +73,22 @@ exports.list = async (req, res) => {
 };
 
 /**
+ * List all songs randomise
+ */
+exports.randomList = async (req, res) => {
+  const songs = await Song.find().limit(50)
+    .populate('artist')
+    .populate('album');
+
+  if (_.isEmpty(songs)) return res.status(404).send({ success: false, message: 'songs not found' });
+
+  // randomise the list
+  const randomSongs = songs.sort(() => Math.random() - 0.5);
+
+  res.status(200).send({ success: true, message: 'success: random songs', data: randomSongs });
+};
+
+/**
  * Retrieve a song || play a song
  */
 exports.detail = async (req, res) => {
@@ -86,22 +102,30 @@ exports.detail = async (req, res) => {
 };
 
 /*
- Retrieve a song based on mood.
+ Retrieve a song based on mood or genre.
  */
-exports.listMood = async (req, res) => {
-  const song = await Song.find({ mood: req.body.mood });
-  if (!song) return res.status(404).send({ success: false, message: 'mood not found ' });
-  res.status(200).send({ success: true, message: 'success', data: song });
+exports.filter = async (req, res) => {
+  // in the future one can find send in mood and genre
+  // const songs = await Song.find({
+  //   $or: [
+  //     { mood: req.body.mood.trim() },
+  //     { genre: req.body.genre.trim() }
+  //   ]
+  // });
+
+  const filter = req.body.filter.toString().trim();
+  const songs = await Song.find({
+    $or: [
+      { mood: filter },
+      { genre: filter }
+    ]
+  });
+
+  if (_.isEmpty(songs)) return res.status(404).send({ success: false, message: 'songs not found' });
+
+  res.status(200).send({ success: true, message: 'success', data: songs });
 };
 
-/*
- Retrieve a song based on genre.
- */
-exports.listGenre = async (req, res) => {
-  const song = await Song.find({ genre: req.body.genre });
-  if (!song) return res.status(404).send({ success: false, message: 'genre not found ' });
-  res.status(200).send({ success: true, message: 'success', data: song });
-};
 
 exports.delete = async (req, res) => {
   const filter = {
@@ -134,7 +158,7 @@ exports.update = async (req, res) => {
     requestBody.cloudinary = response;
     requestBody.url = response.secure_url;
     requestBody.duration = songDuration;
-    requestBody.title = requestBody.title ? requestBody.title : req.file.originalname
+    requestBody.title = requestBody.title ? requestBody.title : req.file.originalname;
   }
 
   const options = { new: true, runValidators: true };
@@ -161,8 +185,10 @@ exports.update = async (req, res) => {
   });
 };
 
-// fetch latest songs
-exports.latestSongs = async (req, res) => {
+/**
+ * fetch latest songs
+ */
+exports.latestList = async (req, res) => {
   const latestSongs = await Song.find().sort({ _id: -1 }).limit(5)
     .populate('artist')
     .populate('album');
