@@ -4,17 +4,12 @@ const { Artist, validateArtist, validateUpdate } = require('../models/artist');
 const UserService = require('../services/user-service');
 
 exports.create = async (req, res) => {
+  const validData = await validateArtist(_.pick(req.body, ['stageName', 'role']));
+
   // make a user
+  req.body.role = validData.role;
+  req.body.stageName = validData.stageName;
   const user = await UserService.createUser(req, res);
-
-  if (!user.role === 'artist') {
-    return res.status(401).send({
-      success: false,
-      message: `wrong user role, expected role to be artist, got ${user.role}`
-    });
-  }
-
-  const validData = await validateArtist(_.pick(req.body, ['stageName']));
 
   const artist = new Artist({
     ...validData,

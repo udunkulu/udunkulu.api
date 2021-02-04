@@ -29,9 +29,9 @@ const albumSchema = new mongoose.Schema({
     required: true
   },
   released: {
-    type: Date,
-    required: true,
-    default: new Date()
+    type: Date
+    // required: true, // in the future this will be require
+    // default: new Date()
   }
 
 }, { timestamps: new Date() });
@@ -56,7 +56,7 @@ const validateAlbum = async (album = {}) => {
     title: Joi.string().min(3).max(50).required(),
     description: Joi.string().min(10).max(250),
     featuring: Joi.string(),
-    released: Joi.date().required()
+    released: Joi.date()
   });
 
   const value = await schema.validateAsync(album);
@@ -67,10 +67,10 @@ const validateAlbum = async (album = {}) => {
 // validation
 const validateUpdate = async (album = {}) => {
   const schema = Joi.object({
-    title: Joi.string().min(3).max(50).required(),
+    title: Joi.string().min(3).max(50),
     description: Joi.string().min(10).max(250),
     featuring: Joi.string(),
-    released: Joi.date().required()
+    released: Joi.date()
   });
 
   const value = await schema.validateAsync(album);

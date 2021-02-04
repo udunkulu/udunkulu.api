@@ -45,6 +45,7 @@ router.route('/:artistId/albums/:albumId/songs')
 
 router.route('/:artistId/albums/:albumId/songs/:id')
   .get(SongController.detail)
+  .put([upload.upload.single('_song')], SongController.update)
   .delete(SongController.delete);
 
 module.exports = router;

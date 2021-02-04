@@ -23,12 +23,10 @@ exports.validateEmail = async (email) => {
 
 exports.createUser = async (req, res) => {
   // validate req.body
-  let validData = await validateUser(_.omit(req.body, ['stageName']));
+  const validData = await validateUser(_.omit(req.body, ['stageName']));
 
   let user = await User.findOne({ email: validData.email });
   if (user) return res.status(409).send({ status: false, message: 'user already exist' });
-
-  validData = _.omit(validData, ['admin']);
 
   user = new User({ ...validData });
 
@@ -39,13 +37,15 @@ exports.createUser = async (req, res) => {
   const token = user.generateAuthToken();
 
   // In local? You need to connect to internet for this to work and set NODE_ENV=production
-  if (NODE_ENV === 'production') {
-    await mailService.sendVerificationMail(user, token);
-  }
+  // if (NODE_ENV === 'production') {
+  //   await mailService.sendVerificationMail(user, token);
+  // }
 
-  if (NODE_ENV === 'development') {
-    user.verifiedAt = new Date();
-  }
+  // if (NODE_ENV === 'development') {
+  //   user.verifiedAt = new Date();
+  // }
+
+  user.verifiedAt = new Date();
 
   await user.save();
 

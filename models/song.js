@@ -65,7 +65,7 @@ const songSchema = new mongoose.Schema({
     required: true
   }
 
-}, { timestamps: new Date() });
+}, { timestamps: true });
 
 // Determine which properties are returned in API responses
 songSchema.set('toJSON', {
@@ -76,7 +76,7 @@ songSchema.set('toJSON', {
   }
 });
 
-songSchema.index({title: 'text'});
+songSchema.index({ title: 'text' });
 
 // Define Song model based on song schema | map song schema to database
 const Song = mongoose.model('Song', songSchema);
@@ -102,8 +102,8 @@ authorisations();
 const validateSong = async (song = {}) => {
   const schema = Joi.object({
     // title: Joi.string().min(3).max(100).required(),
-    mood: Joi.string().required(),
-    genre: Joi.string().required()
+    mood: Joi.string().required().lowercase().trim(),
+    genre: Joi.string().required().lowercase().trim()
 
   });
 
@@ -115,9 +115,9 @@ const validateSong = async (song = {}) => {
 // validation
 const validateUpdate = async (song = {}) => {
   const schema = Joi.object({
-    // title: Joi.string().min(3).max(100).required(),
-    mood: Joi.string().required(),
-    genre: Joi.string().required()
+    title: Joi.string().min(3).max(250),
+    mood: Joi.string().lowercase().trim(),
+    genre: Joi.string().lowercase().trim()
   });
 
   const value = await schema.validateAsync(song);
