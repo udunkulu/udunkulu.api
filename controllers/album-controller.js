@@ -29,7 +29,7 @@ exports.list = async (req, res) => {
  * Create an album
  */
 exports.create = async (req, res) => {
-  if (!req.file || Object.keys(req.file).length === 0) {
+  if (!('file' in req)) {
     return res.status(400).send({
       success: false,
       message: 'no files were uploaded or attached'
@@ -72,8 +72,17 @@ exports.update = async (req, res) => {
   const options = { new: true, runValidators: true };
   const filter = { _id: req.params.id, artist: req.params.artistId };
 
+  // we want to make upload
+  if (('file' in req)) {
+    // in the future, try to
+  // delete the one in cloud and make a new upload or replace it in cloudinary
+    const response = await cloudinary.uploadImage(req.file.path);
+
+    requestBody.cloudinary = response;
+    requestBody.coverArt = response.secure_url;
+  }
+
   await Album.findOneAndUpdate(filter, {
-    coverArt: req.file.path,
     ...requestBody
   }, options, async (error, album) => {
     if (error) throw error;

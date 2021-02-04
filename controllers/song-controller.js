@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const cloudinary = require('../config/cloudinary');
-const { Song, validateSong } = require('../models/song');
+const { Song, validateSong, validateUpdate } = require('../models/song');
 const { Artist } = require('../models/artist');
 const { Album } = require('../models/album');
 const { secondsToMinute } = require('../services/song-service');
@@ -97,4 +97,59 @@ exports.delete = async (req, res) => {
   if (!song) return res.status(404).send({ success: false, message: 'song not found or previous deleted' });
 
   res.status(200).send({ success: true, message: 'success: song deleted', data: song });
+};
+
+/**
+ * Update a song
+ */
+exports.update = async (req, res) => {
+  const requestBody = await validateUpdate(req.body);
+
+  // we want to make upload
+  if (('file' in req)) {
+    // in the future, try to
+  // delete the one in cloud and make a new upload or replace it in cloudinary
+    const response = await cloudinary.uploadSong(req.file.path);
+
+    const songDuration = await secondsToMinute(response.duration);
+
+    requestBody.cloudinary = response;
+    requestBody.url = response.secure_url;
+    requestBody.duration = songDuration;
+    requestBody.title = requestBody.title ? requestBody.title : req.file.originalname
+  }
+
+  const options = { new: true, runValidators: true };
+  const filter = {
+    _id: req.params.id,
+    artist: req.params.artistId,
+    album: req.params.albumId
+  };
+
+  await Song.findOneAndUpdate(filter, {
+    ...requestBody
+  }, options, async (error, song) => {
+    if (error) throw error;
+
+    if (!song) {
+      return res.status(404).send({
+        success: false,
+        message: 'song not found ... may be it was not found under this album'
+      });
+    }
+    await deleteFile(req.file);
+
+    res.status(200).send({ success: true, message: 'success : ablum updated', data: song });
+  });
+};
+
+// fetch latest songs
+exports.latestSongs = async (req, res) => {
+  const latestSongs = await Song.find().sort({ _id: -1 }).limit(5)
+    .populate('artist')
+    .populate('album');
+
+  if (_.isEmpty(latestSongs)) return res.status(404).send({ success: false, message: 'songs not found' });
+
+  return res.send({ success: true, message: 'latest songs', data: latestSongs });
 };
