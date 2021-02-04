@@ -32,7 +32,10 @@ artistSchema.set('toJSON', {
 // validation for creating artist
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string().min(2).max(50).required()
+    stageName: Joi.string().min(2).max(50).required(),
+    role: Joi.string().required().min(6).max(6)
+      .lowercase()
+      .trim()
     // user: Joi.string.min(10)
   });
 
@@ -44,7 +47,10 @@ const validateArtist = async (artist = {}) => {
 // Validation for updating artist
 const validateUpdate = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string().min(2).max(50)
+    stageName: Joi.string().min(2).max(50),
+    role: Joi.string().required().min(6).max(6)
+      .lowercase()
+      .trim()
     // user: Joi.string.min(10)
   });
 
