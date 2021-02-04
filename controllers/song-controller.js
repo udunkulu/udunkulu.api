@@ -104,7 +104,7 @@ exports.detail = async (req, res) => {
 /*
  Retrieve a song based on mood or genre.
  */
-exports.listMoodGenre = async (req, res) => {
+exports.filter = async (req, res) => {
   // in the future one can find send in mood and genre
   // const songs = await Song.find({
   //   $or: [

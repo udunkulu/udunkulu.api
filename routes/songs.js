@@ -7,7 +7,7 @@ const SongController = require('../controllers/song-controller');
 router.route('/').all()
   .get(SongController.list);
 
-router.post('/filter', SongController.listMoodGenre);
+router.post('/filter', SongController.filter);
 
 router.get('/latests', SongController.latestList);
 router.get('/randoms', SongController.randomList);
