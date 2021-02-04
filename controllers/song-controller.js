@@ -73,6 +73,22 @@ exports.list = async (req, res) => {
 };
 
 /**
+ * List all songs randomise
+ */
+exports.randomList = async (req, res) => {
+  const songs = await Song.find().limit(50)
+    .populate('artist')
+    .populate('album');
+
+  if (_.isEmpty(songs)) return res.status(404).send({ success: false, message: 'songs not found' });
+
+  // randomise the list
+  const randomSongs = songs.sort(() => Math.random() - 0.5);
+
+  res.status(200).send({ success: true, message: 'success: random songs', data: randomSongs });
+};
+
+/**
  * Retrieve a song || play a song
  */
 exports.detail = async (req, res) => {
@@ -116,7 +132,7 @@ exports.update = async (req, res) => {
     requestBody.cloudinary = response;
     requestBody.url = response.secure_url;
     requestBody.duration = songDuration;
-    requestBody.title = requestBody.title ? requestBody.title : req.file.originalname
+    requestBody.title = requestBody.title ? requestBody.title : req.file.originalname;
   }
 
   const options = { new: true, runValidators: true };
@@ -143,8 +159,10 @@ exports.update = async (req, res) => {
   });
 };
 
-// fetch latest songs
-exports.latestSongs = async (req, res) => {
+/**
+ * fetch latest songs
+ */
+exports.latestList = async (req, res) => {
   const latestSongs = await Song.find().sort({ _id: -1 }).limit(5)
     .populate('artist')
     .populate('album');
