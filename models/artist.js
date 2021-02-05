@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { ac } = require('../config/roles');
 
 // Define artist schema
 const artistSchema = new mongoose.Schema({
@@ -28,6 +29,23 @@ artistSchema.set('toJSON', {
   versionKey: false
   // transform(doc, ret) {}
 });
+
+// authorisations on artist resource
+const authorisations = () => {
+  ac.grant('listener')
+    .readAny('artist');
+
+  ac.grant('artist').extend('listener')
+    .createOwn('artist')
+    .updateOwn('artist')
+    .deleteOwn('artist');
+
+  ac.grant('admin').extend('listener')
+    // .createAny('artist') // in the future we may allow this
+    .updateAny('artist')
+    .deleteAny('artist');
+};
+authorisations();
 
 // validation for creating artist
 const validateArtist = async (artist = {}) => {

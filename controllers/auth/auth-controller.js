@@ -27,7 +27,7 @@ exports.login = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  res.header('token', token).status(200).send({
+  res.set('token', token).status(200).send({
     success: true,
     message: 'success',
     data: user

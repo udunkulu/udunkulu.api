@@ -49,7 +49,7 @@ exports.createUser = async (req, res) => {
 
   await user.save();
 
-  res.header('token', token);
+  res.set('token', token);
 
   return user;
 };

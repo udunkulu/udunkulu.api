@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-// const auth = require('../middlewares/authentication');
-// const permit = require('../middlewares/permission');
+const auth = require('../middlewares/authentication');
+const permit = require('../middlewares/permission');
 
 const ArtistController = require('../controllers/artist-controller');
 const AlbumController = require('../controllers/album-controller');
@@ -20,32 +20,61 @@ router.route('/')
 
 router.route('/:id')// .all([auth])
   .get(ArtistController.detail)
-  .put(ArtistController.update);
+
+  .put([
+    auth,
+    permit.grant('updateOwn', 'artist')
+  ], ArtistController.update);
 //   .delete(ArtistController.delete);
 
-// allow album to make use of artists resource
+// Album: allow album to make use of artists resource
 // /:artistsId/albums
 router.route('/:artistId/albums')
   .get(AlbumController.list)
-  .post([upload.upload.single('albumCoverArt')], AlbumController.create);
+  .post([
+    auth,
+    permit.grant('createOwn', 'album'),
+    upload.upload.single('albumCoverArt')
+  ], AlbumController.create);
 
 router.route('/:artistId/albums/:id')
   .get(AlbumController.detail)
-  .put([upload.upload.single('albumCoverArt')], AlbumController.update)
-  .delete(AlbumController.delete);
+
+  .put([
+    auth,
+    permit.grant('updateOwn', 'album'),
+    upload.upload.single('albumCoverArt')
+  ], AlbumController.update)
+
+  .delete([
+    auth,
+    permit.grant('deleteOwn', 'album')
+  ], AlbumController.delete);
 
 /**
  * Songs
  * /:artists/artistId/songs
  */
-
 router.route('/:artistId/albums/:albumId/songs')
-  .post([upload.upload.single('_song')], SongController.upload)
+  .post([
+    auth,
+    permit.grant('createOwn', 'song'),
+    upload.upload.single('_song')
+  ], SongController.upload)
+
   .get(SongController.list);
 
 router.route('/:artistId/albums/:albumId/songs/:id')
   .get(SongController.detail)
-  .put([upload.upload.single('_song')], SongController.update)
-  .delete(SongController.delete);
+
+  .put([
+    auth,
+    permit.grant('updateOwn', 'song'),
+    upload.upload.single('_song')
+  ], SongController.update)
+
+  .delete([
+    auth, permit.grant('deleteOwn', 'song')
+  ], SongController.delete);
 
 module.exports = router;

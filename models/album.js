@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { ac } = require('../config/roles');
 
 const albumSchema = new mongoose.Schema({
 
@@ -77,6 +78,23 @@ const validateUpdate = async (album = {}) => {
 
   return value;
 };
+
+// authorisations on album resource
+const authorisations = () => {
+  ac.grant('listener')
+    .readAny('album');
+
+  ac.grant('artist').extend('listener')
+    .createOwn('album')
+    .updateOwn('album')
+    .deleteOwn('album');
+
+  ac.grant('admin').extend('listener')
+    // .createAny('album') // in the future we may allow this
+    .updateAny('album')
+    .deleteAny('album');
+};
+authorisations();
 
 exports.validateAlbum = validateAlbum;
 exports.Album = Album;
