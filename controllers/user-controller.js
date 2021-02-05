@@ -7,7 +7,6 @@ const { User, validateUser, validateUpdate } = require('../models/user');
 // const { NODE_ENV } = require('../config/env');
 const UserService = require('../services/user-service');
 
-
 /**
  * Retrieve a user
  */
@@ -44,8 +43,11 @@ exports.create = async (req, res) => {
 
   user = await UserService.createUser(req, res);
 
-  return res.status(201).send({
-    success: true, message: 'success', data: user
+  // log the user in
+  const token = user.generateAuthToken();
+
+  return res.header('token', token).status(201).send({
+    success: true, message: 'success', data: { user, token }
   });
 };
 

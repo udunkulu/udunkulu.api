@@ -6,7 +6,6 @@ const albums = require('../routes/albums');
 const artists = require('../routes/artists');
 const search = require('../routes/search');
 const { BASE_PATH } = require('../config/env');
-
 /**
  * Routes list
  */

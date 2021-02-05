@@ -11,6 +11,9 @@ exports.create = async (req, res) => {
   req.body.stageName = validData.stageName;
   const user = await UserService.createUser(req, res);
 
+  // log the user in
+  const token = user.generateAuthToken();
+
   const artist = new Artist({
     ...validData,
     user: user._id
@@ -22,10 +25,10 @@ exports.create = async (req, res) => {
     .findById(artist._id)
     .populate('user');
 
-  res.status(201).send({
+  res.header('token', token).status(201).send({
     success: true,
     message: 'created',
-    data: artistWithUser
+    data: { artistWithUser, token }
   });
 };
 
