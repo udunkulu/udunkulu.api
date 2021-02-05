@@ -11,13 +11,7 @@ require('../config/database')();
 
 module.exports = (app) => {
   app.use(morgan('dev'));
-  app.use(cors({
-    credentials: true,
-    origin: [
-      'http://localhost:3000',
-      'https://udunkulu-stream.netlify.com'
-    ]
-  }));
+  app.use(cors());
   app.use(express.json());
   routes(app);
 
