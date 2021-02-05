@@ -21,14 +21,10 @@ exports.create = async (req, res) => {
 
   await artist.save();
 
-  const artistWithUser = await Artist
-    .findById(artist._id)
-    .populate('user');
-
   res.header('token', token).status(201).send({
     success: true,
     message: 'created',
-    data: { artistWithUser, token }
+    data: { user, artist, token }
   });
 };
 
