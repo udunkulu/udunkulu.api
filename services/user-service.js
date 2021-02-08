@@ -33,8 +33,6 @@ exports.createUser = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 
-  // log the user in
-  const token = user.generateAuthToken();
 
   // In local? You need to connect to internet for this to work and set NODE_ENV=production
   // if (NODE_ENV === 'production') {
@@ -48,8 +46,6 @@ exports.createUser = async (req, res) => {
   user.verifiedAt = new Date();
 
   await user.save();
-
-  res.set('token', token);
 
   return user;
 };

@@ -7,6 +7,7 @@ const { User } = require('../../models/user');
 const { validateEmail } = require('../../services/user-service');
 const { sendPasswordResetMail } = require('../../services/mail-service');
 const { Artist } = require('../../models/artist');
+const _ = require('lodash');
 
 /**
  * Login a user
@@ -30,7 +31,7 @@ exports.login = async (req, res) => {
   res.set('token', token).status(200).send({
     success: true,
     message: 'success',
-    data: user
+    data: { user, token }
   });
 };
 
