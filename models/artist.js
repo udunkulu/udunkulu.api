@@ -14,6 +14,9 @@ const artistSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  avatar: {
+    type: String
   }
 }, { timestamps: new Date() });
 

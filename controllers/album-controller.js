@@ -69,9 +69,6 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const requestBody = await validateUpdate(req.body);
 
-  const options = { new: true, runValidators: true };
-  const filter = { _id: req.params.id, artist: req.params.artistId };
-
   // we want to make upload
   if (('file' in req)) {
     // in the future, try to
@@ -81,6 +78,9 @@ exports.update = async (req, res) => {
     requestBody.cloudinary = response;
     requestBody.coverArt = response.secure_url;
   }
+
+  const options = { new: true, runValidators: true };
+  const filter = { _id: req.params.id, artist: req.params.artistId };
 
   await Album.findOneAndUpdate(filter, {
     ...requestBody

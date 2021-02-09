@@ -2,6 +2,8 @@
 const _ = require('lodash');
 const { Artist, validateArtist, validateUpdate } = require('../models/artist');
 const UserService = require('../services/user-service');
+const cloudinary = require('../config/cloudinary');
+const { deleteFile } = require('../services/upload-service');
 
 exports.create = async (req, res) => {
   const validData = await validateArtist(_.pick(req.body, ['stageName', 'role']));
@@ -46,21 +48,34 @@ exports.detail = async (req, res) => {
   if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
   res.status(200).send({ success: true, message: 'success', data: artist });
 };
-
+/**
+ * Update an artist
+*/
 exports.update = async (req, res) => {
   const validBody = await validateUpdate(_.omit(req.body, ['user']));
 
+  // we want to make upload
+  if (('file' in req)) {
+    const response = await cloudinary.uploadImage(req.file.path);
+
+    // validBody.cloudinary = response;
+    validBody.avatar = response.secure_url;
+  }
+
   const options = { new: true, runValidators: true };
+
   await Artist.findByIdAndUpdate(req.params.id, {
     ...validBody
   }, options, async (error, artist) => {
     if (error) throw error;
     if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
 
+    await deleteFile(req.file);
+
     res.status(200).send({ success: true, message: 'update was success', data: artist });
   });
 };
 
-exports.delete = async (req, res) => {
-  // we may want to remove this artist's resources
-};
+// exports.delete = async (req, res) => {
+//   // we may want to remove this artist's resources
+// };
