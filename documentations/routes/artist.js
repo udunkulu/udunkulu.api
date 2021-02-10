@@ -1,7 +1,7 @@
 /**
  * @apiDefine Success
  *
- * @apiSuccess {boolean} success The status of the response usually true
+ * @apiSuccess {boolean} success The status of the response, usually true
  * @apiSuccess {string} message This is the info about the request usually success
  * @apiSuccess {object} data This contains the resource (an object or
  * array of objects) and/or other required particulars
@@ -63,7 +63,7 @@
  * @apiName CreateArtist
  * @apiGroup Artists
  *
- * @apiParamExample {json} Request-Example: only userId and stage
+ * @apiParamExample {json} Request-Example: only userId and stageName
  * {
         "email": "email address of the aritst.",
         "lastName": "lastName Lastname of the artist",
@@ -89,7 +89,12 @@
  * @apiParamExample {json} Request-Example: all or anyone of these fields
  * {
  *    "userId": "userId",
- *    "stageName": "artist stage name"
+ *    "firstName": "artist's first name",
+ *    "lastName": "artist's last name",
+ *    "stageName": "artist's stage name",
+ *    "avatar": "The profile picture of an artist",
+ *    "phoneNumber": "artist's phone number",
+ *    "password": "artist password"
  * }
  *
  * @apiUse Success
