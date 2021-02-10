@@ -1,8 +1,8 @@
 /**
  * @apiDefine Success
  *
- * @apiSuccess {boolean} success The success of the responce usually is true
- * @apiSuccess {string} message This is the info about the request usually success
+ * @apiSuccess {boolean} success The success of the response usually is true
+ * @apiSuccess {string} message This is the info about the request, it is usually success
  * @apiSuccess {object} data This contains the resource (an object or
  * array of objects) and/or other required particulars
  *
@@ -19,7 +19,7 @@
 /**
   * @apiDefine Error
   *
-  * @apiError {boolean} success The success of this responce is usually false
+  * @apiError {boolean} success The success of this response is usually false
   * @apiError {string} message This is the info about the request
   *
   * @apiErrorExample {json} Error-Response:
