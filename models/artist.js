@@ -14,6 +14,9 @@ const artistSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  avatar: {
+    type: String
   }
 }, { timestamps: new Date() });
 
@@ -65,19 +68,34 @@ const validateArtist = async (artist = {}) => {
 // Validation for updating artist
 const validateUpdate = async (artist = {}) => {
   const schema = Joi.object({
-    stageName: Joi.string().min(2).max(50),
-    role: Joi.string().required().min(6).max(6)
-      .lowercase()
-      .trim()
-    // user: Joi.string.min(10)
+    stageName: Joi.string().min(2).max(50)
   });
 
   const value = await schema.validateAsync(artist);
   return value;
 };
 
+/**
+ * @description During update: validte an artit's detail together with its user details
+ * @param {object} data containing artist and user info
+ * @returns {object} value - containing the validated data
+ */
+const validateArtistHavingUserDetail = async (data = {}) => {
+  const schema = Joi.object({
+    stageName: Joi.string().min(2).max(50),
+    firstName: Joi.string().min(3).max(100),
+    lastName: Joi.string().min(3).max(100),
+    password: Joi.string().min(6).max(60),
+    phoneNumber: Joi.string()
+  });
+
+  const value = await schema.validateAsync(data);
+  return value;
+};
+
 module.exports = {
   validateArtist,
   validateUpdate,
-  Artist
+  Artist,
+  validateArtistHavingUserDetail
 };

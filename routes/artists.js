@@ -23,7 +23,8 @@ router.route('/:id')// .all([auth])
 
   .put([
     auth,
-    permit.grant('updateOwn', 'artist')
+    permit.grant('updateOwn', 'artist'),
+    upload.upload.single('avatar')
   ], ArtistController.update);
 //   .delete(ArtistController.delete);
 
