@@ -9,8 +9,8 @@ define({ "api": [
     "parameter": {
       "examples": [
         {
-          "title": "Request-Example: only the title field is required",
-          "content": "{\n    \"title\": \"album title\",\n    \"description\": \"album description\"\n  }",
+          "title": "Request-Example: all field are required and are form-data",
+          "content": "{\n    \"title\": \"album title\",\n    \"released\": year-month-day,\n    \"albumCoverArt\": FORM_DATA\n  }",
           "type": "json"
         }
       ]

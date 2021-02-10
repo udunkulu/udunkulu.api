@@ -1,7 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 const _ = require('lodash');
-const { Artist, validateArtist, validateUpdate } = require('../models/artist');
+const bcrypt = require('bcrypt');
+const { Artist, validateArtist, validateArtistHavingUserDetail } = require('../models/artist');
+const { User } = require('../models/user');
 const UserService = require('../services/user-service');
+const cloudinary = require('../config/cloudinary');
+const { deleteFile } = require('../services/upload-service');
 
 exports.create = async (req, res) => {
   const validData = await validateArtist(_.pick(req.body, ['stageName', 'role']));
@@ -46,21 +50,50 @@ exports.detail = async (req, res) => {
   if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
   res.status(200).send({ success: true, message: 'success', data: artist });
 };
-
+/**
+ * Update an artist
+*/
 exports.update = async (req, res) => {
-  const validBody = await validateUpdate(_.omit(req.body, ['user']));
+  const validBody = await validateArtistHavingUserDetail(req.body);
+
+  // we want to make upload
+  if (('file' in req)) {
+    const response = await cloudinary.uploadImage(req.file.path);
+    validBody.avatar = response.secure_url;
+  }
+
+  //  handle user update
+  // const user = await User.findById(req.user._id);
+  const user = req.user._id;
+
+  // hash password if one exist
+  if (('password' in req.body)) {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(validBody.password, salt);
+  }
+
+  user.firstName = validBody.firstName;
+  user.lastName = validBody.lastName;
+  user.phoneNumber = validBody.phoneNumber;
+
+  await user.save();
 
   const options = { new: true, runValidators: true };
+
   await Artist.findByIdAndUpdate(req.params.id, {
-    ...validBody
+    stageName: validBody.stageName
   }, options, async (error, artist) => {
     if (error) throw error;
     if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
 
-    res.status(200).send({ success: true, message: 'update was success', data: artist });
+    await deleteFile(req.file);
+
+    const data = { user, artist };
+
+    res.status(200).send({ success: true, message: 'update was success', data });
   });
 };
 
-exports.delete = async (req, res) => {
-  // we may want to remove this artist's resources
-};
+// exports.delete = async (req, res) => {
+//   // we may want to remove this artist's resources
+// };

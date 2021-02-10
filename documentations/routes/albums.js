@@ -63,10 +63,11 @@
  * @apiName CreateAlbum
  * @apiGroup Albums
  *
- * @apiParamExample {json} Request-Example: only the title field is required
+ * @apiParamExample {json} Request-Example: all field are required and are form-data
  *{
     "title": "album title",
-    "description": "album description"
+    "released": year-month-day,
+    "albumCoverArt": FORM_DATA
   }
  *
  *@apiUse Header

@@ -8,13 +8,15 @@ exports.search = async (req, res) => {
   const query = new RegExp(req.query.q.trim(), 'gi');
 
   const songs = await Song
-    .find({ $text: { $search: query } }).select(['_id', 'title']);
+    .find({ $text: { $search: query } }).select(['_id', 'title'])
+    .populate('artist')
+    .populate('album');
 
   const albums = await Album
-    .find({ $text: { $search: query } }).select(['_id', 'title']);
+    .find({ $text: { $search: query } }).select(['_id', 'title', 'coverArt']);
 
   const artists = await Artist
-    .find({ $text: { $search: query } }).select(['_id', 'stageName']);
+    .find({ $text: { $search: query } }).select(['_id', 'stageName', 'avater']);
 
   const users = await User
     .find({ $text: { $search: query } })
