@@ -62,6 +62,10 @@ exports.update = async (req, res) => {
     validBody.avatar = response.secure_url;
   }
 
+  // if password is included
+  // if (('password' in req.body)) {
+  //   return res.status(200).send('password included...')
+  // }
   const options = { new: true, runValidators: true };
 
   await Artist.findByIdAndUpdate(req.params.id, {
