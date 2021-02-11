@@ -148,6 +148,28 @@ exports.delete = async (req, res) => {
 exports.update = async (req, res) => {
   const requestBody = await validateUpdate(req.body);
 
+  const { user } = req;
+  // is Owner : check if it is the artist
+  const isArtist = await Artist.findOne({
+    user: user._id, _id: req.params.artistId
+  });
+  if (!isArtist) {
+    return res.status(401).send({
+      success: false, 
+      message: 'Permission denied or artist does not exist'
+    });
+  }
+
+  const isArtistAlbum = await Album.findOne({
+    artist: req.params.artistId, _id: req.params.albumId
+  });
+  if (!isArtistAlbum) {
+    return res.status(401).send({
+      success: false,
+      message: 'Permission denied or artist does not exist'
+    });
+  }
+
   // we want to make upload
   if (('file' in req)) {
     // in the future, try to

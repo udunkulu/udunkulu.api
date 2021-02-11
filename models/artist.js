@@ -50,6 +50,11 @@ const authorisations = () => {
 };
 authorisations();
 
+// is onwer
+const isOwner = async (req, res) => {
+
+};
+
 // validation for creating artist
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
@@ -97,5 +102,6 @@ module.exports = {
   validateArtist,
   validateUpdate,
   Artist,
-  validateArtistHavingUserDetail
+  validateArtistHavingUserDetail,
+  isOwner
 };

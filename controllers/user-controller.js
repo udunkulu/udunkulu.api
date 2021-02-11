@@ -57,6 +57,16 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   let requestBody = await validateUpdate(req.body);
 
+  // is Owner : check if it is the artist
+  const isSelf = await User.findOne({
+    _id: req.params.id
+  });
+  if (isSelf._id !== req.user._id) {
+    return res.status(401).send({
+      success: false,
+      message: 'Permission denied or user does not exist'
+    });
+  }
   // remove password and role from req.body
   requestBody = _.omit(req.body, ['password', 'role']);
 
@@ -79,6 +89,17 @@ exports.delete = async (req, res) => {
   // only a user will can delete itself, admin can also delete
   // if (req.user._id !== req.params.id) return res.status(400).send('Bad request');
 
+   // is Owner : check if it is the artist
+   const isSelf = await User.findOne({
+    _id: req.params.id
+  });
+  if (isSelf._id !== req.user._id) {
+    return res.status(401).send({
+      success: false,
+      message: 'Permission denied or user does not exist'
+    });
+  }
+  
   const user = await User.findByIdAndRemove(req.params.id);
 
   if (!user) return res.status(404).send({ success: false, message: 'user not found' });

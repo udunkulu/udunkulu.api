@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
-const { Artist, validateArtist, validateArtistHavingUserDetail } = require('../models/artist');
+const { Artist, isOwner, validateArtist, validateArtistHavingUserDetail } = require('../models/artist');
 const { User } = require('../models/user');
 const UserService = require('../services/user-service');
 const cloudinary = require('../config/cloudinary');
@@ -56,15 +56,25 @@ exports.detail = async (req, res) => {
 exports.update = async (req, res) => {
   const validBody = await validateArtistHavingUserDetail(req.body);
 
+  // const user = await User.findById(req.user._id);
+  const { user } = req;
+
+  // is Owner
+  const owner = await Artist.findOne({
+    user: user._id, _id: req.params.id
+  });
+  if (!owner) {
+    return res.status(401).send({
+      success: false, 
+      message: 'Permission denied or artist does not exist'
+    });
+  }
+
   // we want to make upload
   if (('file' in req)) {
     const response = await cloudinary.uploadImage(req.file.path);
     validBody.avatar = response.secure_url;
   }
-
-  //  handle user update
-  // const user = await User.findById(req.user._id);
-  const { user } = req;
 
   // hash password if one exist
   if (('password' in req.body)) {
