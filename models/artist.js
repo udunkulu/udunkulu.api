@@ -3,14 +3,16 @@ const Joi = require('joi');
 const { ac } = require('../config/roles');
 
 // Define artist schema
-const artistSchema = new mongoose.Schema({
-  stageName: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50
-  },
+const artistSchema = new mongoose.Schema(
+  {
+    stageName: {
+      type: String,
+      required: true,
+      minlength: 2,
+      maxlength: 50
+    },
 
+<<<<<<< HEAD
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -19,6 +21,15 @@ const artistSchema = new mongoose.Schema({
     type: String
   }
 }, { timestamps: new Date() });
+=======
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  },
+  { timestamps: new Date() }
+);
+>>>>>>> 5819fc6... Feature: Prepopulate songs
 
 artistSchema.index({ stageName: 'text' });
 
@@ -33,17 +44,22 @@ artistSchema.set('toJSON', {
   // transform(doc, ret) {}
 });
 
+//Return all songs related to an artist
+artistSchema.virtual('songs', {
+  ref: 'Song',
+  localField: '_id',
+  foreignField: 'artist',
+  justOne: false
+});
+
 // authorisations on artist resource
 const authorisations = () => {
-  ac.grant('listener')
-    .readAny('artist');
+  ac.grant('listener').readAny('artist');
 
-  ac.grant('artist').extend('listener')
-    .createOwn('artist')
-    .updateOwn('artist')
-    .deleteOwn('artist');
+  ac.grant('artist').extend('listener').createOwn('artist').updateOwn('artist').deleteOwn('artist');
 
-  ac.grant('admin').extend('listener')
+  ac.grant('admin')
+    .extend('listener')
     // .createAny('artist') // in the future we may allow this
     .updateAny('artist')
     .deleteAny('artist');
@@ -54,9 +70,7 @@ authorisations();
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
     stageName: Joi.string().min(2).max(50).required(),
-    role: Joi.string().required().min(6).max(6)
-      .lowercase()
-      .trim()
+    role: Joi.string().required().min(6).max(6).lowercase().trim()
     // user: Joi.string.min(10)
   });
 
@@ -68,7 +82,13 @@ const validateArtist = async (artist = {}) => {
 // Validation for updating artist
 const validateUpdate = async (artist = {}) => {
   const schema = Joi.object({
+<<<<<<< HEAD
     stageName: Joi.string().min(2).max(50)
+=======
+    stageName: Joi.string().min(2).max(50),
+    role: Joi.string().required().min(6).max(6).lowercase().trim()
+    // user: Joi.string.min(10)
+>>>>>>> 5819fc6... Feature: Prepopulate songs
   });
 
   const value = await schema.validateAsync(artist);

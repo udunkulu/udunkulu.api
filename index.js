@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');
 
 start(app);
 
+
 const server = app.listen(PORT, () => {
   logger.info(`Listening on port ${PORT}`);
 });
