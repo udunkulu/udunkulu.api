@@ -64,7 +64,7 @@ exports.update = async (req, res) => {
 
   //  handle user update
   // const user = await User.findById(req.user._id);
-  const user = req.user._id;
+  const { user } = req;
 
   // hash password if one exist
   if (('password' in req.body)) {

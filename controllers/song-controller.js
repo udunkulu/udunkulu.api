@@ -41,6 +41,7 @@ exports.upload = async (req, res) => {
     cloudinary: response,
     artist: artist._id,
     album: album._id,
+    // cover: album.coverArt,
     ...validData
 
   };
