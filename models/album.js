@@ -2,40 +2,41 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const { ac } = require('../config/roles');
 
-const albumSchema = new mongoose.Schema({
-
-  title: {
-    type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 50
+const albumSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 50
+    },
+    artist: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Artist'
+    },
+    description: {
+      type: String,
+      minlength: 10,
+      maxlength: 250
+    },
+    coverArt: {
+      type: String
+    },
+    featuring: {
+      type: String
+    },
+    cloudinary: {
+      type: Object,
+      required: true
+    },
+    released: {
+      type: Date
+      // required: true, // in the future this will be require
+      // default: new Date()
+    }
   },
-  artist: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Artist'
-  },
-  description: {
-    type: String,
-    minlength: 10,
-    maxlength: 250
-  },
-  coverArt: {
-    type: String
-  },
-  featuring: {
-    type: String
-  },
-  cloudinary: {
-    type: Object,
-    required: true
-  },
-  released: {
-    type: Date
-    // required: true, // in the future this will be require
-    // default: new Date()
-  }
-
-}, { timestamps: new Date() });
+  { timestamps: new Date() }
+);
 
 albumSchema.index({ title: 'text' });
 
@@ -49,6 +50,14 @@ albumSchema.set('toJSON', {
     // eslint-disable-next-line no-param-reassign
     delete ret.cloudinary;
   }
+});
+
+//Return all songs related to an album
+albumSchema.virtual('songs', {
+  ref: 'Song',
+  localField: '_id',
+  foreignField: 'album',
+  justOne: false
 });
 
 // validation
@@ -81,15 +90,12 @@ const validateUpdate = async (album = {}) => {
 
 // authorisations on album resource
 const authorisations = () => {
-  ac.grant('listener')
-    .readAny('album');
+  ac.grant('listener').readAny('album');
 
-  ac.grant('artist').extend('listener')
-    .createOwn('album')
-    .updateOwn('album')
-    .deleteOwn('album');
+  ac.grant('artist').extend('listener').createOwn('album').updateOwn('album').deleteOwn('album');
 
-  ac.grant('admin').extend('listener')
+  ac.grant('admin')
+    .extend('listener')
     // .createAny('album') // in the future we may allow this
     .updateAny('album')
     .deleteAny('album');

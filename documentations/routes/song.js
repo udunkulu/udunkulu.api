@@ -2,7 +2,7 @@
  * @apiDefine Success
  *
  * @apiSuccess {boolean} success The success of the response usually true
- * @apiSuccess {string} message This is the info about the request usually success
+ * @apiSuccess {string} message This is the info about the request, it is usually success
  * @apiSuccess {object} data This contains the resource (an object or
  * array of objects) and/or other required particulars
  *

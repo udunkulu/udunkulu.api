@@ -49,7 +49,8 @@ exports.sendPasswordResetMail = async (user) => {
       name: `${user.firstName} ${user.lastName}`,
       intro: 'Password Reset Link',
       action: {
-        instructions: 'If you did not request for this mail, Please Ignore it. To reset your password, click on the link below:',
+        instructions:
+          'If you did not request for this mail, Please Ignore it. To reset your password, click on the link below:',
         button: {
           text: 'Reset password',
           link: `${base}/users/password-reset?token=${token}`
