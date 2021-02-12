@@ -20,20 +20,41 @@ exports.upload = async (req, res) => {
   }
 
   const validData = await validateSong(req.body);
+  const { user } = req;
 
   // get artist info
-  const artist = await Artist.findById(req.params.artistId);
-  if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
+  const artist = await Artist.findOne({
+    user: user._id, _id: req.params.artistId
+  });
+
+  // if (!artist) return res.status(404).send({ success: false, message: 'artist not found' });
+  if (!artist) {
+    return res.status(401).send({
+      success: false, 
+      message: 'Permission denied or artist does not exist'
+    });
+  }
 
   // get album info
-  const album = await Album.findById(req.params.albumId);
-  if (!album) return res.status(404).send({ success: false, message: 'album not found' });
+  // const album = await Album.findById(req.params.albumId);
+  // if (!album) return res.status(404).send({ success: false, message: 'album not found' });
+
+  const album = await Album.findOne({
+    artist: req.params.artistId, _id: req.params.albumId
+  });
+  if (!album) {
+    return res.status(401).send({
+      success: false,
+      message: 'Permission denied or album does not exist'
+    });
+  }
 
   // upload to cloudinary
   const response = await cloudinary.uploadSong(req.file.path);
   // song duration/length in minute string
   const songDuration = await secondsToMinute(response.duration);
 
+  const randoms = Math.round(Math.random() * 10);
   const songData = {
     title: req.file.originalname,
     duration: songDuration,
@@ -41,6 +62,7 @@ exports.upload = async (req, res) => {
     cloudinary: response,
     artist: artist._id,
     album: album._id,
+    streams: randoms,
     // cover: album.coverArt,
     ...validData
 
@@ -127,7 +149,19 @@ exports.filter = async (req, res) => {
   res.status(200).send({ success: true, message: 'success', data: songs });
 };
 
+// show trending list
+exports.trendingList = async (req, res) => {
+  const trendingSongs = await Song.find({ streams: { $gt: 4 } })
+    .populate('artist')
+    .populate('album');
 
+  if (_.isEmpty(trendingSongs)) return res.status(404).send({ success: false, message: 'songs not found' });
+
+  res.status(200).send({ success: true, message: 'success', data: trendingSongs });
+
+};
+
+// delete a song
 exports.delete = async (req, res) => {
   const filter = {
     _id: req.params.id,
@@ -166,7 +200,7 @@ exports.update = async (req, res) => {
   if (!isArtistAlbum) {
     return res.status(401).send({
       success: false,
-      message: 'Permission denied or artist does not exist'
+      message: 'Permission denied or album does not exist'
     });
   }
 
