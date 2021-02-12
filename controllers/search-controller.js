@@ -7,18 +7,6 @@ const { User } = require('../models/user');
 exports.search = async (req, res) => {
   const query = new RegExp(req.query.q.trim(), 'gi');
 
-<<<<<<< HEAD
-  const songs = await Song
-    .find({ $text: { $search: query } }).select(['_id', 'title'])
-    .populate('artist')
-    .populate('album');
-
-  const albums = await Album
-    .find({ $text: { $search: query } }).select(['_id', 'title', 'coverArt']);
-
-  const artists = await Artist
-    .find({ $text: { $search: query } }).select(['_id', 'stageName', 'avater']);
-=======
   const songs = await Song.find({ $text: { $search: query } })
     .select(['_id', 'title'])
     .populate('album artist');
@@ -30,9 +18,9 @@ exports.search = async (req, res) => {
   const artists = await Artist.find({ $text: { $search: query } })
     .select(['_id', 'stageName'])
     .populate({ path: 'songs', populate: 'album artist' });
->>>>>>> 5819fc6... Feature: Prepopulate songs
 
-  const users = await User.find({ $text: { $search: query } }).select(['_id', 'firstName', 'lastName']);
+  const users = await User.find({ $text: { $search: query } })
+    .select(['_id', 'firstName', 'lastName']);
 
   if (_.isEmpty(songs) && _.isEmpty(albums) && _.isEmpty(artists) && _.isEmpty(users)) {
     return res.status(404).send({

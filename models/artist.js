@@ -12,16 +12,6 @@ const artistSchema = new mongoose.Schema(
       maxlength: 50
     },
 
-<<<<<<< HEAD
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  avatar: {
-    type: String
-  }
-}, { timestamps: new Date() });
-=======
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
@@ -29,7 +19,6 @@ const artistSchema = new mongoose.Schema(
   },
   { timestamps: new Date() }
 );
->>>>>>> 5819fc6... Feature: Prepopulate songs
 
 artistSchema.index({ stageName: 'text' });
 
@@ -44,7 +33,7 @@ artistSchema.set('toJSON', {
   // transform(doc, ret) {}
 });
 
-//Return all songs related to an artist
+// Return all songs related to an artist
 artistSchema.virtual('songs', {
   ref: 'Song',
   localField: '_id',
@@ -56,7 +45,10 @@ artistSchema.virtual('songs', {
 const authorisations = () => {
   ac.grant('listener').readAny('artist');
 
-  ac.grant('artist').extend('listener').createOwn('artist').updateOwn('artist').deleteOwn('artist');
+  ac.grant('artist').extend('listener')
+    .createOwn('artist')
+    .updateOwn('artist')
+    .deleteOwn('artist');
 
   ac.grant('admin')
     .extend('listener')
@@ -75,7 +67,9 @@ const isOwner = async (req, res) => {
 const validateArtist = async (artist = {}) => {
   const schema = Joi.object({
     stageName: Joi.string().min(2).max(50).required(),
-    role: Joi.string().required().min(6).max(6).lowercase().trim()
+    role: Joi.string().required().min(6).max(6)
+      .lowercase()
+      .trim()
     // user: Joi.string.min(10)
   });
 
@@ -87,13 +81,7 @@ const validateArtist = async (artist = {}) => {
 // Validation for updating artist
 const validateUpdate = async (artist = {}) => {
   const schema = Joi.object({
-<<<<<<< HEAD
     stageName: Joi.string().min(2).max(50)
-=======
-    stageName: Joi.string().min(2).max(50),
-    role: Joi.string().required().min(6).max(6).lowercase().trim()
-    // user: Joi.string.min(10)
->>>>>>> 5819fc6... Feature: Prepopulate songs
   });
 
   const value = await schema.validateAsync(artist);
