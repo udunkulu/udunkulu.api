@@ -46,7 +46,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -138,7 +138,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -230,7 +230,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -315,7 +315,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -427,7 +427,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -484,7 +484,7 @@
     "parameter": {
       "examples": [
         {
-          "title": "Request-Example: only userId and stage",
+          "title": "Request-Example: only userId and stageName",
           "content": "{\n        \"email\": \"email address of the aritst.\",\n        \"lastName\": \"lastName Lastname of the artist\",\n        \"password\": \"password address of the artist\",\n        \"firstName\": \"firstName of the artist\",\n        \"role\": \"artist\",\n        \"stageName\": \"artist stage name\"\n}",
           "type": "json"
         }
@@ -508,7 +508,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -593,7 +593,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -690,7 +690,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -762,7 +762,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -831,7 +831,7 @@
       "examples": [
         {
           "title": "Request-Example: all or anyone of these fields",
-          "content": "{\n   \"userId\": \"userId\",\n   \"stageName\": \"artist stage name\"\n}",
+          "content": "{\n   \"userId\": \"userId\",\n   \"firstName\": \"artist's first name\",\n   \"lastName\": \"artist's last name\",\n   \"stageName\": \"artist's stage name\",\n   \"avatar\": \"The profile picture of an artist\",\n   \"phoneNumber\": \"artist's phone number\",\n   \"password\": \"artist password\"\n}",
           "type": "json"
         }
       ]
@@ -854,7 +854,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -966,7 +966,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1065,7 +1065,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1137,7 +1137,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1209,7 +1209,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1301,7 +1301,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1373,7 +1373,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1485,7 +1485,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1597,7 +1597,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1678,7 +1678,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1736,7 +1736,7 @@
       "examples": [
         {
           "title": "Request-Example: all fields are required",
-          "content": "{\n       \"email\": \"email address of the user.\",\n       \"lastName\": \"lastName Lastname of the user\",\n       \"password\": \"password address of the user\",\n       \"firstName\": \"firstName of the user\",\n       \"role\": \"user's role\",\n       \"phoneNumber\": \"user phone number\",\n       \"stageName\": \"if userm is an artist\"\n   }",
+          "content": "{\n       \"email\": \"email address of the user.\",\n       \"lastName\": \"lastName Lastname of the user\",\n       \"password\": \"password of the user\",\n       \"firstName\": \"firstName of the user\",\n       \"role\": \"user's role\",\n       \"phoneNumber\": \"user phone number\",\n       \"stageName\": \"if user is an artist\"\n   }",
           "type": "json"
         }
       ]
@@ -1759,7 +1759,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1844,7 +1844,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -1942,7 +1942,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -2014,7 +2014,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -2106,7 +2106,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
@@ -2200,7 +2200,7 @@
             "type": "string",
             "optional": false,
             "field": "message",
-            "description": "<p>This is the info about the request usually success</p>"
+            "description": "<p>This is the info about the request, usually success</p>"
           },
           {
             "group": "Success 200",
