@@ -28,6 +28,18 @@ exports.login = async (req, res) => {
 
   const token = user.generateAuthToken();
 
+  if (user.role === 'artist') {
+    const artist = await Artist.findOne({
+      user: user._id
+    });
+
+    return res.set('token', token).status(200).send({
+      success: true,
+      message: 'success',
+      data: { user, token, artist }
+    });
+  }
+
   res.set('token', token).status(200).send({
     success: true,
     message: 'success',
