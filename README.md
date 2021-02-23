@@ -25,8 +25,8 @@ It prepares the API that the frontend part of the app can consume.
   - Then use the doc at `./documentations/doc/index.html` ( or `<your-host>/api/v1/docs` if it has been configure to do so) and access to know the endpoints to make calls to and their requirements.
   - Then start making calls to the provided host, mostly: localhost:port/api/v1
 - If you want to consume the API online:
-  - Then point your browser to: `https://udunkulu.netlify.app/api/v1/docs`, check the [docs](https://udunkulu.netlify.app)
-  - Then make calls to to the endpoints provided on the doc above
+  - Then visit: `https://udunkulu.netlify.app/api/v1/docs`, check the [docs](https://udunkulu.netlify.app)
+  - Then make calls to the endpoints provided on the doc above
 
 ## Usage
 #### This is how the API documentation should be hosted/treated
@@ -44,7 +44,7 @@ As a backend or fullstack developer, to setup/modify and document your API, do:
 
   - However, You can manually click at the `index.html` of this generated folder found in `./documentations/doc` and work offline.
 
-  - To have this available online: you need to host the api and set the server's public folder to `documentations/doc/`. and then update `./routes/docs.js`. Note that this does not replace hosting your application as a dynamic app. For the hosting inquire from your team to be sure that the doc has not been hosted alreday.
+  - To make the docs live you need to host the api and set the server's public folder to `documentations/doc/`. and then update `./routes/docs.js`. Note that this does not replace hosting your application as a dynamic app. For the hosting inquire from your team to be sure that the doc has not been hosted alreday.
 
   - For this particular hosting, treat it like a static website and that is why we are to point the server towards `./documentations/doc/` which contains the `index.html` that would be served by the hosting server, not expressjs, as the API documentation that is to be read by the consuming party.
 
@@ -121,7 +121,7 @@ We have adopted the npm package naming conveitions for our files and folder:
   - `user-controller.js` : not its camel or snake case counterparts
 
 ## Coding convention
-To be provided later: But basically the following serve for now we depend
-- We uses `ESLint` and `AirBnG JavaScript style guide`
+To be provided later but basically the following serves for now:
+- We use `ESLint` and `AirBnG JavaScript style guide`
 - If you are using VSCode, You are encouraged to install `ESLint` extension by `Dirk Baeumer` and make sure it is enabled
 
